@@ -228,7 +228,7 @@ always @(posedge clk or negedge rst_n) begin
         end
         MERGE:begin
             if(counter_1 == 0
-            ||(x_counter<=(x_1_max+2)&&x_counter>=(x_1_min-2)))begin
+            ||(x_counter<=(x_1_max+4)&&x_counter>=(x_1_min-4)))begin
                 x_1_max <= x_counter_max;
                 x_1_min <= x_counter_min;
                 y_1_max <= y_counter_max;
@@ -236,7 +236,7 @@ always @(posedge clk or negedge rst_n) begin
                 counter_1 <= counter;
             end
             else if((counter_1 > 0&&counter_2 == 0)
-            ||(x_counter<=(x_2_max+2)&&x_counter>=(x_2_min-2)))begin
+            ||(x_counter<=(x_2_max+4)&&x_counter>=(x_2_min-4)))begin
                 x_2_max <= x_counter_max;
                 x_2_min <= x_counter_min;
                 y_2_max <= y_counter_max;
@@ -244,7 +244,7 @@ always @(posedge clk or negedge rst_n) begin
                 counter_2 <= counter;
             end
             else if((counter_1 > 0&&counter_2 > 0&&counter_3 == 0)
-            ||(x_counter<=(x_3_max+2)&&x_counter>=(x_3_min-2)))begin
+            ||(x_counter<=(x_3_max+4)&&x_counter>=(x_3_min-4)))begin
                 x_3_max <= x_counter_max;
                 x_3_min <= x_counter_min;
                 y_3_max <= y_counter_max;
