@@ -1,0 +1,119 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2024/07/19 15:47:53
+// Design Name: 
+// Module Name: vision_core_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module vision_core_tb(
+
+    );
+    reg clk;
+    reg RSTn;
+    reg [239:0] line_pixel_f[319:0];
+    reg [239:0] line_pixel_in;
+    wire ready;
+    reg  start;
+    wire [16:0] cout_six;
+    wire [16:0] cout_o;
+    wire [16:0] cout_four;
+    wire stop_o;
+    
+    wire [8:0] next_row;
+
+initial begin
+    $readmemb("C:\\Users\\curry_yang\\code\\python_tools\\array.txt",line_pixel_f);
+end
+
+vision_core vision_core_tb(
+    .line_pixel(line_pixel_in),
+    .clk(clk),
+    .rst_n(RSTn),
+    .start(start),
+    .cout_six(cout_six),
+    .cout_o(cout_o),
+    .cout_four(cout_four),
+    .ready(ready),
+    .next_row(next_row),
+    .stop(stop_o)
+);
+
+initial begin                                                  
+    clk = 0;
+    RSTn=0;
+    #100
+    RSTn=1;
+
+end
+
+always begin                                                  
+    #10 clk = ~clk;
+end
+
+
+always @(*) begin
+    line_pixel_in <= line_pixel_f[next_row];
+end
+
+
+
+reg ready_last;
+reg ready_last_1;
+always @(posedge clk or negedge RSTn)
+begin
+    if (!RSTn)
+    begin
+        ready_last <= 0;
+        ready_last_1 <= 0;
+    end
+    else
+    begin
+        ready_last <= ready;
+        ready_last_1 <= ready_last;
+    end
+end
+wire ready_rise = !ready_last && ready;
+
+reg [1:0] data_updated;
+
+always @(posedge clk or negedge RSTn)
+begin
+    if (!RSTn)
+    begin
+        data_updated <= 2'd0;
+        start<= 1;
+    end
+    else
+    begin
+        if (ready_rise)
+        begin
+            data_updated <= 2'd1;
+            start <= 0;
+        end
+        else if (data_updated == 2'd1)
+        begin
+            data_updated <=2'd2;
+        end
+        else if (data_updated == 2'd2)
+        begin
+            start <= 1;
+            data_updated <= 0;
+        end
+    end
+end
+endmodule
