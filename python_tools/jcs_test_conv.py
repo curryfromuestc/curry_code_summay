@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 
 #读取一张PNG图片
-a = np.array(Image.open('/Users/curryyang/Pictures/received_image_process.png'))
+a = np.array(Image.open('C:\\Users\\curry_yang\\curry_code_summay\\rtl_works\\ov5640\\received_image_process.png'))
 #将a转换为灰度图像
 a = a[:,:,0]
 print(a)
@@ -46,6 +46,6 @@ a[a>=0.9] = 1
 a[a<0.9] = 0
 print(a)
 #将a保存为PNG图片
-Image.fromarray(np.uint8(a*255)).save('/Users/curryyang/Pictures/test_out.png')
+Image.fromarray(np.uint8(a*255)).save('C:\\Users\\curry_yang\\curry_code_summay\\rtl_works\\ov5640\\received_image_process.png')
 #将a保存为txt文件
-np.savetxt('/Users/curryyang/code/array.txt', a, fmt='%d', delimiter='')
+np.savetxt('C:\\Users\\curry_yang\\curry_code_summay\\rtl_works\\ov5640\\received_image_process.txt', a, fmt='%d', delimiter='')
