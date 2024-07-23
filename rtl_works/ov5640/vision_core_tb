@@ -25,7 +25,7 @@ module vision_core_tb(
     );
     reg clk;
     reg rst_n;
-    reg [319:0] line_pixel_f[239:0];
+    reg [0:319] line_pixel_f[239:0];
     reg [319:0] line_pixel_in;
     reg  start;
     wire [16:0] cout_six;
@@ -90,15 +90,15 @@ always @(posedge clk or negedge rst_n) begin
         start_reg_1 <= 0;
         start_reg_2 <= 0;
     end
-    else if(data_update)begin
-        start_reg_1 <= 1;
-        start_reg_2 <= start_reg_1;
-        start <= start_reg_2;
-    end
     else begin
-        start <= start;
-        start_reg_1 <= start_reg_1;
-        start_reg_2 <= start_reg_2;
+        start_reg_2 <= start_reg_1;
+        start <= start_reg_2;        
+        if(data_update)begin
+        start_reg_1 <= 1;
+        end
+        else begin
+            start_reg_1 <= 0;
+        end
     end
 end
 
