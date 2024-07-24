@@ -43,8 +43,11 @@ parameter IDLE = 2'b00,//!空闲状态
           DONE = 2'b10;//!完成这包数据的解码的状态
 reg [1:0] state,next_state;//!状态机的状态
 
-reg[1:0]valid_pre;
+reg valid_pre;
 reg valid_decoder;
+
+//!缓冲data_in
+reg [7:0] data_in_pre_1,data_in_pre_2;
 
 //!下一状态逻辑
 always@(posedge clk or negedge rst_n)begin
@@ -59,7 +62,7 @@ always @( *) begin
     case(state)
         IDLE:begin
             if(en)begin
-                if(valid_pre == 2'b10)
+                if(valid_pre == 1)
                     next_state = PRE;
                 else
                     next_state = IDLE; 
@@ -93,18 +96,58 @@ always @(posedge clk or negedge rst_n) begin
         cout_us <= 0;
     end
     else begin
-        if(cout_us<79)begin
-            cout_us <= cout_us + 1;
-            cout <= cout;
-        end
-        else begin
-            cout_us <= 0;
-            if(cout < 119)
-                cout <= cout + 1;
-            else
-                cout <= 0;
+        if(valid_pre)begin
+            if(cout_us<79)begin
+                cout_us <= cout_us + 1;
+                cout <= cout;
+            end
+            else begin
+                cout_us <= 0;
+                if(cout < 119)
+                    cout <= cout + 1;
+                else
+                    cout <= 0;
+            end
         end
     end
+end
+always @(posedge clk or negedge rst_n) begin
+    if(~rst_n)begin
+        data_in_pre_1 <= 0;
+        data_in_pre_2 <= 0;
+    end
+    else begin
+        data_in_pre_1 <= data_in;
+        data_in_pre_2 <= data_in_pre_1;
+        if((data_in_pre_1 - data_in_pre_2)>50
+        &&((data_in_pre_1 - data_in)<50||(data_in - data_in_pre_2)<50))begin
+            valid_pre <= 1;
+        end
+        else
+            valid_pre <= 0;
+    end        
+end
+always @(posedge clk or negedge rst_n) begin
+    if(~rst_n)begin
+        
+    end
+    else begin
+        case(state)
+            IDLE :begin
+                
+            end
+            PRE :begin
+                
+            end
+            DECODER :begin
+                
+            end
+            DONE :begin
+                
+            end
+        endcase
+    end
+    
 end
 
 

@@ -1,0 +1,8 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#133510",
+        "titleBar.activeBackground": "#1B4A16",
+        "titleBar.activeForeground": "#F4FBF3"
+    },
+    "C_Cpp.default.compilerPath": "c:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.3\\bin\\__nvcc_device_query.exe"
+}
