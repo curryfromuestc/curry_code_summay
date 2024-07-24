@@ -217,6 +217,7 @@ always @(posedge clk or negedge rst_n) begin
             else if(new_area_row)begin
                 counter <= counter + 1;
                 x_counter_min <= col;
+                x_counter_max <= col;
             end
             else if(same_area)begin
                 counter <= counter + 1;
