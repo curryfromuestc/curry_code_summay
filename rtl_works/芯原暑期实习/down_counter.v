@@ -44,7 +44,7 @@ module down_counter (
                     end
                 end
                 default: begin
-                    count <= count - 1;
+                    count <= count;
                     interrupt <= 0;
                 end
             endcase
