@@ -30,9 +30,9 @@ end
 
 always @( *) begin
     case(col_counter)
-        9'd2:lin_pixel[2] = data_out;
-        9'd3:lin_pixel[3] = data_out;
-        9'd4:lin_pixel[4] = data_out;
+        9'd2:line_pixel[2] = data_out;
+        9'd3:line_pixel[3] = data_out;
+        9'd4:line_pixel[4] = data_out;
         9'd5:lin_pixel[5] = data_out;
         9'd6:lin_pixel[6] = data_out;
         9'd7:lin_pixel[7] = data_out;
