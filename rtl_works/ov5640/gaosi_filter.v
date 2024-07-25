@@ -41,6 +41,55 @@ module gaosi_filter(
     reg data_buff_3_1,data_buff_3_2,data_buff_3_3,data_buff_3_4;//!缓存第三行的数据
     reg data_buff_4_1,data_buff_4_2,data_buff_4_3,data_buff_4_4;//!缓存第四行的数据
     reg data_buff_5_1,data_buff_5_2,data_buff_5_3,data_buff_5_4;//!缓存第五行的数据
+
+    always @(posedge clk or negedge rst_n) begin
+        if(~rst_n)begin
+            data_buff_1_1<=0;
+            data_buff_1_2<=0;
+            data_buff_1_3<=0;
+            data_buff_1_4<=0;
+            data_buff_2_1<=0;
+            data_buff_2_2<=0;
+            data_buff_2_3<=0;
+            data_buff_2_4<=0;
+            data_buff_3_1<=0;
+            data_buff_3_2<=0;
+            data_buff_3_3<=0;
+            data_buff_3_4<=0;
+            data_buff_4_1<=0;
+            data_buff_4_2<=0;
+            data_buff_4_3<=0;
+            data_buff_4_4<=0;
+            data_buff_5_1<=0;
+            data_buff_5_2<=0;
+            data_buff_5_3<=0;
+            data_buff_5_4<=0;
+        end
+        else begin
+            if(en)begin
+                data_buff_1_1<=data_in_1;
+                data_buff_2_1<=data_in_2;
+                data_buff_3_1<=data_in_3;
+                data_buff_4_1<=data_in_4;
+                data_buff_5_1<=data_in_5;
+                data_buff_1_2<=data_buff_1_1;
+                data_buff_2_2<=data_buff_2_1;
+                data_buff_3_2<=data_buff_3_1;
+                data_buff_4_2<=data_buff_4_1;
+                data_buff_5_2<=data_buff_5_1;
+                data_buff_1_3<=data_buff_1_2;
+                data_buff_2_3<=data_buff_2_2;
+                data_buff_3_3<=data_buff_3_2;
+                data_buff_4_3<=data_buff_4_2;
+                data_buff_5_3<=data_buff_5_2;
+                data_buff_1_4<=data_buff_1_3;
+                data_buff_2_4<=data_buff_2_3;
+                data_buff_3_4<=data_buff_3_3;
+                data_buff_4_4<=data_buff_4_3;
+                data_buff_5_4<=data_buff_5_3;
+            end
+        end
+    end
     
 
     
