@@ -10,7 +10,8 @@ module controller(
 wire data_out;
 reg [8:0] col_counter;
 
-
+assign line_pixel[1:0] = 2'b00;
+assign line_pixel[319:318] = 2'b00;
 
 always @(posedge clk or negedge rst_n) begin
     if(~rst_n)
@@ -28,8 +29,6 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 always @( *) begin
-	 line_pixel[1:0] = 2'b00;
-	 line_pixel[319:318] = 2'b00;
     case(col_counter)
         9'd2:line_pixel[2] = data_out;
         9'd3:line_pixel[3] = data_out;

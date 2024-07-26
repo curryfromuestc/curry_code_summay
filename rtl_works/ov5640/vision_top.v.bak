@@ -3,11 +3,11 @@ module vision_top(
     input wire rst_n,
     input wire en,
     input wire[4:0]data_in,
-    output wire[16:0] cout_six,
-    output wire[16:0] cout_o,
-    output wire[16:0] cout_four,
-    output wire data_update,
-    output wire stop  
+    output reg[16:0] cout_six,
+    output reg[16:0] cout_o,
+    output reg[16:0] cout_four,
+    output reg data_update,
+    output reg stop  
 );
 
 wire[319:0] line_pixel_in;
@@ -21,7 +21,6 @@ controller controller(
     .start(start)
 );
 
-
 vision_core vision_core(
     .clk(clk),
     .rst_n(rst_n),
@@ -32,6 +31,6 @@ vision_core vision_core(
     .cout_four(cout_four),
     .data_update(data_update),
     .stop(stop)
-);
+)
 
 endmodule
