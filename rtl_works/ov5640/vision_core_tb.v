@@ -107,5 +107,16 @@ always @(posedge clk)begin
     if(stop_o)
         $finish;
 end
+`define DUMP;
+string dump_file;
+initial begin
+    `ifdef DUMP
+        if($value$plusargs("FSDB=%s",dump_file))
+            $display("dump_file = %s",dump_file);
+        $fsdbDumpfile(dump_file);        
+        $fsdbDumpvars(0, tb_TOP);
+        $fsdbDumpMDA();
+    `endif
+end
 
 endmodule
