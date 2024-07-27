@@ -73,6 +73,12 @@ always @( *) begin
         PRE:begin
             if(cout == 7)
                 next_state = DECODER;
+	    else if(valid_pre == 0&&
+		   ((cout == 1&&(cout_us == 2||cout_us == 0||cout_us == 1))
+		   ||(cout == 0&&(cout_us == 77||cout_us == 78||cout_us == 79))
+		   ||(cout == 4&&(cout_us == 39||cout_us == 40||cout_us == 41))
+		   ||(cout == 3&&(cout_us == 39||cout_us == 40||cout_us == 41))))
+		next_state = IDLE;
             else
                 next_state = PRE;
         end
