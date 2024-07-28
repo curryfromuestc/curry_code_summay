@@ -192,79 +192,79 @@ always@(*)begin
     case(cout)
         7'd7:begin
             if(accumerlator>threshold)
-                data_out[1:0] = 2'b10
+                data_out[1:0] = 2'b10;
             else
                 data_out[1:0] = 2'b01;
         end
         7'd8:begin
             if(accumerlator>threshold)
-                data_out[3:2] = 2'b10
+                data_out[3:2] = 2'b10;
             else
                 data_out[3:2] = 2'b01;
         end
         7'd9:begin
             if(accumerlator>threshold)
-                data_out[5:4] = 2'b10
+                data_out[5:4] = 2'b10;
             else
                 data_out[5:4] = 2'b01;
         end
         7'd10:begin
             if(accumerlator>threshold)
-                data_out[7:6] = 2'b10
+                data_out[7:6] = 2'b10;
             else
                 data_out[7:6] = 2'b01;
         end
         7'd11:begin
             if(accumerlator>threshold)
-                data_out[9:8] = 2'b10
+                data_out[9:8] = 2'b10;
             else
                 data_out[9:8] = 2'b01;
         end
         7'd12:begin
             if(accumerlator>threshold)
-                data_out[11:10] = 2'b10
+                data_out[11:10] = 2'b10;
             else
                 data_out[11:10] = 2'b01;
         end
         7'd13:begin
             if(accumerlator>threshold)
-                data_out[13:12] = 2'b10
+                data_out[13:12] = 2'b10;
             else
                 data_out[13:12] = 2'b01;
         end
         7'd14:begin
             if(accumerlator>threshold)
-                data_out[15:14] = 2'b10
+                data_out[15:14] = 2'b10;
             else
                 data_out[15:14] = 2'b01;
         end
         7'd15:begin
             if(accumerlator>threshold)
-                data_out[17:16] = 2'b10
+                data_out[17:16] = 2'b10;
             else
                 data_out[17:16] = 2'b01;
         end
         7'd16:begin
             if(accumerlator>threshold)
-                data_out[19:18] = 2'b10
+                data_out[19:18] = 2'b10;
             else
                 data_out[19:18] = 2'b01;
         end
         7'd17:begin
             if(accumerlator>threshold)
-                data_out[21:20] = 2'b10
+                data_out[21:20] = 2'b10;
             else
                 data_out[21:20] = 2'b01;
         end
         7'd18:begin
             if(accumerlator>threshold)
-                data_out[23:22] = 2'b10
+                data_out[23:22] = 2'b10;
             else
                 data_out[23:22] = 2'b01;
         end
         7'd19:begin
             if(accumerlator>threshold)
-                data_out[25:24] = 2'b10
+                data_out[25:24] = 2'b10;
             else
                 data_out[25:24] = 2'b01;
         end
