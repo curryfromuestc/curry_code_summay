@@ -1,53 +1,82 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QWidget
-from erial import SerialDriver
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSlider, QLabel, QGridLayout
+from PyQt5.QtCore import Qt
 
-class SerialUI(QMainWindow):
+class SliderUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
-        self.serial_driver = None
 
     def initUI(self):
-        self.setWindowTitle('串口驱动程序')
-        self.setGeometry(100, 100, 400, 300)
+        self.setWindowTitle('上位机')
+        self.setGeometry(100, 100, 1000, 500)
 
-        self.text_edit = QTextEdit(self)
-        self.send_button = QPushButton('发送数据', self)
-        self.receive_button = QPushButton('接收数据', self)
-        self.close_button = QPushButton('关闭串口', self)
+        central_widget = QWidget(self)
+        self.setCentralWidget(central_widget)
 
-        self.send_button.clicked.connect(self.send_data)
-        self.receive_button.clicked.connect(self.receive_data)
-        self.close_button.clicked.connect(self.close_serial)
+        layout = QVBoxLayout(central_widget)
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.text_edit)
-        layout.addWidget(self.send_button)
-        layout.addWidget(self.receive_button)
-        layout.addWidget(self.close_button)
+        self.y_min = QSlider(Qt.Horizontal, self)
+        self.y_min.setMinimum(0)
+        self.y_min.setMaximum(255)
+        self.y_min.setValue(0)
+        self.y_min.setTickPosition(QSlider.TicksBelow)
+        self.y_min.setTickInterval(1)
+        self.y_min.setFixedSize(255,20)
 
-        container = QWidget()
-        container.setLayout(layout)
-        self.setCentralWidget(container)
+        self.y_max = QSlider(Qt.Horizontal, self)
+        self.y_max.setMinimum(0)
+        self.y_max.setMaximum(255)
+        self.y_max.setValue(0)
+        self.y_max.setTickPosition(QSlider.TicksBelow)
+        self.y_max.setTickInterval(1)
+        self.y_max.setFixedSize(255,20)
 
-    def open_serial(self, port):
-        self.serial_driver = SerialDriver(port)
+        self.u_min = QSlider(Qt.Horizontal, self)
+        self.u_min.setMinimum(0)
+        self.u_min.setMaximum(255)
+        self.u_min.setValue(0)
+        self.u_min.setTickPosition(QSlider.TicksBelow)
+        self.u_min.setTickInterval(1)
+        self.u_min.setFixedSize(255,20)
 
-    def send_data(self):
-        data = self.text_edit.toPlainText()
-        self.serial_driver.send_data(data)
+        self.u_max = QSlider(Qt.Horizontal, self)
+        self.u_max.setMinimum(0)
+        self.u_max.setMaximum(255)
+        self.u_max.setValue(0)
+        self.u_max.setTickPosition(QSlider.TicksBelow)
+        self.u_max.setTickInterval(1)
+        self.u_max.setFixedSize(255,20)
 
-    def receive_data(self):
-        data = self.serial_driver.receive_data()
-        self.text_edit.setPlainText(data)
+        self.v_min = QSlider(Qt.Horizontal, self)
+        self.v_min.setMinimum(0)
+        self.v_min.setMaximum(255)
+        self.v_min.setValue(0)
+        self.v_min.setTickPosition(QSlider.TicksBelow)
+        self.v_min.setTickInterval(1)
+        self.v_min.setFixedSize(255,20)
 
-    def close_serial(self):
-        self.serial_driver.close()
+        self.v_max = QSlider(Qt.Horizontal, self)
+        self.v_max.setMinimum(0)
+        self.v_max.setMaximum(255)
+        self.v_max.setValue(0)
+        self.v_max.setTickPosition(QSlider.TicksBelow)
+        self.v_max.setTickInterval(1)
+        self.v_max.setFixedSize(255,20)
+
+        layout.addWidget(self.y_min)
+        layout.addWidget(self.y_max)
+        layout.addWidget(self.u_min)
+        layout.addWidget(self.u_max)
+        layout.addWidget(self.v_min)
+        layout.addWidget(self.v_max)
+
+
+    def send_value(self):
+        return self.y_min.value(), self.y_max.value(), self.u_min.value(), self.u_max.value(), self.v_min.value(), self.v_max.value()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = SerialUI()
-    ex.open_serial('COM1')  # 根据实际情况修改端口
+    ex = SliderUI()
     ex.show()
     sys.exit(app.exec_())
