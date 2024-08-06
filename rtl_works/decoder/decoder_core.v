@@ -45,7 +45,9 @@ parameter IDLE = 2'b00,//!空闲状态
           DONE = 2'b10;//!完成这包数据的解码的状态
 reg [1:0] state,next_state;//!状态机的状态
 
-reg valid_pre;
+reg valid_pre;//！上升沿有效的信号
+reg valid_next;//！下降沿有效的信号
+reg posi_pre,posi_nege;//！上升沿和下降沿的位置
 reg valid_decoder;
 
 //!缓冲data_in
@@ -75,12 +77,14 @@ always @( *) begin
         PRE:begin
             if(cout == 7)
                 next_state = DECODER;
-	    else if(valid_pre == 0&&
+	        else if(valid_pre == 0&&
 		   ((cout == 1&&(cout_us == 2||cout_us == 0||cout_us == 1))
 		   ||(cout == 0&&(cout_us == 77||cout_us == 78||cout_us == 79))
 		   ||(cout == 4&&(cout_us == 39||cout_us == 40||cout_us == 41))
 		   ||(cout == 3&&(cout_us == 39||cout_us == 40||cout_us == 41))))
-		next_state = IDLE;
+		        next_state = IDLE;
+            else if(valid_next&&(posi_nege-posi_pre)<29)
+                next_state = IDLE;
             else
                 next_state = PRE;
         end
@@ -130,6 +134,12 @@ always @(posedge clk or negedge rst_n) begin
         if((data_in_pre_1 - data_in_pre_2)>50
         &&((data_in_pre_1 - data_in)<50||(data_in - data_in_pre_2)<50))begin
             valid_pre <= 1;
+            posi_pre <= cout_us;
+        end
+        else if((data_in_pre_2 - data_in_pre_1)>50
+        &&((data_in_pre_1 - data_in)<50||(data_in - data_in_pre_1)<50))begin
+            valid_next <= 1;
+            posi_nege <= cout_us;
         end
         else
             valid_pre <= 0;
@@ -141,7 +151,6 @@ always @(posedge clk or negedge rst_n) begin
         cout <= 0;
         addra <= 0;
         accumerlator <= 0;
-        douta_w <= 0;
     end
     else begin
         case(state)
@@ -173,7 +182,7 @@ always @(posedge clk or negedge rst_n) begin
             end
             DECODER :begin
                 addra <= cout_us;
-                if(dotua_w == 1)begin
+                if(douta_w == 1)begin
                     accumerlator <= accumerlator + data_in;
                 end
                 else
