@@ -32,29 +32,29 @@ module decoder_core(
 parameter threshold = 50;//!阈值
 
 //!内部信号
-reg [31:0] accumerlator;
-reg [6:0] addra;
-wire douta_w;
+reg [31:0] accumerlator;//!累加器,用于累加权重与数据相乘的结果
+reg [6:0] addra;//!ROM的地址
+wire douta_w;//!ROM的输出
 
 reg [6:0] cout;//!统计从第一微秒到第120微妙的数据
 reg [6:0] cout_us;//!每一微秒的八十个脉冲进行计数
 
-parameter IDLE = 2'b00,//!空闲状态
-          PRE = 2'b01,//!准备状态，判断前挡脉冲的状态
-          DECODER = 2'b11,//!解码状态
-          DONE = 2'b10;//!完成这包数据的解码的状态
+parameter IDLE = 2'b00;//!空闲状态
+parameter PRE = 2'b01;//!准备状态，判断前挡脉冲的状态
+parameter DECODER = 2'b11;//!解码状态
+parameter DONE = 2'b10;//!完成这包数据的解码的状态
 reg [1:0] state,next_state;//!状态机的状态
 
-reg valid_pre;//！上升沿有效的信号
-reg valid_next;//！下降沿有效的信号
-reg posi_pre,posi_nege;//！上升沿和下降沿的位置
-reg valid_decoder;
+reg valid_pre;//!上升沿有效的信号
+reg valid_next;//!下降沿有效的信号
+reg posi_pre,posi_nege;//!上升沿和下降沿的位置
+reg valid_decoder;//!进入解码状态的有效信号
 
 //!缓冲data_in
 reg [7:0] data_in_pre_1,data_in_pre_2;
 
 //!下一状态逻辑
-always@(posedge clk or negedge rst_n)begin
+always@(posedge clk or negedge rst_n)begin:next_state_logic
     if(~rst_n)
         state <= IDLE;
     else
@@ -62,7 +62,7 @@ always@(posedge clk or negedge rst_n)begin
 end
 
 //!状态转移逻辑
-always @( *) begin
+always @( *) begin:state_transfer_logic
     case(state)
         IDLE:begin
             if(en)begin
@@ -123,7 +123,8 @@ end
 //         end
 //     end
 // end
-always @(posedge clk or negedge rst_n) begin
+//!对数据进行打怕，然后比对，确定上升沿还有下降沿的位置
+always @(posedge clk or negedge rst_n) begin:valid_logic
     if(~rst_n)begin
         data_in_pre_1 <= 0;
         data_in_pre_2 <= 0;
@@ -145,7 +146,8 @@ always @(posedge clk or negedge rst_n) begin
             valid_pre <= 0;
     end        
 end
-always @(posedge clk or negedge rst_n) begin
+//!不同状态的输出逻辑
+always @(posedge clk or negedge rst_n) begin:output_logic
     if(~rst_n)begin
         cout_us <= 0;
         cout <= 0;
@@ -196,8 +198,8 @@ always @(posedge clk or negedge rst_n) begin
     end
 end
 
-
-always@(*)begin
+//!将累加器的值与训练出来的阈值进行比较，然后进行解码
+always@(*)begin:decoder_logic
     case(cout)
         7'd7:begin
             if(accumerlator>threshold)
@@ -949,7 +951,7 @@ end
 
 
 
-//实例化ROM
+//!实例化ROM
 blk_mem_gen_0 blk_mem_gen_0_inst (
     .clka(clk),
     .addra(addra),

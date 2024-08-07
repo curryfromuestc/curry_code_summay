@@ -17,6 +17,7 @@ class SliderUI(QMainWindow):
         self.initUI()
 
     def initUI(self):
+        #self.serial_port = serial.Serial('COM3', 921600, timeout=1)
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
 
@@ -151,7 +152,7 @@ class SliderUI(QMainWindow):
     def send_value(self, value):
         #设置一个字符串，用于存储发送的数据，第一位是类别，有0，1，2，3，分别代表红色，蓝色，黄色，黑色，后面是YUV的上下限
         #发送数据
-        self.data = str(value) + ' '+ str(self.y_min.value()) +' '+ str(self.y_max.value()) +' '+ str(self.u_min.value()) +' '+ str(self.u_max.value()) +' '+ str(self.v_min.value()) +' '+ str(self.v_max.value())
+        self.data = str('(')+str(value) + str(self.y_min.value()) + str(self.y_max.value()) + str(self.u_min.value()) + str(self.u_max.value()) + str(self.v_min.value()) + str(self.v_max.value())+str(')')
         #将数据显示到pyqt界面上
         self.data_label = QLabel(self)
         self.data_label.setText(self.data)
@@ -160,6 +161,7 @@ class SliderUI(QMainWindow):
     
     def send_classes(self):
         #发送数据
+        self.serial_port = serial.Serial('COM3', 921600, timeout=1)
         erial.serial_send(self.serial_port, self.data)
 
 
