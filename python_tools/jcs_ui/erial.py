@@ -7,6 +7,8 @@ import time
         
 
 def receive_image(serial_port):
+    # 打开串口
+    serial_port = serial.Serial('COM10', 921600, timeout=1)
     # 帧头
     header = b"image:0,153600,320,240,7\n"
     header_length = len(header)
@@ -60,7 +62,9 @@ def yuv(rgb_image):
     g_mul= np.zeros((240,320))
     b_mul= np.zeros((240,320))
     #读取RGB图像
-    r_mul,g_mul,b_mul = rgb_image.split()
+    r_mul=rgb_image[:,:,0]
+    g_mul=rgb_image[:,:,1]
+    b_mul=rgb_image[:,:,2]
     for y in range(240):
         for x in range(320):
             yuv_image[y,x,0]=0.299*r_mul[y,x]+0.587*g_mul[y,x]+0.114*b_mul[y,x]
@@ -80,6 +84,10 @@ def binary(yuv_image, y_min, y_max, u_min, u_max, v_min, v_max):
             else:
                 binary_image[y,x]=0
     return binary_image
+
+def serial_send(serial_port, data):
+    serial_port = serial.Serial('COM10', 921600, timeout=1)
+    serial_port.write(data)
 
 # ser = serial.Serial('COM10', 921600, timeout=1)
 
