@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSlider, QLabel, QGridLayout,QPushButton,QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSlider, QLabel, QGridLayout,QPushButton,QHBoxLayout,QTableWidget
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QImage
 import erial
@@ -102,6 +102,14 @@ class SliderUI(QMainWindow):
         self.v_max.valueChanged.connect(self.send_value)
         self.v_max_label = QLabel('V_max:0', self)
         self.v_max.valueChanged.connect(lambda: self.v_max_label.setText('V_max:' + str(self.v_max.value())))
+
+        #添加位置信息
+        self.table_widget = QTableWidget()
+        self.array_data = np.random.randint(0, 255, (1, 14))
+        self.table_widget.setRowCount(1)
+        self.table_widget.setColumnCount(14)
+        left_layout.addWidget(self.table_widget)
+
 
         # 添加按钮
         self.button_0 = QPushButton('红色', self)
