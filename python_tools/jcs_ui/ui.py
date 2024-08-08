@@ -161,8 +161,17 @@ class SliderUI(QMainWindow):
     
     def send_classes(self):
         #发送数据
-        self.serial_port = serial.Serial('COM3', 921600, timeout=1)
+        self.serial_port = serial.Serial('COM10', 921600, timeout=1)
         erial.serial_send(self.serial_port, self.data)
+
+    def get_position(self):
+        self.serial_port = serial.Serial('COM10', 921600, timeout=1)
+        self.posi = erial.receive_pos(self.serial_port)
+
+    def get_image(self):
+        self.serial_port = serial.Serial('COM10', 921600, timeout=1)
+        self.rgb_image = erial.receive_image(self.serial_port)
+        
 
 
     

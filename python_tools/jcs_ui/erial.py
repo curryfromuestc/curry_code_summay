@@ -5,7 +5,30 @@ from PIL import Image
 import time
 
         
-
+def receive_pos(serial_port):
+    # 打开串口
+    serial_port = serial.Serial('COM10', 921600, timeout=1)
+    # 帧头
+    header = b"pos:0,4,1,1\n"
+    header_length = len(header)
+    
+    # 从串口接收数据直到收到完整的帧头
+    while True:
+        line = serial_port.readline()
+        print(line)
+        if line == header:
+            break
+        time.sleep(0.1)
+    
+    # 接收位置数据
+    pos_data = b""
+    while len(pos_data) < 6:  # 位置数据的字节量
+        pos_data += serial_port.read(6 - len(pos_data))
+    
+    # 将位置数据转换为NumPy数组
+    pos_array = np.frombuffer(pos_data, dtype=np.uint16)
+    
+    return pos_array
 def receive_image(serial_port):
     # 打开串口
     serial_port = serial.Serial('COM10', 921600, timeout=1)
