@@ -5,6 +5,63 @@ from PyQt5.QtGui import QPixmap, QImage
 import erial
 import serial
 import numpy as np
+import struct
+from PIL import Image
+import time
+
+def receive_image(serial_port,debug=False):
+    # 帧头
+    header = b"image:0,153600,320,240,7\n"
+    header_length = len(header)
+    if(debug is False):
+        # 从串口接收数据直到收到完整的帧头
+        while True:
+            line = serial_port.readline()
+
+            print(line)
+            if line == header:
+                break
+            time.sleep(0.1)
+        
+        # 接收图像数据
+        image_data = b""
+        while len(image_data) < 153600:  # 图像数据的字节量
+            image_data += serial_port.read(153600 - len(image_data))
+        
+        # 将图像数据转换为NumPy数组
+        image_array = np.frombuffer(image_data, dtype=np.uint16)
+        
+        # 转换RGB565格式为RGB888格式
+        r = ((image_array >> 11) & 0x1F) << 3
+        g = ((image_array >> 5) & 0x3F) << 2
+        b = (image_array & 0x1F) << 3
+        
+        # 重新组合RGB通道
+        
+
+        r_mul= np.zeros((240,320))
+        g_mul= np.zeros((240,320))
+        b_mul= np.zeros((240,320))
+        
+        for y in range(240):
+            for x in range(320):
+                r_mul[y,x]=r[y*320+x]
+                g_mul[y,x]=g[y*320+x]
+                b_mul[y,x]=b[y*320+x]
+                
+
+        rgb_image = np.dstack((r_mul, g_mul, b_mul))
+    
+        # 创建PIL Image对象
+        pil_image = Image.fromarray(rgb_image.astype('uint8'))
+    else:
+        pil_image = Image.open("received_image.bmp")
+        rgb_image = np.array(pil_image)
+    return np.array(pil_image)
+    # 保存图像为BMP文件
+    pil_image.save("received_image.bmp")
+    print("图像已保存为 received_image.bmp")
+    return rgb_image
 
 def numpy2qimage(array):
     height,width,channal = array.shape
@@ -12,12 +69,14 @@ def numpy2qimage(array):
     return QImage(array.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
 
 class SliderUI(QMainWindow):
-    def __init__(self):
+    def __init__(self,debug=False):
         super().__init__()
+        if(debug is False):
+            self.serial_port = serial.Serial('COM10', 921600, timeout=1)
+        else:
+            self.serial_port = None
         self.initUI()
-
     def initUI(self):
-        #self.serial_port = serial.Serial('COM3', 921600, timeout=1)
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
 
@@ -28,7 +87,11 @@ class SliderUI(QMainWindow):
         # 显示图片
         # self.serial_port = serial.Serial('COM3', 115200, timeout=1)
         # self.rgb_image = erial.receive_image(self.serial_port)
-        self.rgb_image = np.random.randint(0, 255, (240, 320, 3))
+        # #self.rgb_image = np.random.randint(0, 255, (240, 320, 3))
+       
+
+
+        self.rgb_image = receive_image(self.serial_port,debug=True)
         self.yuv_image = erial.yuv(self.rgb_image)
         self.qimage = numpy2qimage(self.rgb_image)
         self.pixmap = QPixmap(self.qimage)
@@ -105,7 +168,7 @@ class SliderUI(QMainWindow):
 
         #添加位置信息
         self.table_widget = QTableWidget()
-        self.array_data = np.random.randint(0, 255, (1, 14))
+        # self.array_data = erial.receive_pos(self.serial_port)
         self.table_widget.setRowCount(1)
         self.table_widget.setColumnCount(14)
         left_layout.addWidget(self.table_widget)
@@ -160,25 +223,31 @@ class SliderUI(QMainWindow):
     def send_value(self, value):
         #设置一个字符串，用于存储发送的数据，第一位是类别，有0，1，2，3，分别代表红色，蓝色，黄色，黑色，后面是YUV的上下限
         #发送数据
-        self.data = str('(')+str(value) + str(self.y_min.value()) + str(self.y_max.value()) + str(self.u_min.value()) + str(self.u_max.value()) + str(self.v_min.value()) + str(self.v_max.value())+str(')')
+        format=""
+        for _ in range(10):
+            format+="B"
+        self.data = struct.pack(format,ord('('),(value),
+            (self.y_min.value()) , (self.y_max.value()),
+                 (self.u_min.value()) , (self.u_max.value()) ,
+                     (self.v_min.value()) , (self.v_max.value()),
+                        ord(')'),ord('/'))
         #将数据显示到pyqt界面上
         self.data_label = QLabel(self)
-        self.data_label.setText(self.data)
-        print(self.data)
-
+        self.data_label.setText(str(self.data))
+        print(str(self.data))
+        pass
     
     def send_classes(self):
         #发送数据
-        self.serial_port = serial.Serial('COM10', 921600, timeout=1)
         erial.serial_send(self.serial_port, self.data)
 
-    def get_position(self):
-        self.serial_port = serial.Serial('COM10', 921600, timeout=1)
-        self.posi = erial.receive_pos(self.serial_port)
+    # def get_position(self):
+    #     self.serial_port = serial.Serial('COM10', 921600, timeout=1)
+    #     self.posi = erial.receive_pos(self.serial_port)
 
-    def get_image(self):
-        self.serial_port = serial.Serial('COM10', 921600, timeout=1)
-        self.rgb_image = erial.receive_image(self.serial_port)
+    # def get_image(self):
+    #     self.serial_port = serial.Serial('COM10', 921600, timeout=1)
+    #     self.rgb_image = erial.receive_image(self.serial_port)
         
 
 
@@ -187,6 +256,7 @@ class SliderUI(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = SliderUI()
+    ex = SliderUI(debug=True)
+
     ex.show()
     sys.exit(app.exec_())

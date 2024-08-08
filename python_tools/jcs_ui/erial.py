@@ -5,9 +5,11 @@ from PIL import Image
 import time
 
         
-def receive_pos(serial_port):
+def receive_pos(serial_port=None):
     # 打开串口
-    serial_port = serial.Serial('COM10', 921600, timeout=1)
+    if serial_port is None:
+        print("receive_pos".upper(),"open serial port")
+        serial_port = serial.Serial('COM10', 921600, timeout=1)
     # 帧头
     header = b"("
     header_length = len(header)
@@ -31,7 +33,9 @@ def receive_pos(serial_port):
     return pos_array
 def receive_image(serial_port):
     # 打开串口
-    serial_port = serial.Serial('COM10', 921600, timeout=1)
+    if serial_port is None:
+        print("receive_pos".upper(),"open serial port")
+        serial_port = serial.Serial('COM10', 921600, timeout=1)
     # 帧头
     header = b"image:0,153600,320,240,7\n"
     header_length = len(header)
