@@ -46,6 +46,38 @@ def binary(yuv_image, y_min, y_max, u_min, u_max, v_min, v_max):
 
     return binary_image
 
+def add_pos(serial_port,binary_image):
+    header = b"("
+    # while True:
+    #     line = serial_port.readline()
+    #     if line == header:
+    #         break
+    #     time.sleep(0.1)
+    # pos_data = b""
+    # while len(pos_data)<14:
+    #     pos_data += serial_port.read(14-len(pos_data))
+    
+    #先用一个固定的位置代替进行测试，后续再接收位置信息
+    pos_data = b'\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01'
+
+    pos_image = binary_image.copy()
+    square_x = pos_data[1] * 256 + pos_data[2]
+    square_y = pos_data[3]
+    circle_x = pos_data[8] * 256 + pos_data[9]
+    circle_y = pos_data[10]
+    hexagon_x = pos_data[11] * 256 + pos_data[12]
+    hexagon_y = pos_data[13]
+    square_left = pos_data[4] * 256 + pos_data[5]
+    square_right = pos_data[6] * 256 + pos_data[7]
+    pos_image[square_y,square_x] = [0,255,0]
+    pos_image[circle_y,circle_x] = [0,255,0]
+    pos_image[hexagon_y,hexagon_x] = [0,255,0]
+    pos_image[:,square_left,:] = [0,255,0]
+    pos_image[:,square_right,:] = [0,255,0]
+    return pos_image
+        
+    
+
 def receive_image(serial_port):
     # 帧头
     header = b"image:0,153600,320,240,7\n"
@@ -100,7 +132,7 @@ def numpy2qimage(array: np.ndarray) -> QImage:
 class SliderUI(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.serial_port = serial.Serial('COM10', 921600, timeout=1)
+        self.serial_port = serial.Serial('/dev/tty.usbserial-0001', 921600, timeout=1)
         self.bgr_image = np.zeros((240,320,3))
         self.qimage = QImage(self.bgr_image, 320, 240 ,320*3, QImage.Format_RGB888)
         self.binary_image_qimage = QImage(self.bgr_image, 320, 240 , 320*3,QImage.Format_RGB888)
@@ -109,6 +141,10 @@ class SliderUI(QMainWindow):
         self.initUI()
         self.thread1= threading.Thread(target=self.update_yuv_image)
         self.thread1.start()
+        self.thread2= threading.Thread(target=self.update_receive_image)
+        self.thread2.start()
+        self.thread3= threading.Thread(target=self.update_recieve_pos)
+        self.thread3.start()
         self.should_exit = False
 
         
@@ -120,12 +156,13 @@ class SliderUI(QMainWindow):
         left_layout = QVBoxLayout()  # 左侧布局
         right_layout = QVBoxLayout()  # 右侧布局
 
-        # 添加图片
+        # 添加图片,设置图片大小
         self.logo = QPixmap('logo.png')
-        self.logo_label = QLabel(self)
-        self.logo_label.setPixmap(self.logo)
-        right_layout.addWidget(self.logo_label)
-
+        self.logo = self.logo.scaled(60, 60)
+        self.label_logo = QLabel(self)
+        self.label_logo.setPixmap(self.logo)
+        right_layout.addWidget(self.label_logo)
+        #接收图片的逻辑
         self.bgr_image = receive_image(self.serial_port)
         self.qimage = numpy2qimage(self.bgr_image)
         self.pixmap = QPixmap(self.qimage)
@@ -201,12 +238,12 @@ class SliderUI(QMainWindow):
         #self.v_max.valueChanged.connect(lambda: self.v_max_label.setText('V_max:' + str(self.v_max.value())))
 
         #添加位置信息
-        self.table_widget = QTableWidget()
-        # self.array_data = erial.receive_pos(self.serial_port)
-        #self.table_widget.setRowCount(1)
-        self.table_widget.setColumnCount(4)
-        self.table_widget.setHorizontalHeaderLabels(['Color', 'Square', 'Circle', 'Hexagon'])
-        left_layout.addWidget(self.table_widget)
+        # self.table_widget = QTableWidget()
+        # # self.array_data = erial.receive_pos(self.serial_port)
+        # #self.table_widget.setRowCount(1)
+        # self.table_widget.setColumnCount(4)
+        # self.table_widget.setHorizontalHeaderLabels(['Color', 'Square', 'Circle', 'Hexagon'])
+        # left_layout.addWidget(self.table_widget)
 
 
         # 添加按钮
@@ -272,7 +309,9 @@ class SliderUI(QMainWindow):
         self.data_label.setText(str(self.data))
         print(str(self.data))
         pass
-    
+    def send_classes(self):
+        #发送数据
+        serial.serial_send(self.serial_port, self.data)
     # def send_classes(self):
     #     #发送数据
     #     erial.serial_send(self.serial_port, self.data)
@@ -281,11 +320,32 @@ class SliderUI(QMainWindow):
         while 1:
             self.yuv_image = yuv(self.bgr_image)
             self.binary_image = binary(self.yuv_image, self.y_min.value(), self.y_max.value(), self.u_min.value(),self.u_max.value(), self.v_min.value(),self.v_max.value())
+            self.binary_image = add_pos(self.serial_port,self.binary_image)
             #print(self.binary_image.shape)
             self.binary_image_qimage = numpy2qimage(self.binary_image)
             #print(self.binary_image_qimage.size())
             self.binary_image_pixmap = QPixmap(self.binary_image_qimage)
             self.binary_image_label.setPixmap(self.binary_image_pixmap)
+            self.show()
+            time.sleep(0.3)
+            if (self.should_exit):
+                break
+    def update_receive_image(self):
+        while 1:
+            self.bgr_image = receive_image(self.serial_port)
+            self.qimage = numpy2qimage(self.bgr_image)
+            self.pixmap = QPixmap(self.qimage)
+            self.label.setPixmap(self.pixmap)
+            self.show()
+            time.sleep(0.3)
+            if (self.should_exit):
+                break
+    def update_recieve_pos(self):
+        while 1:
+            self.pos_image = add_pos(self.serial_port,self.binary_image)
+            self.pos_image_qimage = numpy2qimage(self.pos_image)
+            self.pos_image_pixmap = QPixmap(self.pos_image_qimage)
+            self.pos_image_label.setPixmap(self.pos_image_pixmap)
             self.show()
             time.sleep(0.3)
             if (self.should_exit):
