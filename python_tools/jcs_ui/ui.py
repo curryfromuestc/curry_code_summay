@@ -120,6 +120,11 @@ class SliderUI(QMainWindow):
         left_layout = QVBoxLayout()  # 左侧布局
         right_layout = QVBoxLayout()  # 右侧布局
 
+        # 添加图片
+        self.logo = QPixmap('logo.png')
+        self.logo_label = QLabel(self)
+        self.logo_label.setPixmap(self.logo)
+        right_layout.addWidget(self.logo_label)
 
         self.bgr_image = receive_image(self.serial_port)
         self.qimage = numpy2qimage(self.bgr_image)
