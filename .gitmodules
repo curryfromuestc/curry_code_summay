@@ -1,0 +1,3 @@
+[submodule "cuda_cnn"]
+	path = cuda_cnn
+	url = https://github.com/An0nym6/CNN.git
