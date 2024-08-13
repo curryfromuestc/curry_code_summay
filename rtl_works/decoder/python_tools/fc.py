@@ -1,4 +1,4 @@
-import BNN
+import rtl_works.decoder.python_tools.BNN as BNN
 import torch
 import torch.nn as nn
 
