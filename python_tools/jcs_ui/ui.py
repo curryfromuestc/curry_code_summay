@@ -1,5 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSlider, QLabel, QGridLayout,QPushButton,QHBoxLayout,QTableWidget
+import cv2
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSlider, QLabel, QGridLayout,QPushButton,QHBoxLayout,QTableWidget,QLineEdit
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QImage
 import serial
@@ -10,7 +11,7 @@ import time
 import threading
 
 
-def yuv(bgr_image):
+def yuv(rgb_image):
     #转换规则是Y = 0.299 * R + 0.587 * G + 0.114 * B，U =-0.169 * R - 0.331 * G + 0.500 * B，V = 0.500 * R - 0.439 * G - 0.081 * B
     #将RGB转换为YUV格式
     yuv_image = np.zeros((240,320,3))
@@ -18,9 +19,9 @@ def yuv(bgr_image):
     g_mul= np.zeros((240,320))
     b_mul= np.zeros((240,320))
     #读取BGR图像
-    r_mul=bgr_image[:,:,0]
-    g_mul=bgr_image[:,:,1]
-    b_mul=bgr_image[:,:,2]
+    r_mul=rgb_image[:,:,0]
+    g_mul=rgb_image[:,:,1]
+    b_mul=rgb_image[:,:,2]
     for y in range(240):
         for x in range(320):
             yuv_image[y,x,0]=0.299*r_mul[y,x]+0.587*g_mul[y,x]+0.114*b_mul[y,x] 
@@ -132,10 +133,11 @@ def numpy2qimage(array: np.ndarray) -> QImage:
 class SliderUI(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.serial_port = serial.Serial('/dev/tty.usbserial-0001', 921600, timeout=1)
-        self.bgr_image = np.zeros((240,320,3))
-        self.qimage = QImage(self.bgr_image, 320, 240 ,320*3, QImage.Format_RGB888)
-        self.binary_image_qimage = QImage(self.bgr_image, 320, 240 , 320*3,QImage.Format_RGB888)
+        self.should_exit = False
+        self.serial_port = serial.Serial('COM10', 921600, timeout=0.1)
+        self.rgb_image = np.zeros((240,320,3))
+        self.qimage = QImage(self.rgb_image, 320, 240 ,320*3, QImage.Format_RGB888)
+        self.binary_image_qimage = QImage(self.rgb_image, 320, 240 , 320*3,QImage.Format_RGB888)
         self.binary_image_pixmap = QPixmap(self.binary_image_qimage)
         self.pixmap = QPixmap(self.qimage)
         self.initUI()
@@ -143,12 +145,13 @@ class SliderUI(QMainWindow):
         self.thread1.start()
         self.thread2= threading.Thread(target=self.update_receive_image)
         self.thread2.start()
-        self.thread3= threading.Thread(target=self.update_recieve_pos)
-        self.thread3.start()
+        # self.thread3= threading.Thread(target=self.update_recieve_pos)
+        # self.thread3.start()
         self.should_exit = False
 
         
     def initUI(self):
+        self.setWindowTitle('CICC6900')
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
 
@@ -157,14 +160,14 @@ class SliderUI(QMainWindow):
         right_layout = QVBoxLayout()  # 右侧布局
 
         # 添加图片,设置图片大小
-        self.logo = QPixmap('logo.png')
-        self.logo = self.logo.scaled(60, 60)
+        self.logo = QPixmap('/Users/curryyang/code/curry_code_summay/python_tools/jcs_ui/logo.png')
+        self.logo = self.logo.scaled(100, 100)
         self.label_logo = QLabel(self)
         self.label_logo.setPixmap(self.logo)
         right_layout.addWidget(self.label_logo)
         #接收图片的逻辑
-        self.bgr_image = receive_image(self.serial_port)
-        self.qimage = numpy2qimage(self.bgr_image)
+        #self.rgb_image = receive_image(self.serial_port)
+        self.qimage = numpy2qimage(self.rgb_image)
         self.pixmap = QPixmap(self.qimage)
         self.label = QLabel(self)
         self.label.setPixmap(self.pixmap)
@@ -249,19 +252,19 @@ class SliderUI(QMainWindow):
         # 添加按钮
         self.button_0 = QPushButton('红色', self)
         self.button_0.setFixedSize(100, 20)
-        self.button_0.clicked.connect(lambda:self.send_value(0))
+        self.button_0.clicked.connect(lambda:self.send_value(0x72))
         self.button_1 = QPushButton('蓝色', self)
         self.button_1.setFixedSize(100, 20)
-        self.button_1.clicked.connect(lambda:self.send_value(1))
+        self.button_1.clicked.connect(lambda:self.send_value(0x62))
         self.button_2 = QPushButton('黄色', self)
         self.button_2.setFixedSize(100, 20)
-        self.button_2.clicked.connect(lambda:self.send_value(2))
+        self.button_2.clicked.connect(lambda:self.send_value(0x79))
         self.button_3 = QPushButton('黑色', self)
         self.button_3.setFixedSize(100, 20)
-        self.button_3.clicked.connect(lambda:self.send_value(3))
+        self.button_3.clicked.connect(lambda:self.send_value(0x68))
         self.button_send = QPushButton('发送', self)
         self.button_send.setFixedSize(100, 20)
-        #self.button_send.clicked.connect(self.send_classes)
+        self.button_send.clicked.connect(self.send_classes)
 
         #self.binary_image = erial.binary(self.yuv_image, self.y_min.value(), self.y_max.value(), self.u_min.value(),self.u_max.value(), self.v_min.value(),self.v_max.value())
         #print(self.binary_image)
@@ -272,6 +275,15 @@ class SliderUI(QMainWindow):
         self.binary_image_label.setPixmap(self.binary_image_pixmap)
         right_layout.addWidget(self.binary_image_label)
 
+        self.square_x_label = QLabel('Square X: 0', self)
+        self.square_y_label = QLabel('Square Y: 0', self)
+        self.circle_x_label = QLabel('Circle X: 0', self)
+        self.circle_y_label = QLabel('Circle Y: 0', self)
+        self.hexagon_x_label = QLabel('Hexagon X: 0', self)
+        self.hexagon_y_label = QLabel('Hexagon Y: 0', self)
+        self.square_left_label = QLabel('Square Left: 0', self)
+        self.square_right_label = QLabel('Square Right: 0', self)
+        
         left_layout.addWidget(self.y_min)
         left_layout.addWidget(self.y_min_label)
         left_layout.addWidget(self.y_max)
@@ -289,9 +301,37 @@ class SliderUI(QMainWindow):
         left_layout.addWidget(self.button_2)
         left_layout.addWidget(self.button_3)
         left_layout.addWidget(self.button_send)
+        left_layout.addWidget(self.square_x_label)
+        left_layout.addWidget(self.square_y_label)
+        left_layout.addWidget(self.circle_x_label)
+        left_layout.addWidget(self.circle_y_label)
+        left_layout.addWidget(self.hexagon_x_label)
+        left_layout.addWidget(self.hexagon_y_label)
+        left_layout.addWidget(self.square_left_label)
+        left_layout.addWidget(self.square_right_label)
+        
 
         main_layout.addLayout(left_layout)  # 将左侧布局添加到主布局
         main_layout.addLayout(right_layout)  # 将右侧布局添加到主布局
+
+    # def update_position_data(self, position_data):
+    #     square_x = position_data[1] * 256 + position_data[2]
+    #     square_y = position_data[3]
+    #     circle_x = position_data[8] * 256 + position_data[9]
+    #     circle_y = position_data[10]
+    #     hexagon_x = position_data[11] * 256 + position_data[12]
+    #     hexagon_y = position_data[13]
+    #     square_left = position_data[4] * 256 + position_data[5]
+    #     square_right = position_data[6] * 256 + position_data[7]
+
+    #     self.square_x_textbox.setText(str(square_x))
+    #     self.square_y_textbox.setText(str(square_y))
+    #     self.circle_x_textbox.setText(str(circle_x))
+    #     self.circle_y_textbox.setText(str(circle_y))
+    #     self.hexagon_x_textbox.setText(str(hexagon_x))
+    #     self.hexagon_y_textbox.setText(str(hexagon_y))
+    #     self.square_left_textbox.setText(str(square_left))
+    #     self.square_right_textbox.setText(str(square_right))
 
     def send_value(self, value):
         #设置一个字符串，用于存储发送的数据，第一位是类别，有0，1，2，3，分别代表红色，蓝色，黄色，黑色，后面是YUV的上下限
@@ -308,44 +348,163 @@ class SliderUI(QMainWindow):
         self.data_label = QLabel(self)
         self.data_label.setText(str(self.data))
         print(str(self.data))
-        pass
+        
     def send_classes(self):
         #发送数据
-        serial.serial_send(self.serial_port, self.data)
+        self.serial_port.write(self.data)
+        print("send data",self.data)
     # def send_classes(self):
     #     #发送数据
     #     erial.serial_send(self.serial_port, self.data)
     
     def update_yuv_image(self):
         while 1:
-            self.yuv_image = yuv(self.bgr_image)
+            if (self.should_exit):
+                break
+            self.yuv_image = yuv(self.rgb_image)
             self.binary_image = binary(self.yuv_image, self.y_min.value(), self.y_max.value(), self.u_min.value(),self.u_max.value(), self.v_min.value(),self.v_max.value())
-            self.binary_image = add_pos(self.serial_port,self.binary_image)
+            self.y_min_label.setText('Y_min:' + str(self.y_min.value()))
+            self.y_max_label.setText('Y_max:' + str(self.y_max.value()))
+            self.u_min_label.setText('U_min:' + str(self.u_min.value()))
+            self.u_max_label.setText('U_max:' + str(self.u_max.value()))
+            self.v_min_label.setText('V_min:' + str(self.v_min.value()))
+            self.v_max_label.setText('V_max:' + str(self.v_max.value()))
+            #self.binary_image = add_pos(self.serial_port,self.binary_image)
             #print(self.binary_image.shape)
             self.binary_image_qimage = numpy2qimage(self.binary_image)
             #print(self.binary_image_qimage.size())
             self.binary_image_pixmap = QPixmap(self.binary_image_qimage)
             self.binary_image_label.setPixmap(self.binary_image_pixmap)
             self.show()
-            time.sleep(0.3)
+            time.sleep(0.2)
             if (self.should_exit):
                 break
+
     def update_receive_image(self):
-        while 1:
-            self.bgr_image = receive_image(self.serial_port)
-            self.qimage = numpy2qimage(self.bgr_image)
-            self.pixmap = QPixmap(self.qimage)
-            self.label.setPixmap(self.pixmap)
-            self.show()
-            time.sleep(0.3)
-            if (self.should_exit):
-                break
+            self.serial_port.flush()
+            while 1:
+                if (self.should_exit):
+                        break
+                read_data = self.serial_port.read(1)
+                headers = b"mage:0,153600,320,240,7\n"
+                if read_data == b'i':
+                    if self.serial_port.read_until(headers) == headers:
+                        print("header received")
+                        #data = ser.read(153600)
+        
+                        image_data = b""
+                        while len(image_data) < 153600:  # 图像数据的字节量
+                            image_data += self.serial_port.read(153600 - len(image_data))
+                        image_array = np.frombuffer(image_data, dtype=np.uint16)
+        
+                        r = ((image_array >> 11) & 0x1F) << 3
+                        g = ((image_array >> 5) & 0x3F) << 2
+                        b = (image_array & 0x1F) << 3
+        
+                        # 重新组合RGB通道
+        
+        
+                        r_mul= np.zeros((240,320))
+                        g_mul= np.zeros((240,320))
+                        b_mul= np.zeros((240,320))
+        
+                        for y in range(240):
+                            for x in range(320):
+                                r_mul[y,x]=r[y*320+x]
+                                g_mul[y,x]=g[y*320+x]
+                                b_mul[y,x]=b[y*320+x]
+        
+        
+                        
+                        self.rgb_image = np.dstack((r_mul, g_mul, b_mul))
+
+        
+                        self.qimage = numpy2qimage(self.rgb_image)
+                        self.pixmap = QPixmap(self.qimage)
+                        self.label.setPixmap(self.pixmap)
+                        self.show()
+                        self.serial_port.flush()
+                        if (self.should_exit):
+                            break
+                        
+                elif read_data == b'(':
+                    print("pos header received")
+                    position_data = b""
+                    while len(position_data) < 14:
+                        position_data += self.serial_port.read(14 - len(position_data))
+                    print("position_data = ", position_data)
+        
+                    square_x = position_data[1] *256 + position_data[2]
+                    square_y = position_data[3] 
+                    print("square_x = ", square_x)
+                    print("square_y = ", square_y)
+                    circle_x = position_data[8] *256 + position_data[9]
+                    circle_y = position_data[10] 
+                    print("circle_x = ", circle_x)
+                    print("circle_y = ", circle_y)
+                    hexagon_x = position_data[11] *256 + position_data[12]
+                    hexagon_y = position_data[13] 
+                    print("hexagon_x = ", hexagon_x)
+                    print("hexagon_y = ", hexagon_y)
+                    square_left = position_data[4] * 256 + position_data[5]
+                    square_right = position_data[6] * 256 + position_data[7]
+                    print("square_left = ", square_left)
+                    print("square_right = ", square_right)
+
+                    self.square_x_label.setText('Square X: ' + str(square_x))
+                    self.square_y_label.setText('Square Y: ' + str(square_y))
+                    self.circle_x_label.setText('Circle X: ' + str(circle_x))
+                    self.circle_y_label.setText('Circle Y: ' + str(circle_y))
+                    self.hexagon_x_label.setText('Hexagon X: ' + str(hexagon_x))
+                    self.hexagon_y_label.setText('Hexagon Y: ' + str(hexagon_y))
+                    self.square_left_label.setText('Square Left: ' + str(square_left))
+                    self.square_right_label.setText('Square Right: ' + str(square_right))
+
+        
+                    rgb_image_copy = self.rgb_image.copy()
+
+                    # rgb_image_copy[square_x,square_y] = [0,255,0]
+                    # rgb_image_copy[circle_y,circle_x] = [0,255,0]
+                    # rgb_image_copy[hexagon_y,hexagon_x] = [0,255,0]
+                    # rgb_image_copy[:,square_left,:] = [0,255,0]
+                    # rgb_image_copy[:,square_right,:] = [0,255,0]
+                    rgb_image_copy = cv2.drawMarker(rgb_image_copy, (square_x-3, square_y), (0, 255, 0), markerType=cv2.MARKER_SQUARE, markerSize=6, thickness=2)
+                    rgb_image_copy = cv2.drawMarker(rgb_image_copy, (circle_x-3, circle_y), (0, 255, 0), markerType=cv2.MARKER_CROSS, markerSize=6, thickness=2)
+                    rgb_image_copy = cv2.drawMarker(rgb_image_copy, (hexagon_x-3, hexagon_y), (0, 255, 0), markerType=cv2.MARKER_DIAMOND, markerSize=6, thickness=2)
+                    rgb_image_copy = cv2.rectangle(rgb_image_copy, (square_left-2, 0), (square_right-2, 480), (0, 255, 0), 2)
+
+                    self.pos_image = rgb_image_copy.copy()
+
+                    self.pos_image_qimage = numpy2qimage(self.pos_image)
+                    self.pos_image_pixmap = QPixmap(self.pos_image_qimage)
+                    self.label.setPixmap(self.pos_image_pixmap)
+                    self.show()
+                    self.serial_port.flush()
+                if (self.should_exit):
+                    break
+                
+
+
+            #self.rgb_image = receive_image(self.serial_port)
+
+
+
+            # self.qimage = numpy2qimage(self.rgb_image)
+            # self.pixmap = QPixmap(self.qimage)
+            # self.label.setPixmap(self.pixmap)
+            # self.show()
+            # time.sleep(0.3)
+            # if (self.should_exit):
+            #     break
+
+
+
     def update_recieve_pos(self):
         while 1:
             self.pos_image = add_pos(self.serial_port,self.binary_image)
             self.pos_image_qimage = numpy2qimage(self.pos_image)
             self.pos_image_pixmap = QPixmap(self.pos_image_qimage)
-            self.pos_image_label.setPixmap(self.pos_image_pixmap)
+            self.label.setPixmap(self.pos_image_pixmap)
             self.show()
             time.sleep(0.3)
             if (self.should_exit):

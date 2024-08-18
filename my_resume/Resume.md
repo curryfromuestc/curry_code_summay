@@ -48,4 +48,5 @@
 ## 技能清单
 
 - ★★★ 机器学习，深度学习，SNN
-- ★★☆ C、Python、verilog
+- ★★★ cuda、Python、verilog
+- ★★★ 神经网络的硬件加速
