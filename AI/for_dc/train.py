@@ -4,14 +4,13 @@ from model import *
 import tqdm
 from vedeio_loader import *
 
-model = Conv_fc(T=40, image_size=64)
-optmizer = torch.optim.Adam(model.parameters(), lr=0.001)
-criterion = nn.BCELoss()
+model = ResNet(block=4,layers=4)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
-#data_loader是一个自己的MP4视频数据集
-verdeio_dataloader = VideoDataset(video_dir="你的视频目录路径")
-dataloader = DataLoader(verdeio_dataloader, batch_size=4, shuffle=True)
+criterion = nn.CrossEntropyLoss()
+optmizer = torch.optim.Adam(model.parameters(), lr=0.001)
+dataloader = create_dataloader("path_to_video_folder", batch_size=64)
+
 
 def train(model,data_loader,optmizer,criterion,device):
     model.train()
@@ -27,7 +26,6 @@ def train(model,data_loader,optmizer,criterion,device):
         optmizer.step()
         running_loss += loss.item()
     return running_loss/len(data_loader)
-
 for epoch in range(10):
     loss = train(model,dataloader,optmizer,criterion,device)
     print("Epoch: {} Loss: {}".format(epoch, loss))

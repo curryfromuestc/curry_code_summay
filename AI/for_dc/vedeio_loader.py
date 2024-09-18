@@ -1,44 +1,59 @@
-from torch.utils.data import Dataset, DataLoader
 import cv2
 import os
-import torch
 import numpy as np
+from torch.utils.data import Dataset, DataLoader
 
-class VideoDataset(Dataset):
+# Custom dataset class
+class AviVideoDataset(Dataset):
     def __init__(self, video_dir, transform=None):
         """
-        video_dir: 存放视频文件的目录
-        transform: 应用于视频帧的预处理函数
+        Args:
+            video_dir (str): Directory containing video files
+            transform (callable, optional): Optional transform to be applied on a sample
         """
-        self.video_dir = video_dir
+        self.video_paths = [os.path.join(video_dir, f) for f in os.listdir(video_dir) if f.endswith('.avi')]
         self.transform = transform
-        self.videos = os.listdir(video_dir)
 
     def __len__(self):
-        return len(self.videos)
+        return len(self.video_paths)
 
     def __getitem__(self, idx):
-        video_path = os.path.join(self.video_dir, self.videos[idx])
-        # 使用OpenCV加载视频
-        cap = cv2.VideoCapture(video_path)
+        video_path = self.video_paths[idx]
+        cap = cv2.VideoCapture(video_path)  # Open the video file
         frames = []
+        
         while True:
-            ret, frame = cap.read()
+            ret, frame = cap.read()  # Read video frame by frame
             if not ret:
                 break
+            
+            # Convert the frame to grayscale and stack it to create 2 channels
+            gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            two_channel_frame = np.stack((gray_frame, gray_frame), axis=0)  # Create 2 channels
+
             if self.transform:
-                frame = self.transform(frame)
-            frames.append(frame)
+                two_channel_frame = self.transform(two_channel_frame)
+
+            frames.append(two_channel_frame)
+
         cap.release()
-        # 假设你的模型期望固定数量的帧，这里简单地选择前N帧
-        N = 10  # Replace 10 with the desired number of frames
-        frames = frames[:N]  # N是你选择的帧数
-        # 将帧列表转换为模型期望的张量形式
-        frames_tensor = torch.stack(frames)
-        return frames_tensor
 
-# 实例化数据集和数据加载器
-#video_dataset = VideoDataset(video_dir="你的视频目录路径")
-#data_loader = DataLoader(video_dataset, batch_size=4, shuffle=True)
+        # Convert the list of frames into a numpy array
+        video_array = np.stack(frames, axis=0)  # Shape: (number of frames, 2, height, width)
+        return video_array
 
-# 接下来，你可以使用这个data_loader在训练循环中加载数据
+
+# Function to create the DataLoader
+def create_dataloader(video_dir, batch_size=4, shuffle=True, num_workers=0):
+    dataset = AviVideoDataset(video_dir=video_dir)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
+    return dataloader
+
+
+# Example usage
+if __name__ == "__main__":
+    video_dir = "path_to_video_folder"  # Path to the directory containing the video files
+    dataloader = create_dataloader(video_dir, batch_size=2)
+    
+    for batch in dataloader:
+        print(batch.shape) 
