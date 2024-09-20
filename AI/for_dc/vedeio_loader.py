@@ -52,7 +52,7 @@ def create_dataloader(video_dir, batch_size=4, shuffle=True, num_workers=0):
 
 # Example usage
 if __name__ == "__main__":
-    video_dir = "path_to_video_folder"  # Path to the directory containing the video files
+    video_dir = "/home/curry/code/视频划分/TEST"  # Path to the directory containing the video files
     dataloader = create_dataloader(video_dir, batch_size=2)
     
     for batch in dataloader:
