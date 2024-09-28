@@ -26,6 +26,6 @@ def train(model,data_loader,optmizer,criterion,device):
         optmizer.step()
         running_loss += loss.item()
     return running_loss/len(data_loader)
-for epoch in range(10):
+for epoch in range(100):
     loss = train(model,dataloader,optmizer,criterion,device)
     print("Epoch: {} Loss: {}".format(epoch, loss))
