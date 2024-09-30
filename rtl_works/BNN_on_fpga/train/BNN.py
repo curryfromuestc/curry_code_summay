@@ -38,8 +38,8 @@ class BinaryLinear(nn.Linear):
     def forward(self, x):
 
         w = self.weight
-        # bw = BinaryWeight.apply(w)
-        scaling_factor = torch.mean(abs(w),dim=1,keepdim=True)
+        #bw = BinaryWeight.apply(w)
+        scaling_factor = torch.mean(torch.mean(abs(w),dim=1,keepdim=True),dim=0,keepdim=True)
         scaling_factor = scaling_factor.detach()
         bw = scaling_factor * BinaryWeight.apply(w)
         
@@ -59,8 +59,9 @@ class BinaryConv2d(nn.Conv2d):
     def forward(self, x):
         
         w = self.weight
-        # bw = BinaryWeight.apply(w)
-        scaling_factor = torch.mean(torch.mean(torch.mean(abs(w),dim=3,keepdim=True),dim=2,keepdim=True),dim=1,keepdim=True)
+        #bw = BinaryWeight.apply(w)
+        scaling_factor = torch.mean(torch.mean(torch.mean(torch.mean(abs(w),dim=3,keepdim=True),dim=2,keepdim=True),
+                                               dim=1,keepdim=True),dim=0,keepdim=True)
         scaling_factor = scaling_factor.detach()
         bw = scaling_factor * BinaryWeight.apply(w)
     
