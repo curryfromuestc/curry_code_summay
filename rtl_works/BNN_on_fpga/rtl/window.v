@@ -136,7 +136,7 @@ always @(posedge clk) begin
         mem[123] <= mem[122];
         mem[124] <= mem[123];
         mem[125] <= mem[124];
-        mem[126] <= mem[125];
+        mem[126] <= mem[125]; 
         mem[127] <= mem[126];
         mem[128] <= mem[127];
         mem[129] <= mem[128];
