@@ -19,6 +19,9 @@ module conv
 reg [7:0] weight_addr = 8'd0;
 reg [31:0] wt_data;
 
+reg [19:0] cnt1;//! 用于计数，工作时钟
+reg [9:0] cnt2;
+
 reg sum_valid;
 reg sum_valid_ff;
 
@@ -281,6 +284,55 @@ always @(posedge clk) begin
 end
 //------------------------流水线第三级---------------------------------
 always @(posedge clk) begin
-    
+    sum100 <= sum000 + sum010;
+    sum101 <= sum001 + sum011;
+    sum102 <= sum002 + sum012;
+    sum103 <= sum003 + sum013;
+    sum104 <= sum004 + sum014;
+    sum110 <= sum020;
+    sum111 <= sum021;
+    sum112 <= sum022;
+    sum113 <= sum023;
+    sum114 <= sum024;
+end
+//------------------------流水线第四级---------------------------------
+always @(posedge clk) begin
+    sum200 <= sum100 + sum110;
+    sum201 <= sum101 + sum111;
+    sum202 <= sum102 + sum112;
+    sum203 <= sum103 + sum113;
+    sum204 <= sum104 + sum114;
+end
+//------------------------流水线第五级---------------------------------
+always @(posedge clk) begin
+    sum30 <= sum200 + sum201;
+    sum21 <= sum202 + sum203;
+    sum32 <= sum204;
+end
+//------------------------流水线第六级---------------------------------
+always @(posedge clk) begin
+    sum40 <= sum30 + sum21;
+    sum41 <= sum32;
+end
+//------------------------流水线第七级---------------------------------
+always @(posedge clk) begin
+    wt_data <= sum40 + sum41;
+end
+//------------------------模块工作时钟---------------------------------
+always @(posedge clk) begin
+    if(start)
+        cnt1 <= cnt1+1'd1;
+    else
+        cnt1 <= 20'd0;
+end
+always @(posedge clk) begin
+    if(sum_valid)begin
+        if(cnt2 == Ni-1)
+            cnt2 <= 10'd0;
+        else
+            cnt2 <= cnt2 + 10'd1; 
+    end
+    else
+        cnt2 <= 10'd0;
 end
 endmodule
