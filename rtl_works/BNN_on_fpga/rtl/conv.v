@@ -6,21 +6,21 @@ module conv
 (
     input wire clk,
     input wire rstn,
-    input wire start,
-    input wire weight_en,
-    input weight,
-    input [39:0] taps,
-    input state,
-    output signed [31:0] dout,
-    output ovalid,
-    output done
+    input wire start,//！ 启动信号，注意跟滑窗模块的启动信号时间不一样
+    input wire weight_en,//！ 权重有效信号
+    input weight,//！ 以比特权重
+    input [39:0] taps,//！ 滑窗模块输入
+    input state,//！选择信号，为第一个卷积层或者是第二个卷积层
+    output signed [31:0] dout,//！ 卷积输出
+    output ovalid,//！ 输出有效信号
+    output done//！ 卷积运算完成信号
 );
 //------------------------变量定义----------------------------
 reg [7:0] weight_addr = 8'd0;
 reg [31:0] wt_data;
 
 reg [19:0] cnt1;//! 用于计数，工作时钟
-reg [9:0] cnt2;
+reg [9:0] cnt2;//！ 用于同步滑窗模块以及卷积模块
 
 reg sum_valid;
 reg sum_valid_ff;
