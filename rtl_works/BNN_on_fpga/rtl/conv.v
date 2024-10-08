@@ -1,12 +1,13 @@
 module conv 
 #(
    parameter K = 5,
+   parameter Ni = 28, //！ 28 for the first layer, 12 for the second layer
    parameter S = 1 
 )
 (
     input wire clk,
     input wire rstn,
-    input wire start,//！ 启动信号，注意跟滑窗模块的启动信号时间不一样
+    input wire start,//！启动信号，注意跟滑窗模块的启动信号时间不一样
     input wire weight_en,//！ 权重有效信号
     input weight,//！ 以比特权重
     input [39:0] taps,//！ 滑窗模块输入
@@ -24,8 +25,6 @@ reg [9:0] cnt2;//！ 用于同步滑窗模块以及卷积模块
 
 reg sum_valid;
 reg sum_valid_ff;
-
-reg [4:0] Ni; //! fmap的大小，输入图像的size
 always @(*) begin
     if(!state)
         Ni = 28;
@@ -335,4 +334,27 @@ always @(posedge clk) begin
     else
         cnt2 <= 10'd0;
 end
+//------------------------输出信号有效判断---------------------------------
+always @(posedge clk) begin
+    if(!start)
+        sum_valid <= 1'b0;
+    else begin
+        case (state)
+            1'b0:if(cnt1 == 10'd829 - 2'd1)
+                    sum_valid <= 1'b0;
+                else if(cnt1 == 10'd161 - 2'd1)
+                    sum_valid <= 1'b1;
+            1'b1:if(cnt1 == 10'd255)
+                    sum_valid <= 1'b0;
+                else if(cnt1 == 10'd161)
+                    sum_valid <= 1'b1;
+        endcase
+    end
+end
+always @(posedge clk) begin
+    sum_valid_ff <= sum_valid;
+end
+assign done = ~sum_valid_ff && sum_valid;
+assign ovalid = (sum_valid&&cnt2<Ni-K+1)?1'b1:1'b0;
+assign dout = wt_data;
 endmodule
