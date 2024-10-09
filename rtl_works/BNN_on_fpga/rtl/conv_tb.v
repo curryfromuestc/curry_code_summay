@@ -19,7 +19,7 @@ module conv_tb();
 
     reg [10:0] cnt_line;
     reg [10:0] cnt_conv;
-    reg [31:0] conv_result_r [0:599];
+    reg signed [31:0] conv_result_r [0:599];
     
     conv conv_inst(
         .clk(clk),
@@ -50,7 +50,7 @@ module conv_tb();
         rstn = 1;
         start_conv = 1;
         weight_en = 1;
-        weight_c = 1;
+        weight_c = 0;
     end
 
     initial begin

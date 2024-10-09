@@ -109,153 +109,153 @@ end
 //------------------------流水线第一级---------------------------------
 always @(posedge clk) begin
     if(k00 == 1'b1)
-        p00 <= {m00[7],24'b0,m00[6:0]};
+        p00 <= {24'b0,m00};
     else
-        p00 <= {~m00[7],24'b0,m00[6:0]};
+        p00 <= -{24'b0,m00};
 end
 always @(posedge clk) begin
     if(k01 == 1'b1)
-        p01 <= {m01[7],24'b0,m01[6:0]};
+        p01 <= {24'b0,m01};
     else
-        p01 <= {~m01[7],24'b0,m01[6:0]};
+        p01 <= -{24'b0,m01};
 end
 always @(posedge clk) begin
     if(k02 == 1'b1)
-        p02 <= {m02[7],24'b0,m02[6:0]};
+        p02 <= {24'b0,m02};
     else
-        p02 <= {~m02[7],24'b0,m02[6:0]};
+        p02 <= -{24'b0,m02};
 end
 always @(posedge clk) begin
     if(k03 == 1'b1)
-        p03 <= {m03[7],24'b0,m03[6:0]};
+        p03 <= {24'b0,m03};
     else
-        p03 <= {~m03[7],24'b0,m03[6:0]};
+        p03 <= -{24'b0,m03};
 end
 always @(posedge clk) begin
     if(k04 == 1'b1)
-        p04 <= {m04[7],24'b0,m04[6:0]};
+        p04 <= {24'b0,m04};
     else
-        p04 <= {~m04[7],24'b0,m04[6:0]};
+        p04 <= -{24'b0,m04};
 end
 always @(posedge clk) begin
     if(k10 == 1'b1)
-        p10 <= {m10[7],24'b0,m10[6:0]};
+        p10 <= {24'b0,m10};
     else
-        p10 <= {~m10[7],24'b0,m10[6:0]};
+        p10 <= -{24'b0,m10};
 end
 always @(posedge clk) begin
     if(k11 == 1'b1)
-        p11 <= {m11[7],24'b0,m11[6:0]};
+        p11 <= {24'b0,m11};
     else
-        p11 <= {~m11[7],24'b0,m11[6:0]};
+        p11 <= -{24'b0,m11};
 end
 always @(posedge clk) begin
     if(k12 == 1'b1)
-        p12 <= {m12[7],24'b0,m12[6:0]};
+        p12 <= {24'b0,m12};
     else
-        p12 <= {~m12[7],24'b0,m12[6:0]};
+        p12 <= -{24'b0,m12};
 end
 always @(posedge clk) begin
     if(k13 == 1'b1)
-        p13 <= {m13[7],24'b0,m13[6:0]};
+        p13 <= {24'b0,m13};
     else
-        p13 <= {~m13[7],24'b0,m13[6:0]};
+        p13 <= -{24'b0,m13};
 end
 always @(posedge clk) begin
     if(k14 == 1'b1)
-        p14 <= {m14[7],24'b0,m14[6:0]};
+        p14 <= {24'b0,m14};
     else
-        p14 <= {~m14[7],24'b0,m14[6:0]};
+        p14 <= -{24'b0,m14};
 end
 always @(posedge clk) begin
     if(k20 == 1'b1)
-        p20 <= {m20[7],24'b0,m20[6:0]};
+        p20 <= {24'b0,m20};
     else
-        p20 <= {~m20[7],24'b0,m20[6:0]};
+        p20 <= -{24'b0,m20};
 end
 always @(posedge clk) begin
     if(k21 == 1'b1)
-        p21 <= {m21[7],24'b0,m21[6:0]};
+        p21 <= {24'b0,m21};
     else
-        p21 <= {~m21[7],24'b0,m21[6:0]};
+        p21 <= -{24'b0,m21};
 end
 always @(posedge clk) begin
     if(k22 == 1'b1)
-        p22 <= {m22[7],24'b0,m22[6:0]};
+        p22 <= {24'b0,m22};
     else
-        p22 <= {~m22[7],24'b0,m22[6:0]};
+        p22 <= -{24'b0,m22};
 end
 always @(posedge clk) begin
     if(k23 == 1'b1)
-        p23 <= {m23[7],24'b0,m23[6:0]};
+        p23 <= {24'b0,m23};
     else
-        p23 <= {~m23[7],24'b0,m23[6:0]};
+        p23 <= -{24'b0,m23};
 end
 always @(posedge clk) begin
     if(k24 == 1'b1)
-        p24 <= {m24[7],24'b0,m24[6:0]};
+        p24 <= {24'b0,m24};
     else
-        p24 <= {~m24[7],24'b0,m24[6:0]};
+        p24 <= -{24'b0,m24};
 end
 always @(posedge clk) begin
     if(k30 == 1'b1)
-        p30 <= {m30[7],24'b0,m30[6:0]};
+        p30 <= {24'b0,m30};
     else
-        p30 <= {~m30[7],24'b0,m30[6:0]};
+        p30 <= -{24'b0,m30};
 end
 always @(posedge clk) begin
     if(k31 == 1'b1)
-        p31 <= {m31[7],24'b0,m31[6:0]};
+        p31 <= {24'b0,m31};
     else
-        p31 <= {~m31[7],24'b0,m31[6:0]};
+        p31 <= -{24'b0,m31};
 end
 always @(posedge clk) begin
     if(k32 == 1'b1)
-        p32 <= {m32[7],24'b0,m32[6:0]};
+        p32 <= {24'b0,m32};
     else
-        p32 <= {~m32[7],24'b0,m32[6:0]};
+        p32 <= -{24'b0,m32};
 end
 always @(posedge clk) begin
     if(k33 == 1'b1)
-        p33 <= {m33[7],24'b0,m33[6:0]};
+        p33 <= {24'b0,m33};
     else
-        p33 <= {~m33[7],24'b0,m33[6:0]};
+        p33 <= -{24'b0,m33};
 end
 always @(posedge clk) begin
     if(k34 == 1'b1)
-        p34 <= {m34[7],24'b0,m34[6:0]};
+        p34 <= {24'b0,m34};
     else
-        p34 <= {~m34[7],24'b0,m34[6:0]};
+        p34 <= -{24'b0,m34};
 end
 always @(posedge clk) begin
     if(k40 == 1'b1)
-        p40 <= {m40[7],24'b0,m40[6:0]};
+        p40 <= {24'b0,m40};
     else
-        p40 <= {~m40[7],24'b0,m40[6:0]};
+        p40 <= -{24'b0,m40};
 end
 always @(posedge clk) begin
     if(k41 == 1'b1)
-        p41 <= {m41[7],24'b0,m41[6:0]};
+        p41 <= {24'b0,m41};
     else
-        p41 <= {~m41[7],24'b0,m41[6:0]};
+        p41 <= -{24'b0,m41};
 end
 always @(posedge clk) begin
     if(k42 == 1'b1)
-        p42 <= {m42[7],24'b0,m42[6:0]};
+        p42 <= {24'b0,m42};
     else
-        p42 <= {~m42[7],24'b0,m42[6:0]};
+        p42 <= -{24'b0,m42};
 end
 always @(posedge clk) begin
     if(k43 == 1'b1)
-        p43 <= {m43[7],24'b0,m43[6:0]};
+        p43 <= {24'b0,m43};
     else
-        p43 <= {~m43[7],24'b0,m43[6:0]};
+        p43 <= -{24'b0,m43};
 end
 always @(posedge clk) begin
     if(k44 == 1'b1)
-        p44 <= {m44[7],24'b0,m44[6:0]};
+        p44 <= {24'b0,m44};
     else
-        p44 <= {~m44[7],24'b0,m44[6:0]};
+        p44 <= -{24'b0,m44};
 end
 //------------------------流水线第二级---------------------------------
 always @(posedge clk) begin
