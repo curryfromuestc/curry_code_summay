@@ -25,12 +25,6 @@ reg [9:0] cnt2;//！ 用于同步滑窗模块以及卷积模块
 
 reg sum_valid;
 reg sum_valid_ff;
-always @(*) begin
-    if(!state)
-        Ni = 28;
-    else
-        Ni = 12;
-end
 reg k00, k01, k02, k03, k04,
     k10, k11, k12, k13, k14,
     k20, k21, k22, k23, k24,
@@ -340,13 +334,13 @@ always @(posedge clk) begin
         sum_valid <= 1'b0;
     else begin
         case (state)
-            1'b0:if(cnt1 == 10'd828)
+            1'b0:if(cnt1 == 20'd828)
                     sum_valid <= 1'b0;
-                else if(cnt1 == 10'd160)
+                else if(cnt1 == 20'd160)
                     sum_valid <= 1'b1;
-            1'b1:if(cnt1 == 10'd255)
+            1'b1:if(cnt1 == 20'd255)
                     sum_valid <= 1'b0;
-                else if(cnt1 == 10'd160)
+                else if(cnt1 == 20'd160)
                     sum_valid <= 1'b1;
         endcase
     end
@@ -354,7 +348,7 @@ end
 always @(posedge clk) begin
     sum_valid_ff <= sum_valid;
 end
-assign done = ~sum_valid_ff && sum_valid;
+assign done = ~sum_valid && sum_valid_ff;
 assign ovalid = (sum_valid&&cnt2<Ni-K+1)?1'b1:1'b0;
 assign dout = wt_data;
 endmodule
