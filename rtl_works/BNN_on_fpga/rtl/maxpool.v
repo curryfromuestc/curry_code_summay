@@ -75,13 +75,13 @@ always @(posedge clk) begin
             if(ptr <= 7'd23&&ivalid)
                 data[ptr] <= din;
             else
-                data  <= data;
+                data[ptr] <= data[ptr];
         end
         1'b1:begin
             if(ptr <= 7'd7&&ivalid)
                 data[ptr] <= din;
             else
-                data  <= data;
+                data[ptr]  <= data[ptr];
         end
     endcase
 end
