@@ -41,10 +41,10 @@ transform_test = transforms.Compose([
 ])
 
 #数据集下载
-trainset = torchvision.datasets.CIFAR10(root = '/home/yanggl/code/qutified_resnet18/cifar10',train = True,download = True,transform = transform_train)
+trainset = torchvision.datasets.CIFAR10(root = '/ssd/Datasets/CIFAR10',train = True,download = True,transform = transform_train)
 trainloader = torch.utils.data.DataLoader(trainset,batch_size = BATCH_SIZE,shuffle = True,num_workers = 2)
 
-testset = torchvision.datasets.CIFAR10(root = '/home/yanggl/code/qutified_resnet18/cifar10',train = False,download = True,transform = transform_test)
+testset = torchvision.datasets.CIFAR10(root = '/ssd/Datasets/CIFAR10',train = False,download = True,transform = transform_test)
 testloader = torch.utils.data.DataLoader(testset,batch_size = BATCH_SIZE,shuffle = False,num_workers = 2)
 
 #cifar10数据集标签
