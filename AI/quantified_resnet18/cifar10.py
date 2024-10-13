@@ -22,7 +22,7 @@ show = ToPILImage()
 #定义训练参数
 EPOCH = 300
 pre_epoch = 0
-BATCH_SIZE = 512
+BATCH_SIZE = 256
 LR = 1e-3
 T = 4
 
@@ -64,7 +64,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 net = net.to(device)
 functional.set_step_mode(net,'m')
-functional.set_backend(net, 'cupy', neuron.IFNode)
+#functional.set_backend(net, 'cupy', neuron.IFNode)
 #定义损失函数和优化器
 import torch.optim as optim
 criterion = nn.CrossEntropyLoss()
@@ -94,11 +94,12 @@ for epoch in range(pre_epoch, EPOCH):
     for i, data in enumerate(tqdm(trainloader, 0)):
         length = len(trainloader)
         input, labels = data
-        inputs = torch.zeros(len(input),4, 3, 32, 32)
-        for j in range(4):
-            inputs[:,j,:,:,:] = encoder(input)
-        inputs, labels = inputs.to(device), labels.to(device)
-        outputs = net(inputs)
+        # inputs = torch.zeros(len(input),4, 3, 32, 32)
+        # for j in range(4):
+        #     inputs[:,j,:,:,:] = encoder(input)
+        # inputs = input.repeat(4,1,1,1)
+        input, label = input.to(device), labels.to(device)
+        outputs = net(input)
         optimizer.zero_grad()
         loss = criterion(outputs, labels)
         
@@ -122,11 +123,13 @@ for epoch in range(pre_epoch, EPOCH):
         net.eval()
         for i ,data in enumerate(tqdm(testloader,0)):
             input, labels = data
-            inputs = torch.zeros(len(input),4, 3, 32, 32)
-            for j in range(4):
-                inputs[:,j,:,:,:] = encoder(input)
-            inputs, labels = inputs.to(device), labels.to(device)
-            outputs = net(inputs)
+            # inputs = torch.zeros(len(input),4, 3, 32, 32)
+            # for j in range(4):
+            #     inputs[:,j,:,:,:] = encoder(input)
+            # inputs, labels = inputs.to(device), labels.to(device)
+            # inputs = input.repeat(4,1,1,1)
+            input, label = input.to(device), labels.to(device)
+            outputs = net(input)
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += predicted.eq(labels.data).cpu().sum()
