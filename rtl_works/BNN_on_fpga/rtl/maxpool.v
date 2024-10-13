@@ -86,7 +86,7 @@ always @(posedge clk) begin
     endcase
 end
 always@(posedge clk)begin
-		case({state,cnt}) // 这里的 cnt是触发时的值，而不是计算后的值
+		case({state,cnt}) //！ 这里的 cnt是触发时的值，而不是计算后的值
 		2'b00:begin
 			if(ptr >= 7'd24)
 			begin
@@ -147,7 +147,7 @@ always@(posedge clk)begin
 end
 
 // cnt 为 1时，输出才是有效的，即 2*2 的kernel， cnt=1含义为第二行且为偶数位索引（从1计数）
-// 筛选输出数据
-assign ovalid = ~cnt && cnt_d; // 采样下降沿
+//---------------------- 筛选输出数据----------------------
+assign ovalid = ~cnt && cnt_d; //！ 采样下降沿
 assign dout   = data_reg_1 > data_reg_0 ? data_reg_1 : data_reg_0;
 endmodule
