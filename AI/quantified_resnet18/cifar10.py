@@ -98,7 +98,7 @@ for epoch in range(pre_epoch, EPOCH):
         # for j in range(4):
         #     inputs[:,j,:,:,:] = encoder(input)
         # inputs = input.repeat(4,1,1,1)
-        input, label = input.to(device), labels.to(device)
+        input, labels = input.to(device), labels.to(device)
         outputs = net(input)
         optimizer.zero_grad()
         loss = criterion(outputs, labels)
@@ -128,7 +128,7 @@ for epoch in range(pre_epoch, EPOCH):
             #     inputs[:,j,:,:,:] = encoder(input)
             # inputs, labels = inputs.to(device), labels.to(device)
             # inputs = input.repeat(4,1,1,1)
-            input, label = input.to(device), labels.to(device)
+            input, labels = input.to(device), labels.to(device)
             outputs = net(input)
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
