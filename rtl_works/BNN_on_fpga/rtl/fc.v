@@ -289,333 +289,334 @@ case(cnt)
 4'd0:begin
 	if(!state)
 		begin
-			p0 <= w[0] *din_0;    
-			p1 <= w[16]*din_1; 
-			p2 <= w[32]*din_2;
-			p3 <= w[48]*din_3; 
-			p4 <= w[64]*din_4; 
-			p5 <= w[80]*din_5;
+			p0 <= (w[0] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[16] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[32] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[48] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[64] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[80] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[96]*din_0;    
-			p1 <= w[112]*din_1; 
-			p2 <= w[128]*din_2; 
-			p3 <= w[144]*din_3; 
-			p4 <= w[160]*din_4; 
-			p5 <= w[176]*din_5;    
+			p0 <= (w[96] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[112] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[128] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[144] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[160] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[176] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd1:begin
 	if(!state)
 		begin
-			p0 <= w[1]*din_0;    
-			p1 <= w[17]*din_1; 
-			p2 <= w[33]*din_2; 
-			p3 <= w[49]*din_3; 
-			p4 <= w[65]*din_4; 
-			p5 <= w[81]*din_5;
+			p0 <= (w[1] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[17] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[33] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[49] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[65] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[81] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[97]*din_0;    
-			p1 <= w[113]*din_1; 
-			p2 <= w[129]*din_2; 
-			p3 <= w[145]*din_3; 
-			p4 <= w[161]*din_4; 
-			p5 <= w[177]*din_5;
+			p0 <= (w[97] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[113] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[129] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[145] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[161] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[177] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd2:begin
 	if(!state)
 		begin
-			p0 <= w[2]*din_0;    
-			p1 <= w[18]*din_1;
-			p2 <= w[34]*din_2; 
-			p3 <= w[50]*din_3; 
-			p4 <= w[66]*din_4;
-			p5 <= w[82]*din_5;
+			p0 <= (w[2] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[18] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[34] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[50] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[66] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[82] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[98]*din_0;    
-			p1 <= w[114]*din_1; 
-			p2 <= w[130]*din_2; 
-			p3 <= w[146]*din_3; 
-			p4 <= w[162]*din_4; 
-			p5 <= w[178]*din_5;            
+			p0 <= (w[98] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[114] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[130] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[146] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[162] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[178] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd3:begin
 	if(!state)
 		begin
-			p0 <= w[3]*din_0;    
-			p1 <= w[19]*din_1;
-			p2 <= w[35]*din_2; 
-			p3 <= w[51]*din_3; 
-			p4 <= w[67]*din_4;
-			p5 <= w[83]*din_5;
+			p0 <= (w[3] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[19] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[35] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[51] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[67] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[83] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[99]*din_0;    
-			p1 <= w[115]*din_1; 
-			p2 <= w[131]*din_2; 
-			p3 <= w[147]*din_3; 
-			p4 <= w[163]*din_4; 
-			p5 <= w[179]*din_5;            
+			p0 <= (w[99] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[115] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[131] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[147] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[163] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[179] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd4:begin
 	if(!state)
 		begin
-			p0 <= w[4]*din_0;    
-			p1 <= w[20]*din_1;
-			p2 <= w[36]*din_2; 
-			p3 <= w[52]*din_3; 
-			p4 <= w[68]*din_4;
-			p5 <= w[84]*din_5;
+			p0 <= (w[4] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[20] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[36] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[52] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[68] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[84] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[100]*din_0;    
-			p1 <= w[116]*din_1; 
-			p2 <= w[132]*din_2; 
-			p3 <= w[148]*din_3; 
-			p4 <= w[164]*din_4; 
-			p5 <= w[180]*din_5;            
+			p0 <= (w[100] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[116] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[132] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[148] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[164] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[180] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd5:begin
 	if(!state)
 		begin
-			p0 <= w[5]*din_0;    
-			p1 <= w[21]*din_1;
-			p2 <= w[37]*din_2; 
-			p3 <= w[53]*din_3; 
-			p4 <= w[69]*din_4;
-			p5 <= w[85]*din_5;
+			p0 <= (w[5] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[21] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[37] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[53] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[69] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[85] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[101]*din_0;    
-			p1 <= w[117]*din_1; 
-			p2 <= w[133]*din_2; 
-			p3 <= w[149]*din_3; 
-			p4 <= w[165]*din_4; 
-			p5 <= w[181]*din_5;            
+			p0 <= (w[101] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[117] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[133] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[149] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[165] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[181] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd6:begin
 	if(!state)
 		begin
-			p0 <= w[6]*din_0;    
-			p1 <= w[22]*din_1;
-			p2 <= w[38]*din_2; 
-			p3 <= w[54]*din_3; 
-			p4 <= w[70]*din_4;
-			p5 <= w[86]*din_5;
+			p0 <= (w[6] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[22] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[38] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[54] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[70] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[86] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[102]*din_0;    
-			p1 <= w[118]*din_1; 
-			p2 <= w[134]*din_2; 
-			p3 <= w[150]*din_3; 
-			p4 <= w[166]*din_4; 
-			p5 <= w[182]*din_5;            
+			p0 <= (w[102] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[118] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[134] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[150] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[166] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[182] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd7:begin
 	if(!state)
 		begin
-			p0 <= w[7]*din_0;    
-			p1 <= w[23]*din_1;
-			p2 <= w[39]*din_2; 
-			p3 <= w[55]*din_3; 
-			p4 <= w[71]*din_4;
-			p5 <= w[87]*din_5;
+			p0 <= (w[7] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[23] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[39] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[55] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[71] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[87] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[103]*din_0;    
-			p1 <= w[119]*din_1; 
-			p2 <= w[135]*din_2; 
-			p3 <= w[151]*din_3; 
-			p4 <= w[167]*din_4; 
-			p5 <= w[183]*din_5;            
+			p0 <= (w[103] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[119] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[135] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[151] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[167] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[183] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd8:begin
 	if(!state)
 		begin
-			p0 <= w[8]*din_0;    
-			p1 <= w[24]*din_1;
-			p2 <= w[40]*din_2; 
-			p3 <= w[56]*din_3; 
-			p4 <= w[72]*din_4;
-			p5 <= w[88]*din_5;
+			p0 <= (w[8] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[24] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[40] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[56] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[72] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[88] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[104]*din_0;    
-			p1 <= w[120]*din_1; 
-			p2 <= w[136]*din_2; 
-			p3 <= w[152]*din_3; 
-			p4 <= w[168]*din_4; 
-			p5 <= w[184]*din_5;            
+			p0 <= (w[104] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[120] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[136] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[152] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[168] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[184] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd9:begin
 	if(!state)
 		begin
-			p0 <= w[9]*din_0;    
-			p1 <= w[25]*din_1;
-			p2 <= w[41]*din_2; 
-			p3 <= w[57]*din_3; 
-			p4 <= w[73]*din_4;
-			p5 <= w[89]*din_5;
+			p0 <= (w[9] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[25] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[41] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[57] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[73] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[89] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[105]*din_0;    
-			p1 <= w[121]*din_1; 
-			p2 <= w[137]*din_2; 
-			p3 <= w[153]*din_3; 
-			p4 <= w[169]*din_4; 
-			p5 <= w[185]*din_5;            
+			p0 <= (w[105] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[121] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[137] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[153] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[169] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[185] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd10:begin
 	if(!state)
 		begin
-			p0 <= w[10]*din_0;    
-			p1 <= w[26]*din_1;
-			p2 <= w[42]*din_2; 
-			p3 <= w[58]*din_3; 
-			p4 <= w[74]*din_4;
-			p5 <= w[90]*din_5;
+			p0 <= (w[10] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[26] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[42] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[58] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[74] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[90] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[106]*din_0;    
-			p1 <= w[122]*din_1; 
-			p2 <= w[138]*din_2; 
-			p3 <= w[154]*din_3; 
-			p4 <= w[170]*din_4; 
-			p5 <= w[186]*din_5;            
+			p0 <= (w[106] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[122] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[138] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[154] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[170] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[186] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd11:begin
 	if(!state)
 		begin
-			p0 <= w[11]*din_0;    
-			p1 <= w[27]*din_1;
-			p2 <= w[43]*din_2; 
-			p3 <= w[59]*din_3; 
-			p4 <= w[75]*din_4;
-			p5 <= w[91]*din_5;
+			p0 <= (w[11] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[27] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[43] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[59] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[75] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[91] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[107]*din_0;    
-			p1 <= w[123]*din_1; 
-			p2 <= w[139]*din_2; 
-			p3 <= w[155]*din_3; 
-			p4 <= w[171]*din_4; 
-			p5 <= w[187]*din_5;            
+			p0 <= (w[107] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[123] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[139] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[155] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[171] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[187] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd12:begin
 	if(!state)
 		begin
-			p0 <= w[12]*din_0;    
-			p1 <= w[28]*din_1;
-			p2 <= w[44]*din_2; 
-			p3 <= w[60]*din_3; 
-			p4 <= w[76]*din_4;
-			p5 <= w[92]*din_5;
+			p0 <= (w[12] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[28] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[44] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[60] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[76] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[92] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[108]*din_0;    
-			p1 <= w[124]*din_1; 
-			p2 <= w[140]*din_2; 
-			p3 <= w[156]*din_3; 
-			p4 <= w[172]*din_4; 
-			p5 <= w[188]*din_5;            
+			p0 <= (w[108] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[124] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[140] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[156] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[172] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[188] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd13:begin
 	if(!state)
 		begin
-			p0 <= w[13]*din_0;    
-			p1 <= w[29]*din_1;
-			p2 <= w[45]*din_2; 
-			p3 <= w[61]*din_3; 
-			p4 <= w[77]*din_4;
-			p5 <= w[93]*din_5;
+			p0 <= (w[13] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[29] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[45] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[61] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[77] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[93] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[109]*din_0;    
-			p1 <= w[125]*din_1; 
-			p2 <= w[141]*din_2; 
-			p3 <= w[157]*din_3; 
-			p4 <= w[173]*din_4; 
-			p5 <= w[189]*din_5;            
+			p0 <= (w[109] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[125] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[141] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[157] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[173] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[189] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd14:begin
 	if(!state)
 		begin
-			p0 <= w[14]*din_0;    
-			p1 <= w[30]*din_1;
-			p2 <= w[46]*din_2; 
-			p3 <= w[62]*din_3; 
-			p4 <= w[78]*din_4;
-			p5 <= w[94]*din_5;
+			p0 <= (w[14] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[30] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[46] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[62] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[78] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[94] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[110]*din_0;    
-			p1 <= w[126]*din_1; 
-			p2 <= w[142]*din_2; 
-			p3 <= w[158]*din_3; 
-			p4 <= w[174]*din_4; 
-			p5 <= w[190]*din_5;            
+			p0 <= (w[110] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[126] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[142] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[158] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[174] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[190] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 4'd15:begin
 	if(!state)
 		begin
-			p0 <= w[15]*din_0;    
-			p1 <= w[31]*din_1;
-			p2 <= w[47]*din_2; 
-			p3 <= w[63]*din_3; 
-			p4 <= w[79]*din_4;
-			p5 <= w[95]*din_5;
+			p0 <= (w[15] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[31] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[47] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[63] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[79] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[95] == 1'b1) ? din_5 : -din_5;
 		end
 	else
 		begin
-			p0 <= w[111]*din_0;    
-			p1 <= w[127]*din_1; 
-			p2 <= w[143]*din_2; 
-			p3 <= w[159]*din_3; 
-			p4 <= w[175]*din_4; 
-			p5 <= w[191]*din_5;            
+			p0 <= (w[111] == 1'b1) ? din_0 : -din_0;
+			p1 <= (w[127] == 1'b1) ? din_1 : -din_1;
+			p2 <= (w[143] == 1'b1) ? din_2 : -din_2;
+			p3 <= (w[159] == 1'b1) ? din_3 : -din_3;
+			p4 <= (w[175] == 1'b1) ? din_4 : -din_4;
+			p5 <= (w[191] == 1'b1) ? din_5 : -din_5;
 		end
 	end
 default:begin
-			p0 <= 0;    
-			p1 <= 0; 
-			p2 <= 0; 
-			p3 <= 0; 
-			p4 <= 0; 
-			p5 <= 0;
-		end
+	p0 <= 0;
+	p1 <= 0;
+	p2 <= 0;
+	p3 <= 0;
+	p4 <= 0;
+	p5 <= 0;
+end
 endcase
 end
+
 
 //---------------第二级----------------------
 always@(posedge clk)begin
