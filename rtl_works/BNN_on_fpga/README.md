@@ -67,4 +67,3 @@ output = conv(image)
 ![software](fig/屏幕截图%202024-10-16%20110734.png)  
 ![hardware](fig/屏幕截图%202024-10-16%20120035.png)
 
-

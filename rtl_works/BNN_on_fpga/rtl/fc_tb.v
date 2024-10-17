@@ -1,25 +1,3 @@
-
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: jccao
-// 
-// Create Date: 2022/05/05 08:27:30
-// Design Name: 
-// Module Name: fc_tb
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module fc_tb();
 	// 输入
 	reg clk;
@@ -81,10 +59,10 @@ module fc_tb();
 		# 20; // 一周期后填充权重数据，共需要192个时钟周期，192x20
 		rstn = 1;
 		weight_en = 1;
-		weight = 0; // 这里权重全为1
+		weight = 1; // 这里权重全为1
 		# (192*20);// 开始填充数据
 		// 全连接模块的输入有效信号不能一直为1
-		for(i_fc=0;i_fc<32;i_fc=i_fc+1)
+		for(i_fc=0;i_fc<33;i_fc=i_fc+1)
 		begin
 			ivalid = 1; // input valid
 			#20;
