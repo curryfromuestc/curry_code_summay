@@ -24,6 +24,7 @@ module relu
 	always@(posedge clk)begin
 		dout_delay <= dout_r;
 	end
+
 	
 	// 输入有效，输出就有效
 	always@(posedge clk)begin
