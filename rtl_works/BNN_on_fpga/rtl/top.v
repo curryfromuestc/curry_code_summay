@@ -127,6 +127,21 @@ always @(posedge clk) begin
         else
             conv_result_cnt <= conv_result_cnt;
 end
-
+reg [6:0] add_result_cnt;
+always@(posedge clk)
+begin
+    case(conv_counter)
+    4'd4,4'd5,4'd6,4'd7,4'd8,4'd9,4'd10,4'd11,4'd12,4'd13:begin
+        if(add_result_cnt == 7'd64)
+            add_result_cnt <= 7'd0;
+        else
+            if(add_wren == 6'b111111)
+                add_result_cnt <= add_result_cnt + 7'd1;
+            else
+                add_result_cnt <= add_result_cnt;
+        end
+    default:add_result_cnt <= 7'd0;
+    endcase
+end
 
 endmodule
