@@ -688,7 +688,7 @@ always@(posedge clk)
 begin
 	if(!rstn)
 		dout_r <= 0;
-	else if(cnt_wren_ff_1 == 2'd2)
+	else if(cnt_wren_ff_3 == 2'd2)
 		dout_r <= 0;
 	else if(ivalid_ff_3)// 4个时钟周期计算出一次输入与权重乘加结果
 		dout_r <= dout_r + sum; // 累加求最终总和
@@ -697,7 +697,7 @@ begin
 end 
 
 assign dout = dout_r;
-assign ovalid = (cnt_wren_ff_1 == 2'd2) ? 1:0;  // 单独使用全连接模块时，用这个
+assign ovalid = (cnt_wren_ff_3 == 2'd2) ? 1:0;  // 单独使用全连接模块时，用这个
 //assign ovalid = (wren == 1) ? 1:0; // wren =1 时表示第12次卷积循环或者第13次卷积循环结束
 
 endmodule

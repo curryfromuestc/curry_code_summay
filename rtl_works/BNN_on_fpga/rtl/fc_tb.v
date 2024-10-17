@@ -75,7 +75,7 @@ module fc_tb();
 	// 读取图片数据
 	initial
 	begin
-		fp_i = $fopen("/home/curry/code/curry_code_summay/rtl_works/BNN_on_fpga/test_output5_txt.txt","r"); // 数字 0  (1)输入数据路径
+		fp_i = $fopen("/Users/curryyang/code/curry_code_summay/rtl_works/BNN_on_fpga/test_output5_txt.txt","r"); // 数字 0  (1)输入数据路径
 	end
 	
 	
@@ -116,8 +116,14 @@ module fc_tb();
 	// 仿真
 	initial
 	begin
-		# (20+192*20+32*40+5*20); // 等待全连接模块计算完成
+		# (20+192*20+32*40+5*20+100); // 等待全连接模块计算完成
 		
 		$finish; // 打印完结果后完成仿真
 	end
+
+	initial begin
+		$dumpfile("fc_tb.vcd");
+		$dumpvars(0,fc_tb);
+	end
+
 endmodule
