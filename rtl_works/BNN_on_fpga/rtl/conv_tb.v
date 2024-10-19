@@ -61,7 +61,7 @@ module conv_tb();
     end
 
     initial begin
-        fp_i = $fopen("/home/curry/code/curry_code_summay/rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
+        fp_i = $fopen("rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
     end
 
     always @(posedge clk) begin
@@ -115,4 +115,8 @@ module conv_tb();
         end
     end
     always #10 clk <= ~clk; 
+    initial begin
+		$dumpfile("conv_tb.vcd");
+		$dumpvars(0,conv_tb);
+	end
 endmodule
