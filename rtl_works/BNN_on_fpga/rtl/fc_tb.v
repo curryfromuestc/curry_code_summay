@@ -59,10 +59,10 @@ module fc_tb();
 		# 20; // 一周期后填充权重数据，共需要192个时钟周期，192x20
 		rstn = 1;
 		weight_en = 1;
-		weight = 0; // 这里权重全为1
+		weight = 1; // 这里权重全为1
 		# (192*20);// 开始填充数据
 		// 全连接模块的输入有效信号不能一直为1
-		for(i_fc=0;i_fc<32;i_fc=i_fc+1)
+		for(i_fc=0;i_fc<33;i_fc=i_fc+1)
 		begin
 			ivalid = 1; // input valid
 			#20;
@@ -75,7 +75,7 @@ module fc_tb();
 	// 读取图片数据
 	initial
 	begin
-		fp_i = $fopen("/home/curry/code/curry_code_summay/rtl_works/BNN_on_fpga/test_output5_txt.txt","r"); // 数字 0  (1)输入数据路径
+		fp_i = $fopen("/Users/curryyang/code/curry_code_summay/rtl_works/BNN_on_fpga/test_output5_txt.txt","r"); // 数字 0  (1)输入数据路径
 	end
 	
 	
@@ -116,8 +116,14 @@ module fc_tb();
 	// 仿真
 	initial
 	begin
-		# (20+192*20+32*40+5*20); // 等待全连接模块计算完成
+		# (20+192*20+32*40+5*20+100); // 等待全连接模块计算完成
 		
 		$finish; // 打印完结果后完成仿真
 	end
+
+	initial begin
+		$dumpfile("fc_tb.vcd");
+		$dumpvars(0,fc_tb);
+	end
+
 endmodule

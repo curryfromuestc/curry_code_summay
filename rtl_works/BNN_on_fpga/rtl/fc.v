@@ -31,6 +31,7 @@ reg signed [31:0] sum;
 reg signed [31:0] dout_r;
 
 reg ivalid_ff_0, ivalid_ff_1, ivalid_ff_2, ivalid_ff_3;
+reg[1:0] cnt_wren_ff_0, cnt_wren_ff_1, cnt_wren_ff_2, cnt_wren_ff_3;
 
 //---------------权重加载----------------------
 always @(posedge clk or negedge rstn)begin
@@ -641,6 +642,12 @@ begin
 	ivalid_ff_2 <= ivalid_ff_1;// 三
 	ivalid_ff_3 <= ivalid_ff_2;// 四
 end
+always @(posedge clk) begin
+	cnt_wren_ff_0 <= cnt_wren;
+	cnt_wren_ff_1 <= cnt_wren_ff_0;
+	cnt_wren_ff_2 <= cnt_wren_ff_1;
+	cnt_wren_ff_3 <= cnt_wren_ff_2;
+end
 // sum较其对应输入晚3拍
 always@(posedge clk)
 begin
@@ -681,7 +688,7 @@ always@(posedge clk)
 begin
 	if(!rstn)
 		dout_r <= 0;
-	else if(cnt_wren == 2'd2)
+	else if(cnt_wren_ff_3 == 2'd2)
 		dout_r <= 0;
 	else if(ivalid_ff_3)// 4个时钟周期计算出一次输入与权重乘加结果
 		dout_r <= dout_r + sum; // 累加求最终总和
@@ -690,7 +697,7 @@ begin
 end 
 
 assign dout = dout_r;
-//assign ovalid = (cnt_wren == 2'd2) ? 1:0;  // 单独使用全连接模块时，用这个
-assign ovalid = (wren == 1) ? 1:0; // wren =1 时表示第12次卷积循环或者第13次卷积循环结束
+assign ovalid = (cnt_wren_ff_3 == 2'd2) ? 1:0;  // 单独使用全连接模块时，用这个
+//assign ovalid = (wren == 1) ? 1:0; // wren =1 时表示第12次卷积循环或者第13次卷积循环结束
 
 endmodule
