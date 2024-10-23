@@ -20,7 +20,7 @@ from torchvision.transforms import ToPILImage
 show = ToPILImage()
 
 EPOCH = 300
-pre_epoch = 0
+pre_epoch = 58
 BATCH_SIZE = 256
 LR = 1e-3
 T = 4
@@ -59,6 +59,16 @@ optimizer = optim.Adam(net.parameters(), lr=LR)
 lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=EPOCH, eta_min=0, last_epoch=-1)
 save_path = '/home/ygl/code/curry_code_summay/AI/quantified_resnet18'
 
+resume = True
+if resume:
+    print('==> Resuming from checkpoint..')
+    checkpoint = torch.load(save_path + '/ckpt_{}.pth'.format(58))
+    net.module.load_state_dict(checkpoint['parameter'])
+    optimizer.load_state_dict(checkpoint['optimizer'])
+    lr_scheduler.load_state_dict(checkpoint['scheduler'])
+    pre_epoch = checkpoint['epoch']
+    print("==> Done")
+
 print(net)
 
 print("Start Training")
@@ -89,7 +99,11 @@ for epoch in range(pre_epoch, EPOCH):
 
     print('[epoch:%d] Loss: %.03f | Acc: %.3f%% '
             % (epoch + 1, sum_loss / (i + 1), 100. * correct / total))
-    
+    checkpoint = {'parameter': net.module.state_dict(),
+              'optimizer': optimizer.state_dict(),
+              'scheduler': lr_scheduler.state_dict(),
+              'epoch': epoch}
+    torch.save(checkpoint, 'ckpt_{}.pth'.format(epoch+1))
     #测试部分
     print("Waiting Test")
     with torch.no_grad():
