@@ -10,7 +10,7 @@ module conv
     input wire start,//！启动信号，注意跟滑窗模块的启动信号时间不一样
     input wire weight_en,//！ 权重有效信号
     input weight,//！ 以比特权重
-    input [39:0] taps,//！ 滑窗模块输入
+    input [159:0] taps,//！ 滑窗模块输入
     input state,//！选择信号，为第一个卷积层或者是第二个卷积层
     output signed [31:0] dout,//！ 卷积输出
     output ovalid,//！ 输出有效信号
@@ -30,8 +30,8 @@ reg k00, k01, k02, k03, k04,
     k20, k21, k22, k23, k24,
     k30, k31, k32, k33, k34,
     k40, k41, k42, k43, k44;//! 25个卷积核的权重，全是1bit
-wire signed [7:0] m04,m14,m24,m34,m44;
-reg signed [7:0] m00,m01,m02,m03,
+wire signed [31:0] m04,m14,m24,m34,m44;
+reg signed [31:0] m00,m01,m02,m03,
     m10,m11,m12,m13,
     m20,m21,m22,m23,
     m30,m31,m32,m33,
@@ -51,11 +51,11 @@ reg signed [31:0] sum30,sum21,sum32;//！ 流水线第五级
 reg signed [31:0] sum40,sum41;//！ 流水线第六级
 
 //----------------------------对输入矩阵进行赋值----------------------------
-assign m04 = taps[39:32];
-assign m14 = taps[31:24];
-assign m24 = taps[23:16];
-assign m34 = taps[15:8];
-assign m44 = taps[7:0];
+assign m04 = taps[159:128];
+assign m14 = taps[127:96];
+assign m24 = taps[95:64];
+assign m34 = taps[63:32];
+assign m44 = taps[31:0];
 
 always @(posedge clk) begin
     {m00,m01,m02,m03} <= {m01,m02,m03,m04};
@@ -109,154 +109,156 @@ end
 //------------------------流水线第一级---------------------------------
 always @(posedge clk) begin
     if(k00 == 1'b1)
-        p00 <= {24'b0,m00};
+        p00 <=m00;
     else
-        p00 <= -{24'b0,m00};
+        p00 <= -m00;
 end
 always @(posedge clk) begin
     if(k01 == 1'b1)
-        p01 <= {24'b0,m01};
+        p01 <=m01;
     else
-        p01 <= -{24'b0,m01};
+        p01 <= -m01;
 end
 always @(posedge clk) begin
     if(k02 == 1'b1)
-        p02 <= {24'b0,m02};
+        p02 <=m02;
     else
-        p02 <= -{24'b0,m02};
+        p02 <= -m02;
 end
 always @(posedge clk) begin
     if(k03 == 1'b1)
-        p03 <= {24'b0,m03};
+        p03 <=m03;
     else
-        p03 <= -{24'b0,m03};
+        p03 <= -m03;
 end
 always @(posedge clk) begin
     if(k04 == 1'b1)
-        p04 <= {24'b0,m04};
+        p04 <=m04;
     else
-        p04 <= -{24'b0,m04};
+        p04 <= -m04;
 end
 always @(posedge clk) begin
     if(k10 == 1'b1)
-        p10 <= {24'b0,m10};
+        p10 <=m10;
     else
-        p10 <= -{24'b0,m10};
+        p10 <= -m10;
 end
 always @(posedge clk) begin
     if(k11 == 1'b1)
-        p11 <= {24'b0,m11};
+        p11 <=m11;
     else
-        p11 <= -{24'b0,m11};
+        p11 <= -m11;
 end
 always @(posedge clk) begin
     if(k12 == 1'b1)
-        p12 <= {24'b0,m12};
+        p12 <=m12;
     else
-        p12 <= -{24'b0,m12};
+        p12 <= -m12;
 end
 always @(posedge clk) begin
     if(k13 == 1'b1)
-        p13 <= {24'b0,m13};
+        p13 <=m13;
     else
-        p13 <= -{24'b0,m13};
+        p13 <= -m13;
 end
 always @(posedge clk) begin
     if(k14 == 1'b1)
-        p14 <= {24'b0,m14};
+        p14 <=m14;
     else
-        p14 <= -{24'b0,m14};
+        p14 <= -m14;
 end
 always @(posedge clk) begin
     if(k20 == 1'b1)
-        p20 <= {24'b0,m20};
+        p20 <=m20;
     else
-        p20 <= -{24'b0,m20};
+        p20 <= -m20;
 end
 always @(posedge clk) begin
     if(k21 == 1'b1)
-        p21 <= {24'b0,m21};
+        p21 <=m21;
     else
-        p21 <= -{24'b0,m21};
+        p21 <= -m21;
 end
 always @(posedge clk) begin
     if(k22 == 1'b1)
-        p22 <= {24'b0,m22};
+        p22 <=m22;
     else
-        p22 <= -{24'b0,m22};
+        p22 <= -m22;
 end
 always @(posedge clk) begin
     if(k23 == 1'b1)
-        p23 <= {24'b0,m23};
+        p23 <=m23;
     else
-        p23 <= -{24'b0,m23};
+        p23 <= -m23;
 end
 always @(posedge clk) begin
     if(k24 == 1'b1)
-        p24 <= {24'b0,m24};
+        p24 <=m24;
     else
-        p24 <= -{24'b0,m24};
+        p24 <= -m24;
 end
 always @(posedge clk) begin
     if(k30 == 1'b1)
-        p30 <= {24'b0,m30};
+        p30 <=m30;
     else
-        p30 <= -{24'b0,m30};
+        p30 <= -m30;
 end
 always @(posedge clk) begin
     if(k31 == 1'b1)
-        p31 <= {24'b0,m31};
+        p31 <=m31;
     else
-        p31 <= -{24'b0,m31};
+        p31 <= -m31;
 end
 always @(posedge clk) begin
     if(k32 == 1'b1)
-        p32 <= {24'b0,m32};
+        p32 <=m32;
     else
-        p32 <= -{24'b0,m32};
+        p32 <= -m32;
 end
 always @(posedge clk) begin
     if(k33 == 1'b1)
-        p33 <= {24'b0,m33};
+        p33 <=m33;
     else
-        p33 <= -{24'b0,m33};
+        p33 <= -m33;
 end
 always @(posedge clk) begin
     if(k34 == 1'b1)
-        p34 <= {24'b0,m34};
+        p34 <=m34;
     else
-        p34 <= -{24'b0,m34};
+        p34 <= -m34;
 end
 always @(posedge clk) begin
     if(k40 == 1'b1)
-        p40 <= {24'b0,m40};
+        p40 <=m40;
     else
-        p40 <= -{24'b0,m40};
+        p40 <= -m40;
 end
 always @(posedge clk) begin
     if(k41 == 1'b1)
-        p41 <= {24'b0,m41};
+        p41 <=m41;
     else
-        p41 <= -{24'b0,m41};
+        p41 <= -m41;
 end
 always @(posedge clk) begin
     if(k42 == 1'b1)
-        p42 <= {24'b0,m42};
+        p42 <=m42;
     else
-        p42 <= -{24'b0,m42};
+        p42 <= -m42;
 end
 always @(posedge clk) begin
     if(k43 == 1'b1)
-        p43 <= {24'b0,m43};
+        p43 <=m43;
     else
-        p43 <= -{24'b0,m43};
+        p43 <= -m43;
 end
 always @(posedge clk) begin
     if(k44 == 1'b1)
-        p44 <= {24'b0,m44};
+        p44 <=m44;
     else
-        p44 <= -{24'b0,m44};
+        p44 <= -m44;
 end
+
+
 //------------------------流水线第二级---------------------------------
 always @(posedge clk) begin
     sum000 <= p00 + p10;
@@ -340,7 +342,7 @@ always @(posedge clk) begin
                     sum_valid <= 1'b1;
             1'b1:if(cnt1 == 20'd255)
                     sum_valid <= 1'b0;
-                else if(cnt1 == 20'd160)
+                else if(cnt1 == 20'd163)
                     sum_valid <= 1'b1;
         endcase
     end
