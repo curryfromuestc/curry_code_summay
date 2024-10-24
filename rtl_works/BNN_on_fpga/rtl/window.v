@@ -7,7 +7,7 @@ module window (
 );
 
 // 声明一个ram
-reg signed[31:0] mem [139:0];
+reg signed[31:0] mem [0:139];
 always @(posedge clk) begin
     if (start) begin
         mem[0] <= din;

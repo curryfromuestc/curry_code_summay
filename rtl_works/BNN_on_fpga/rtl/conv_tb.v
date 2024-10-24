@@ -4,10 +4,10 @@ module conv_tb();
     reg clk;
     reg rstn;
     reg start_conv;
-    reg [7:0] image_in;
+    reg signed[31:0] image_in;
     reg start_window;
     reg state;
-    wire [39:0] taps;
+    wire [159:0] taps;
     reg weight_en;
     reg weight_c;
     wire [31:0] conv_result;
@@ -61,7 +61,7 @@ module conv_tb();
     end
 
     initial begin
-        fp_i = $fopen("rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
+        fp_i = $fopen("/Users/curryyang/code/curry_code_summay/rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
     end
 
     always @(posedge clk) begin
