@@ -637,4 +637,68 @@ generate
                         .done(conv_done[i]));
             end
 endgenerate
+//缓存第二层中间参数
+always@(posedge clk)begin
+	case(conv_counter)
+		4'd2:if(conv_wren == 6'b111111) s_fifo_valid <= 12'b000000111111;
+			else s_fifo_valid <= 12'b000000000000;
+		4'd3:if(conv_wren == 6'b111111) s_fifo_valid <= 12'b111111000000;
+			else s_fifo_valid <= 12'b000000000000;
+		4'd4,4'd6,4'd8,4'd10:if(add_wren == 6'b111111) s_fifo_valid <= 12'b000000111111;
+			else s_fifo_valid <= 12'b000000000000;
+		4'd5,4'd7,4'd9,4'd11:if(add_wren == 6'b111111) s_fifo_valid <= 12'b111111000000;
+			else s_fifo_valid <= 12'b000000000000;
+		default:s_fifo_valid <= 12'b000000000000;     
+	endcase
+end
+always @(posedge clk) begin
+    case(conv_counter)
+        4'd2:begin
+            s_fifo_data[0] <= conv_result[0];
+            s_fifo_data[1] <= conv_result[1];
+            s_fifo_data[2] <= conv_result[2];
+            s_fifo_data[3] <= conv_result[3];
+            s_fifo_data[4] <= conv_result[4];
+            s_fifo_data[5] <= conv_result[5]; 
+        end
+        4'd3:begin
+            s_fifo_data[6] <= conv_result[0];
+            s_fifo_data[7] <= conv_result[1];
+            s_fifo_data[8] <= conv_result[2];
+            s_fifo_data[9] <= conv_result[3];
+            s_fifo_data[10] <= conv_result[4];
+            s_fifo_data[11] <= conv_result[5]; 
+        end
+        4'd4,4'd6,4'd8,4'd10:begin
+            s_fifo_data[0] <= add_result[0];
+            s_fifo_data[1] <= add_result[1];
+            s_fifo_data[2] <= add_result[2];
+            s_fifo_data[3] <= add_result[3];
+            s_fifo_data[4] <= add_result[4];
+            s_fifo_data[5] <= add_result[5]; 
+        end
+        4'd5,4'd7,4'd9,4'd11:begin
+            s_fifo_data[6] <= add_result[0];
+            s_fifo_data[7] <= add_result[1];
+            s_fifo_data[8] <= add_result[2];
+            s_fifo_data[9] <= add_result[3];
+            s_fifo_data[10] <= add_result[4];
+            s_fifo_data[11] <= add_result[5]; 
+        end
+        default:begin
+            s_fifo_data[0] <= 32'd0;
+            s_fifo_data[1] <= 32'd0;
+            s_fifo_data[2] <= 32'd0;
+            s_fifo_data[3] <= 32'd0;
+            s_fifo_data[4] <= 32'd0;
+            s_fifo_data[5] <= 32'd0;
+            s_fifo_data[6] <= 32'd0;
+            s_fifo_data[7] <= 32'd0;
+            s_fifo_data[8] <= 32'd0;
+            s_fifo_data[9] <= 32'd0;
+            s_fifo_data[10] <= 32'd0;
+            s_fifo_data[11] <= 32'd0;
+        end
+    endcase
+end
 endmodule
