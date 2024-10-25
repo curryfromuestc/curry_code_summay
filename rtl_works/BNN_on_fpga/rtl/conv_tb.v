@@ -61,7 +61,7 @@ module conv_tb();
     end
 
     initial begin
-        fp_i = $fopen("/Users/curryyang/code/curry_code_summay/rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
+        fp_i = $fopen("/home/curry/code/curry_code_summay/rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
     end
 
     always @(posedge clk) begin
