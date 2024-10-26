@@ -701,4 +701,91 @@ always @(posedge clk) begin
         end
     endcase
 end
+//读出第二层中间参数，进行累加
+always @(posedge clk) begin
+    case(conv_counter)
+    4'd4,4'd6,4'd8,4'd10,4'd12:if(conv_wren == 6'b111111) m_fifo_ready <= 12'b000000111111;
+         else if(conv_wren == 6'b000000) m_fifo_ready <= 12'b000000000000;
+    4'd5,4'd7,4'd9,4'd11,4'd13:if(conv_wren == 6'b111111) m_fifo_ready <= 12'b111111000000;
+         else if(conv_wren == 6'b000000) m_fifo_ready <= 12'b000000000000;
+    default:m_fifo_ready <= 12'b000000000000;
+    endcase
+end
+//--------读出参数--------
+always @(posedge clk) begin
+    case(conv_counter)
+    4'd4,4'd6,4'd8,4'd10,4'd12:begin
+        if (m_fifo_valid[0] && m_fifo_ready[0])
+            add_data[0] <= m_fifo_data[0];
+        else
+            add_data[0] <= 31'd0;
+
+        if (m_fifo_valid[1] && m_fifo_ready[1])
+            add_data[1] <= m_fifo_data[1];
+        else
+            add_data[1] <= 31'd0;
+
+        if (m_fifo_valid[2] && m_fifo_ready[2])
+            add_data[2] <= m_fifo_data[2];
+        else
+            add_data[2] <= 31'd0;
+
+        if (m_fifo_valid[3] && m_fifo_ready[3])
+            add_data[3] <= m_fifo_data[3];
+        else
+            add_data[3] <= 31'd0;
+
+        if (m_fifo_valid[4] && m_fifo_ready[4])
+            add_data[4] <= m_fifo_data[4];
+        else
+            add_data[4] <= 31'd0;
+
+        if (m_fifo_valid[5] && m_fifo_ready[5])
+            add_data[5] <= m_fifo_data[5];
+        else
+            add_data[5] <= 31'd0;
+    end
+    4'd5,4'd7,4'd9,4'd11,4'd13:begin
+        if (m_fifo_valid[6] && m_fifo_ready[6])
+            add_data[0] <= m_fifo_data[6];
+        else
+            add_data[0] <= 31'd0;
+
+        if (m_fifo_valid[7] && m_fifo_ready[7])
+            add_data[1] <= m_fifo_data[7];
+        else
+            add_data[1] <= 31'd0;
+
+        if (m_fifo_valid[8] && m_fifo_ready[8])
+            add_data[2] <= m_fifo_data[8];
+        else
+            add_data[2] <= 31'd0;
+
+        if (m_fifo_valid[9] && m_fifo_ready[9])
+            add_data[3] <= m_fifo_data[9];
+        else
+            add_data[3] <= 31'd0;
+
+        if (m_fifo_valid[10] && m_fifo_ready[10])
+            add_data[4] <= m_fifo_data[10];
+        else
+            add_data[4] <= 31'd0;
+
+        if (m_fifo_valid[11] && m_fifo_ready[11])
+            add_data[5] <= m_fifo_data[11];
+        else
+            add_data[5] <= 31'd0;
+    end
+    endcase
+end
+reg reset_fifo;
+always@(posedge clk or negedge rstn)
+if(!rstn)
+    reset_fifo <= 0;
+else
+    if(cnn_done)
+        reset_fifo <= 0;
+    else
+        reset_fifo <= 1;
+//----------参数缓存----------
 endmodule
