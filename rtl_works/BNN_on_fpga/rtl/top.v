@@ -788,4 +788,19 @@ else
     else
         reset_fifo <= 1;
 //----------参数缓存----------
+genvar a;
+generate
+	for(a= 0;a<=11;a=a+1)begin
+		use_fifo_ip fifo_inst(
+			.s_axis_aresetn(reset_fifo),          // input wire s_axis_aresetn
+			.s_axis_aclk(clk),                // input wire s_axis_aclk
+			.s_axis_tvalid(s_fifo_valid[a]),            // input wire s_axis_tvalid
+			.s_axis_tready(s_fifo_ready[a]),            // output wire s_axis_tready
+			.s_axis_tdata(s_fifo_data[a]),              // input wire [31 : 0] s_axis_tdata
+			.m_axis_tvalid(m_fifo_valid[a]),            // output wire m_axis_tvalid
+			.m_axis_tready(m_fifo_ready[a]),            // input wire m_axis_tready
+			.m_axis_tdata(m_fifo_data[a])             // output wire [31 : 0] m_axis_tdata
+		);
+	end
+endgenerate
 endmodule
