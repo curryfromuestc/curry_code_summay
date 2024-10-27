@@ -793,7 +793,7 @@ else
 genvar a;
 generate
 	for(a= 0;a<=11;a=a+1)begin
-		use_fifo_ip fifo_inst(
+		user_fifo_ip fifo_inst(
 			.s_axis_aresetn(reset_fifo),          // input wire s_axis_aresetn
 			.s_axis_aclk(clk),                // input wire s_axis_aclk
 			.s_axis_tvalid(s_fifo_valid[a]),            // input wire s_axis_tvalid
