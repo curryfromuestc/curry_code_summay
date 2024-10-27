@@ -59,7 +59,7 @@ reg signed[31:0] relu_data[0:5];
 wire signed [31:0] conv_result[0:5];
 wire signed [31:0] add_result[0:5];
 wire signed [31:0] relu_result[0:5];
-wire signed [31:0] polling_result[0:5];
+wire signed [31:0] pooling_result[0:5];
 wire signed [31:0] fc_result[0:9];
 reg signed [31:0] result_r0[0:9];
 reg signed [31:0] result_r1[0:9];
@@ -117,6 +117,7 @@ wire start_cnn_r;
 assign start_cnn_r = start_cnn && ~start_cnn_delay; // 采样上升沿    
 
 //--------------------结果计数--------------------
+//六个卷积模块计算
 reg [9:0] conv_result_cnt;
 always @(posedge clk) begin
     if(!start_conv)
@@ -127,6 +128,7 @@ always @(posedge clk) begin
         else
             conv_result_cnt <= conv_result_cnt;
 end
+//累积模块，用于累积第二层的权重结果
 reg [6:0] add_result_cnt;
 always@(posedge clk)
 begin
@@ -718,63 +720,63 @@ always @(posedge clk) begin
         if (m_fifo_valid[0] && m_fifo_ready[0])
             add_data[0] <= m_fifo_data[0];
         else
-            add_data[0] <= 31'd0;
+            add_data[0] <= 32'd0;
 
         if (m_fifo_valid[1] && m_fifo_ready[1])
             add_data[1] <= m_fifo_data[1];
         else
-            add_data[1] <= 31'd0;
+            add_data[1] <= 32'd0;
 
         if (m_fifo_valid[2] && m_fifo_ready[2])
             add_data[2] <= m_fifo_data[2];
         else
-            add_data[2] <= 31'd0;
+            add_data[2] <= 32'd0;
 
         if (m_fifo_valid[3] && m_fifo_ready[3])
             add_data[3] <= m_fifo_data[3];
         else
-            add_data[3] <= 31'd0;
+            add_data[3] <= 32'd0;
 
         if (m_fifo_valid[4] && m_fifo_ready[4])
             add_data[4] <= m_fifo_data[4];
         else
-            add_data[4] <= 31'd0;
+            add_data[4] <= 32'd0;
 
         if (m_fifo_valid[5] && m_fifo_ready[5])
             add_data[5] <= m_fifo_data[5];
         else
-            add_data[5] <= 31'd0;
+            add_data[5] <= 32'd0;
     end
     4'd5,4'd7,4'd9,4'd11,4'd13:begin
         if (m_fifo_valid[6] && m_fifo_ready[6])
             add_data[0] <= m_fifo_data[6];
         else
-            add_data[0] <= 31'd0;
+            add_data[0] <= 32'd0;
 
         if (m_fifo_valid[7] && m_fifo_ready[7])
             add_data[1] <= m_fifo_data[7];
         else
-            add_data[1] <= 31'd0;
+            add_data[1] <= 32'd0;
 
         if (m_fifo_valid[8] && m_fifo_ready[8])
             add_data[2] <= m_fifo_data[8];
         else
-            add_data[2] <= 31'd0;
+            add_data[2] <= 32'd0;
 
         if (m_fifo_valid[9] && m_fifo_ready[9])
             add_data[3] <= m_fifo_data[9];
         else
-            add_data[3] <= 31'd0;
+            add_data[3] <= 32'd0;
 
         if (m_fifo_valid[10] && m_fifo_ready[10])
             add_data[4] <= m_fifo_data[10];
         else
-            add_data[4] <= 31'd0;
+            add_data[4] <= 32'd0;
 
         if (m_fifo_valid[11] && m_fifo_ready[11])
             add_data[5] <= m_fifo_data[11];
         else
-            add_data[5] <= 31'd0;
+            add_data[5] <= 32'd0;
     end
     endcase
 end
@@ -803,4 +805,321 @@ generate
 		);
 	end
 endgenerate
+//----------累加模块------------
+reg ivalid_add;
+always @(posedge clk) begin
+	case(conv_counter)
+	4'd4,4'd5,4'd6,4'd7,4'd8,4'd9,4'd10,4'd11,4'd12,4'd13:if(conv_wren == 6'b111111) ivalid_add <= 1'b1;
+															else ivalid_add <= 1'b0;
+	default:ivalid_add <= 1'b0;
+	endcase
+end
+genvar b;
+generate
+	for(b=0;b<=5;b=b+1)begin
+		add u_add(
+			.clk(clk),
+			.ivalid(ivalid_add),
+			.din_0(conv_result[b]),
+			.din_1(add_data[b]),
+			.ovalid(add_wren[b]),
+			.dout(add_result[b])
+		);
+	end
+endgenerate
+//---------判断ReLU模块何时运行----------
+reg ivalid_relu;
+always@(posedge clk)begin
+	case(conv_counter)
+	4'd1:if(conv_wren == 6'b111111) ivalid_relu <= 1'b1;
+		else ivalid_relu <= 1'b0;
+	4'd12,4'd13:if(add_wren == 6'b111111) ivalid_relu <= 1'b1;
+		else ivalid_relu <= 1'b0;
+	default:ivalid_relu <= 1'b0;
+	endcase
+end
+//----------ReLU模块数据端口接口----------
+always @(posedge clk) begin
+	case(conv_counter)
+	4'd1:begin
+		relu_data[0] <= conv_result[0];
+		relu_data[1] <= conv_result[1];
+		relu_data[2] <= conv_result[2];
+		relu_data[3] <= conv_result[3];
+		relu_data[4] <= conv_result[4];
+		relu_data[5] <= conv_result[5];
+	end
+	4'd12,4'd13:begin
+		relu_data[0] <= add_result[0];
+		relu_data[1] <= add_result[1];
+		relu_data[2] <= add_result[2];
+		relu_data[3] <= add_result[3];
+		relu_data[4] <= add_result[4];
+		relu_data[5] <= add_result[5];
+	end
+	default:begin
+		relu_data[0] <= 32'd0;
+		relu_data[1] <= 32'd0;
+		relu_data[2] <= 32'd0;
+		relu_data[3] <= 32'd0;
+		relu_data[4] <= 32'd0;
+		relu_data[5] <= 32'd0;
+	end
+	endcase
+end
+//----------例化ReLU模块----------
+genvar c;
+generate
+	for(c=0;c<=5;c=c+1)begin
+		relu u_relu(
+			.clk(clk),
+			.ivalid(ivalid_relu),
+			.din(relu_data[c]),
+			.ovalid(relu_wren[c]),
+			.dout(relu_result[c])
+		);
+	end
+endgenerate
+//-------只有处在第一卷积循环、第12,13次卷积循环且激活模块完成计算时才启动池化模块-------
+reg ivalid_pooling;
+always@(posedge clk)
+begin
+	case(conv_counter)
+		4'd1,4'd12,4'd13:
+			if(relu_wren == 6'b111111) 
+				ivalid_pooling <= 1'b1;
+			else 
+				ivalid_pooling <= 1'b0;
+		default:ivalid_pooling <= 1'b0;
+		endcase
+end
+genvar d;
+generate
+	for(d=0;d<=5;d=d+1)begin
+		maxpool u_pooling(
+			.clk(clk),
+			.rstn(rstn),
+			.ivalid(ivalid_pooling),
+			.state(state),
+			.din(relu_result[d]),
+			.ovalid(pooling_wren[d]),
+			.dout(pooling_result[d]) 
+		);
+	end
+endgenerate
+//==========================================================
+//Layer1 Feature Map 缓存
+//************第一层结果缓存**************//
+// 只在第一次卷积循环且池化完成后才写入 fmap
+always@(posedge clk)
+if(conv_counter == 4'd1 && pooling_wren == 6'b111111)
+    fmap_wren <= 6'b111111;
+else
+    fmap_wren <= 6'b000000;
+
+// 一次卷积加速后复位 fmap
+reg reset_fmap;
+always@(posedge clk or negedge rstn)begin
+if(!rstn)
+    reset_fmap <= 0;
+else
+    if(cnn_done)
+        reset_fmap <= 0;
+    else
+        reset_fmap <= 1;
+end
+genvar e;
+generate
+    for(e=0;e<=5;e=e+1)
+        begin:fmap_inst
+            FIFO_fmap u_FIFO_fmap (
+              .clk(clk),
+              .rstn(reset_fmap),
+              .din(pooling_result[e]),
+              .wr_en(fmap_wren[e]),
+              .rd_en(fmap_rden[e]),
+              .rd_rst(fmap_rdrst[e]),     
+              .dout(fmap_dout[e]),
+              .full(),
+              .empty()
+            );
+        end
+endgenerate
+//------------------全连接成---------------
+//开始之前，需要1920个时钟周期加载权重
+always @(posedge clk) begin
+	if(cnt_fc<11'd1)begin
+		weight_fc[0] <= 1'd0;
+		weight_fc[1] <= 1'd0;
+		weight_fc[2] <= 1'd0;
+		weight_fc[3] <= 1'd0;
+		weight_fc[4] <= 1'd0;
+		weight_fc[5] <= 1'd0;
+		weight_fc[6] <= 1'd0;
+		weight_fc[7] <= 1'd0;
+		weight_fc[8] <= 1'd0;
+		weight_fc[9] <= 1'd0;
+	end
+	else if(cnt_fc <= 11'd193)
+		weight_fc[0] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd385)
+		weight_fc[1] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd577)
+		weight_fc[2] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd769)
+		weight_fc[3] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd961)
+		weight_fc[4] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd1153)
+		weight_fc[5] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd1345)
+		weight_fc[6] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd1537)
+		weight_fc[7] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd1729)
+		weight_fc[8] <= weightfc_tdata;
+	else if(cnt_fc <= 11'd1921)
+		weight_fc[9] <= weightfc_tdata;
+end
+// 第12，13次卷积循环时，使能全连接模块输入端口
+reg ivalid_fc;
+always@(posedge clk)begin
+	case(conv_counter)
+	4'd12,4'd13:if(pooling_wren == 6'b111111) ivalid_fc <= 1;
+		else ivalid_fc <= 0;
+	default:ivalid_fc <= 0;
+	endcase
+end
+genvar f;
+generate
+	for(f=0;f<10;f=f+1)
+		begin:fullconnect_inst
+			fc u_fullconnect(
+				.clk(clk),
+				.rstn(rstn),
+				.ivalid(ivalid_fc),
+				.din_0(pooling_result[0]),
+				.din_1(pooling_result[1]),
+				.din_2(pooling_result[2]),
+				.din_3(pooling_result[3]),
+				.din_4(pooling_result[4]),
+				.din_5(pooling_result[5]),
+				.weight(weight_fc[f]),
+				.weight_en(weight_fc_en[f]),
+				.ovalid(fc_wren[f]),
+				.dout(fc_result[f])
+			);
+		end
+endgenerate
+//----------全连接层计算结果----------
+integer r;
+always@(posedge clk)begin
+	case(conv_counter)
+	4'd12:if(fc_wren == 10'b1111111111)
+		begin
+			result_r0[0] <= fc_result[0];
+			result_r0[1] <= fc_result[1];
+			result_r0[2] <= fc_result[2];
+			result_r0[3] <= fc_result[3];
+			result_r0[4] <= fc_result[4];
+			result_r0[5] <= fc_result[5];
+			result_r0[6] <= fc_result[6];
+			result_r0[7] <= fc_result[7];
+			result_r0[8] <= fc_result[8];
+			result_r0[9] <= fc_result[9];
+		end
+	4'd13:if(fc_wren == 10'b1111111111)
+		begin
+			result_r1[0] <= fc_result[0] + result_r0[0];
+			result_r1[1] <= fc_result[1] + result_r0[1];
+			result_r1[2] <= fc_result[2] + result_r0[2];
+			result_r1[3] <= fc_result[3] + result_r0[3];
+			result_r1[4] <= fc_result[4] + result_r0[4];
+			result_r1[5] <= fc_result[5] + result_r0[5];
+			result_r1[6] <= fc_result[6] + result_r0[6];
+			result_r1[7] <= fc_result[7] + result_r0[7];
+			result_r1[8] <= fc_result[8] + result_r0[8];
+			result_r1[9] <= fc_result[9] + result_r0[9];
+		end
+	default:begin
+			result_r0[0] <= 0;
+			result_r0[1] <= 0;
+			result_r0[2] <= 0;
+			result_r0[3] <= 0;
+			result_r0[4] <= 0;
+			result_r0[5] <= 0;
+			result_r0[6] <= 0;
+			result_r0[7] <= 0;
+			result_r0[8] <= 0;
+			result_r0[9] <= 0;
+			result_r1[0] <= 0;
+			result_r1[1] <= 0;
+			result_r1[2] <= 0;
+			result_r1[3] <= 0;
+			result_r1[4] <= 0;
+			result_r1[5] <= 0;
+			result_r1[6] <= 0;
+			result_r1[7] <= 0;
+			result_r1[8] <= 0;
+			result_r1[9] <= 0;
+			end
+	endcase
+end
+
+reg result_valid;
+reg [3:0] cnt4;
+always @(posedge clk or negedge rstn) begin
+	if(!rstn)
+    result_valid <= 0;
+	else begin
+		if(!start_cnn_delay)
+			result_valid <= 0;
+		else if(cnt4 > 4'd10)
+			result_valid <= 0; 
+		else if(conv_counter == 4'd13 && fc_wren == 10'b1111111111)
+			result_valid <= 1; 
+	end
+end
+always@(posedge clk or negedge rstn)
+	begin
+	if(!rstn)
+		cnn_done_r <= 0;
+	else
+		if(start_cnn_r)
+			cnn_done_r <= 0;
+		else if(cnt4 == 4'd10)
+			cnn_done_r <= 1; // 卷积加速完成
+	end
+   
+	always@(posedge clk or negedge rstn)
+	begin
+	if(!rstn)
+		cnt4 <= 0;
+	else
+		if(!result_valid)
+			cnt4 <= 0;
+		else
+			cnt4 <= cnt4 + 1;
+	end
+
+always@(posedge clk or negedge rstn)
+begin
+if(!rstn)
+    result_valid_r <= 1'b0;
+else    
+    if(cnt4 == 4'd0)
+        result_valid_r <= 1'b0;
+    else if(cnt4 <= 4'd10)
+        result_valid_r <= 1'b1;
+    else
+        result_valid_r <= 1'b0;
+end
+
+always@(posedge clk)
+begin
+if(cnt4 > 4'd0 && cnt4 <= 4'd10)
+    result_data <= result_r1[cnt4-1];
+else
+    result_data <= 0;
+end
 endmodule
