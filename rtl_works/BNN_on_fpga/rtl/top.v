@@ -22,9 +22,9 @@ module top(
 
     output wire [3:0] conv_cnt
 );
-reg image_ready;
-reg weight_ready;
-reg weightfc_ready;
+reg image_ready;//!图像数据准备标志位，在滑窗模块开始信号拉高过后启动
+reg weight_ready;//！卷积权值准备标志位，在卷积模块开始信号拉高过后启动
+reg weightfc_ready;//！全连接权值准备标志位，在卷积模块开始信号拉高过后启动
 reg result_valid_r;
 reg weight_rerd_r;
 reg cnn_done_r;
@@ -41,19 +41,19 @@ reg start_window;//!滑窗模块启动标志
 reg start_conv;//!卷积模块启动标志
 
 //-----------------输出有效标志位-----------------
-wire [5:0] conv_wren;
-wire [5:0] add_wren;
-wire [5:0] relu_wren;
-wire [5:0] pooling_wren;
-wire [9:0] fc_wren;
+wire [5:0] conv_wren;//!卷积输出有效标志位，接在卷积模块的ovlaid上
+wire [5:0] add_wren;//！累加输出有效标志位，接在累加模块的ovlaid上
+wire [5:0] relu_wren;//！激活函数输出有效标志位，接在激活函数模块的ovlaid上
+wire [5:0] pooling_wren;//！池化输出有效标志位，接在池化模块的ovlaid上
+wire [9:0] fc_wren;//！全连接输出有效标志位，接在全连接模块的ovlaid上
 
 //-----------------卷积计算结束标志位-----------------
 wire [5:0] conv_done;
 
 //----------------模块输入端口----------------
 wire [159:0] taps;
-reg signed[31:0] add_data[0:5];
-reg signed[31:0] relu_data[0:5];
+reg signed[31:0] add_data[0:5];//！累加模块输入数据，从m_fifo中读取
+reg signed[31:0] relu_data[0:5];//!relu模块输入数据，来自累加模块
 
 //-----------------模块输出端口--------------
 wire signed [31:0] conv_result[0:5];
@@ -61,8 +61,8 @@ wire signed [31:0] add_result[0:5];
 wire signed [31:0] relu_result[0:5];
 wire signed [31:0] pooling_result[0:5];
 wire signed [31:0] fc_result[0:9];
-reg signed [31:0] result_r0[0:9];
-reg signed [31:0] result_r1[0:9];
+reg signed [31:0] result_r0[0:9];//！fc输出数据第一波缓存
+reg signed [31:0] result_r1[0:9];//！fc输出数据第二波缓存
 
 reg [3:0] conv_counter = 4'd0;//!卷积计算次数计数
 
@@ -118,7 +118,7 @@ assign start_cnn_r = start_cnn && ~start_cnn_delay; // 采样上升沿
 
 //--------------------结果计数--------------------
 //六个卷积模块计算
-reg [9:0] conv_result_cnt;
+reg [9:0] conv_result_cnt;//！统计卷积模块输出个数
 always @(posedge clk) begin
     if(!start_conv)
         conv_result_cnt <= 10'd0;
@@ -134,7 +134,7 @@ always@(posedge clk)
 begin
     case(conv_counter)
     4'd4,4'd5,4'd6,4'd7,4'd8,4'd9,4'd10,4'd11,4'd12,4'd13:begin
-        if(add_result_cnt == 7'd64)
+        if(add_result_cnt == 7'd64)//第二层卷积出来过后，每一个featuremap一共有是8*8个数据，所以是64个数据
             add_result_cnt <= 7'd0;
         else
             if(add_wren == 6'b111111)
@@ -146,7 +146,7 @@ begin
     endcase
 end
 //池化模块计算
-reg [7:0] pooling_result_cnt;
+reg [7:0] pooling_result_cnt;//！第一层池化完后是12*12个数据，所以是144个数据，第二层是4*4个数据，所以是16个数据
 always@(posedge clk) begin
     case(conv_counter)
     4'd1:begin
@@ -179,7 +179,7 @@ begin
     begin
         if(cnt_fc == 11'd1923)// 完成全连接计算
             cnt_fc <= cnt_fc;
-        else if(start_cnn_delay)
+        else if(start_cnn_delay)//卷积一开始，就给fc存权重
             cnt_fc <= cnt_fc + 1'b1;
     end
 end
@@ -262,7 +262,7 @@ always@(posedge clk or negedge rstn)
 				weight_ready <= 1'b1; // 卷积模块启动且 cnt <
 		end                      
     
-	always@(posedge clk or negedge rstn)begin
+always@(posedge clk or negedge rstn)begin
 	if(!rstn)
 		weight_rerd_r <= 0;
 	else
@@ -948,7 +948,7 @@ endgenerate
 //------------------全连接成---------------
 //开始之前，需要1920个时钟周期加载权重
 always @(posedge clk) begin
-	if(cnt_fc<11'd1)begin
+	if(cnt_fc<=11'd1)begin
 		weight_fc[0] <= 1'd0;
 		weight_fc[1] <= 1'd0;
 		weight_fc[2] <= 1'd0;
