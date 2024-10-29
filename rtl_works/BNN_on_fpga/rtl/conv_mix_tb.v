@@ -9,16 +9,22 @@ reg state;
 wire [159:0] taps;
 reg weight_en;
 reg weight_c;
+reg [31:0] weight;
 wire [31:0] conv_result;
 wire conv_done;
 wire conv_ovalid;
 
 integer fp_i;
 integer count_w;
+integer count_r;
 
 reg [10:0] cnt_line;
 reg [10:0] cnt_conv;
 reg signed [31:0] conv_result_r [0:599];
+
+always @(*) begin
+    weight_c = ~weight[31];
+end
 
 conv_mix conv_mix_inst(
     .clk(clk),
@@ -42,11 +48,26 @@ initial begin
     rstn = 1;
     start_conv = 1;
     weight_en = 1;
-    weight_c = 0;
+    #(cycle*25);
+end
+integer w_i;
+initial begin
+    w_i = $fopen("C:\\Users\\curry_yang\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_conv1_weight_txt.txt", "r");
+end
+always @(posedge clk) begin
+    if(weight_en == 1)begin
+        count_r <= $fscanf(w_i,"%b",weight);
+    end
+end
+initial begin
+    cnt_line = 0;
+    start_window = 0;
+    #(20+10*cycle);
+    start_window = 1;
 end
 
 initial begin
-    fp_i = $fopen("/home/curry/code/curry_code_summay/rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
+    fp_i = $fopen("C:\\Users\\curry_yang\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_image_txt.txt", "r");
 end
 
 always @(posedge clk) begin
@@ -66,9 +87,9 @@ always @(posedge clk) begin
         cnt_conv = cnt_conv + 1;
     end
     else begin
-        if(conv_done) // 以24x24二维矩阵形式打印卷积结果
+        if(conv_done) // �?24x24二维矩阵形式打印卷积结果
         begin
-            conv_result_r[cnt_conv] =  conv_result; // 最后一个结果，conv_ovalid 和 conv_done均为 1
+            conv_result_r[cnt_conv] =  conv_result; // �?后一个结果，conv_ovalid �? conv_done均为 1
             //$display("cnt_conv: %d  ", cnt_conv);
             $display("conv complete");
             if(state == 0)
@@ -79,9 +100,9 @@ always @(posedge clk) begin
                     
                     $write("%d ", conv_result_r[i]); // $write 不会自动换行
                     
-                    if((i+1)%24 == 0)// 添加行号并换行
+                    if((i+1)%24 == 0)// 添加行号并换�?
                     begin
-                        $display(" "); // 每行 24 个数据
+                        $display(" "); // 每行 24 个数�?
                         display_line = display_line + 1;
                         $write("%d :", display_line);
                     end
@@ -98,5 +119,5 @@ always @(posedge clk) begin
         end
     end
 end
-
+always #10 clk <= ~clk; 
 endmodule
