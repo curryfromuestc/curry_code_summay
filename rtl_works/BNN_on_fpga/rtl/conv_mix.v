@@ -1,13 +1,13 @@
 module conv_mix(
     input wire clk,
     input wire rstn,
-    input wire start,//！启动信号，注意跟滑窗模块的启动信号时间不一�?
-    input wire weight_en,//�? 权重有效信号
-    input weight,//�? 以比特权�?
+    input wire start,//！启动信号，注意跟滑窗模块的启动信号时间不一�?
+    input wire weight_en,//�? 权重有效信号
+    input weight,//�? 以比特权�?
     input wire signed[31:0] din,
-    input state,//�? 状�?�信�?
-    output reg ovalid,//�? 输出有效信号
-    output reg done,//�? 卷积运算完成信号
+    input state,//�? 状�?�信�?
+    output reg ovalid,//�? 输出有效信号
+    output reg done,//�? 卷积运算完成信号
     output signed[31:0] dout
 );
 reg start_window;
@@ -37,7 +37,7 @@ conv conv_inst(
 );
 
 //----------------------------控制滑窗模块启动时间----------------------------
-//当state�?0时，滑窗模块启动时间相比卷积模块�?10个时钟周期，当state�?1时，滑窗模块启动时间相比卷积模块�?90个时钟周�?
+//当state�?0时，滑窗模块启动时间相比卷积模块�?10个时钟周期，当state�?1时，滑窗模块启动时间相比卷积模块�?90个时钟周�?
 always @(posedge clk) begin
     if (!rstn) begin
         cnt <= 8'd0;
@@ -64,16 +64,15 @@ always @(posedge clk) begin
 end
 
 reg signed[31:0] relu_dout;
+reg relu_ovalid;
 always @(posedge clk or negedge rstn) begin
     if(!rstn) begin
-        ovalid <= 1'b0;
-        done <= 1'b0;
         relu_dout <= 32'b0;
+        relu_ovalid <= 1'b0;
     end
     else begin
-        done <= conv_done;
         if(conv_ovalid) begin
-            ovalid <= 1'b1;
+            relu_ovalid <= 1'b1;
             if(conv_dout[31]) begin
                 relu_dout <= 32'b0;
             end else begin
@@ -81,13 +80,41 @@ always @(posedge clk or negedge rstn) begin
             end
         end 
         else begin
-            ovalid <= 1'b0;
             relu_dout <= 32'b0;
+            relu_ovalid <= 1'b0;
         end
     end
 end
 
-assign dout = relu_dout;
+maxpool maxpool_inst(
+    .clk(clk),
+    .rstn(rstn),
+    .ivalid(relu_ovalid),
+    .state(state),
+    .din(relu_dout),
+    .ovalid(ovalid),
+    .dout(dout)
+);
+
+reg cnt_line;
+always @(posedge clk or negedge rstn) begin
+    if(!rstn)
+        cnt_line <= 0;
+    else begin
+        if(relu_ovalid)
+            cnt_line <= cnt_line + 1;
+        else
+            cnt_line <= cnt_line;
+        end
+end
+
+always @( *) begin
+    if(cnt_line == 576)
+        done <= 1;
+    else
+        done <= 0;
+end
+
 
 
 endmodule
