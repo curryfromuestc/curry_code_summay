@@ -10,6 +10,7 @@ module conv_tb();
     wire [159:0] taps;
     reg weight_en;
     reg weight_c;
+    reg signed[31:0] weight;
     wire [31:0] conv_result;
     wire conv_done;
     wire conv_ovalid;
@@ -42,15 +43,31 @@ module conv_tb();
     );
 
     initial begin
-        clk = 0;
+        clk = 1;
         rstn = 0;
         state = 0;
         cnt_conv = 0;
+        //weight_c = 0;
         #20;
         rstn = 1;
         start_conv = 1;
         weight_en = 1;
-        weight_c = 0;
+        #(cycle*25);
+        weight_en = 0;
+    end
+    always @(*) begin
+        weight_c = ~weight[31];
+    end
+    
+    integer w_i;
+    integer count_r;
+    initial begin
+        w_i = $fopen("C:\\Users\\21047\\Downloads\\test_conv1_weight_txt.txt", "r");
+    end
+    always @(posedge clk) begin
+        if(weight_en == 1)begin
+            count_r <= $fscanf(w_i,"%b",weight);
+        end
     end
 
     initial begin
@@ -61,7 +78,7 @@ module conv_tb();
     end
 
     initial begin
-        fp_i = $fopen("/home/curry/code/curry_code_summay/rtl_works/BNN_on_fpga/test_image_txt.txt", "r");
+        fp_i = $fopen("C:\\Users\\21047\\Downloads\\test_image_txt.txt", "r");
     end
 
     always @(posedge clk) begin
@@ -107,7 +124,16 @@ module conv_tb();
 				begin
 					for(i=0;i<64;i=i+1)
 					begin
-						$display("%d", conv_result_r[i]);
+						if(i == 0) $write("%d :", display_line);
+						
+						$write("%d ", conv_result_r[i]); // $write 不会自动换行
+						
+						if((i+1)%8 == 0)// 添加行号并换行
+						begin
+							$display(" "); // 每行 24 个数据
+							display_line = display_line + 1;
+							$write("%d :", display_line);
+						end
 					end	
 				end
 				
@@ -115,8 +141,4 @@ module conv_tb();
         end
     end
     always #10 clk <= ~clk; 
-    initial begin
-		$dumpfile("conv_tb.vcd");
-		$dumpvars(0,conv_tb);
-	end
 endmodule

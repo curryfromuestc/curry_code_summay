@@ -1,7 +1,8 @@
 module conv 
 #(
    parameter K = 5,
-   parameter Ni = 28, //！ 28 for the first layer, 12 for the second layer
+//   parameter Ni = 28, //！ 28 for the first layer, 12 for the second layer
+//   parameter N1 = 12,
    parameter S = 1 
 )
 (
@@ -17,6 +18,7 @@ module conv
     output done//！ 卷积运算完成信号
 );
 //------------------------变量定义----------------------------
+wire [7:0] Ni;
 reg [7:0] weight_addr = 8'd0;
 reg [31:0] wt_data;
 
@@ -50,6 +52,9 @@ reg signed [31:0] sum200,sum201,sum202,sum203,sum204;//！ 流水线第四级
 reg signed [31:0] sum30,sum21,sum32;//！ 流水线第五级
 reg signed [31:0] sum40,sum41;//！ 流水线第六级
 
+
+assign Ni = (state)?12:28;
+
 //----------------------------对输入矩阵进行赋值----------------------------
 assign m04 = taps[159:128];
 assign m14 = taps[127:96];
@@ -76,36 +81,67 @@ always @(posedge clk or negedge rstn) begin
             weight_addr <= weight_addr + 8'd1; 
     end
 end
-always @(posedge clk) begin
+//always @(posedge clk) begin
+//    case(weight_addr)
+//        8'd0: k00 <= weight;
+//        8'd1: k01 <= weight;
+//        8'd2: k02 <= weight;
+//        8'd3: k03 <= weight;
+//        8'd4: k04 <= weight;
+//        8'd5: k10 <= weight;
+//        8'd6: k11 <= weight;
+//        8'd7: k12 <= weight;
+//        8'd8: k13 <= weight;
+//        8'd9: k14 <= weight;
+//        8'd10: k20 <= weight;
+//        8'd11: k21 <= weight;
+//        8'd12: k22 <= weight;
+//        8'd13: k23 <= weight;
+//        8'd14: k24 <= weight;
+//        8'd15: k30 <= weight;
+//        8'd16: k31 <= weight;
+//        8'd17: k32 <= weight;
+//        8'd18: k33 <= weight;
+//        8'd19: k34 <= weight;
+//        8'd20: k40 <= weight;
+//        8'd21: k41 <= weight;
+//        8'd22: k42 <= weight;
+//        8'd23: k43 <= weight;
+//        8'd24: k44 <= weight;
+//        default : ;
+//    endcase
+//end
+always @(*) begin
     case(weight_addr)
-        8'd0: k00 <= weight;
-        8'd1: k01 <= weight;
-        8'd2: k02 <= weight;
-        8'd3: k03 <= weight;
-        8'd4: k04 <= weight;
-        8'd5: k10 <= weight;
-        8'd6: k11 <= weight;
-        8'd7: k12 <= weight;
-        8'd8: k13 <= weight;
-        8'd9: k14 <= weight;
-        8'd10: k20 <= weight;
-        8'd11: k21 <= weight;
-        8'd12: k22 <= weight;
-        8'd13: k23 <= weight;
-        8'd14: k24 <= weight;
-        8'd15: k30 <= weight;
-        8'd16: k31 <= weight;
-        8'd17: k32 <= weight;
-        8'd18: k33 <= weight;
-        8'd19: k34 <= weight;
-        8'd20: k40 <= weight;
-        8'd21: k41 <= weight;
-        8'd22: k42 <= weight;
-        8'd23: k43 <= weight;
-        8'd24: k44 <= weight;
+        8'd0: k00 = weight;
+        8'd1: k01 = weight;
+        8'd2: k02 = weight;
+        8'd3: k03 = weight;
+        8'd4: k04 = weight;
+        8'd5: k10 = weight;
+        8'd6: k11 = weight;
+        8'd7: k12 = weight;
+        8'd8: k13 = weight;
+        8'd9: k14 = weight;
+        8'd10: k20 = weight;
+        8'd11: k21 = weight;
+        8'd12: k22 = weight;
+        8'd13: k23 = weight;
+        8'd14: k24 = weight;
+        8'd15: k30 = weight;
+        8'd16: k31 = weight;
+        8'd17: k32 = weight;
+        8'd18: k33 = weight;
+        8'd19: k34 = weight;
+        8'd20: k40 = weight;
+        8'd21: k41 = weight;
+        8'd22: k42 = weight;
+        8'd23: k43 = weight;
+        8'd24: k44 = weight;
         default : ;
     endcase
 end
+
 //------------------------流水线第一级---------------------------------
 always @(posedge clk) begin
     if(k00 == 1'b1)
@@ -342,7 +378,7 @@ always @(posedge clk) begin
                     sum_valid <= 1'b1;
             1'b1:if(cnt1 == 20'd255)
                     sum_valid <= 1'b0;
-                else if(cnt1 == 20'd163)
+                else if(cnt1 == 20'd160)
                     sum_valid <= 1'b1;
         endcase
     end
