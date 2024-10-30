@@ -57,7 +57,16 @@ always @( *) begin
             else
                 next_state = CONV_1;
         end
+        CONV_2:
     endcase
+end
+
+always @(posedge clk or negedge rstn) begin
+    if(!rstn)
+        conv_cnt <= 8'd0;
+    else begin
+        if(state == CONV_1)
+    end
 end
 
 endmodule
