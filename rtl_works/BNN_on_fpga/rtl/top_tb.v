@@ -103,7 +103,7 @@ module cnn_tb;
 	begin
 		// fp_w = $fopen("C:/Users/Administrator/Desktop/pic/cnn_test/cw.txt","r"); // 卷积模块权重
 		// fp_wfc = $fopen("C:/Users/Administrator/Desktop/pic/cnn_test/fcw.txt","r"); // 全连接模块权重
-		fp_i = $fopen("/home/curry/code/curry_code_summay/rtl_works/BNN_on_fpga/test_image_txt.txt","r"); // 数字 0 
+		fp_i = $fopen("C:\\Users\\21047\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_image_txt.txt","r"); // 数字 0 
 		//fp_all = $fopen("C:/Users/Administrator/Desktop/pic/cnn_test/images_bin.txt","r"); // 所有测试数据
 	end
 	
