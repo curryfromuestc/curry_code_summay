@@ -129,9 +129,16 @@ always @(posedge clk) begin
                         end
                 end	
             end
-            $finish;
+            //$finish;
         end
     end
 end
 always #10 clk <= ~clk; 
+always @(posedge clk) begin
+    if(done)begin
+        start_conv <= 0;
+    end
+    else
+        start_conv <= start_conv;
+end
 endmodule

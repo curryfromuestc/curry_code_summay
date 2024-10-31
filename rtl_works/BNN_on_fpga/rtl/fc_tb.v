@@ -10,6 +10,7 @@ module fc_tb();
 	reg signed [31:0] din_4;
 	reg signed [31:0] din_5;
 	reg weight;
+	reg [31:0] weight_32;
 	reg weight_en;
 	// 输出
 	wire ovalid;
@@ -59,8 +60,8 @@ module fc_tb();
 		# 20; // 一周期后填充权重数据，共需要192个时钟周期，192x20
 		rstn = 1;
 		weight_en = 1;
-		weight = 1; // 这里权重全为1
 		# (192*20);// 开始填充数据
+		weight_en = 0;
 		// 全连接模块的输入有效信号不能一直为1
 		for(i_fc=0;i_fc<33;i_fc=i_fc+1)
 		begin
@@ -72,10 +73,27 @@ module fc_tb();
 		
 	end
 	
+	integer w_i;
+	integer count_r;
+
+	always @( *) begin
+		weight = ~weight_32;
+	end
+
+	initial begin
+		w_i = $fopen("C:\\Users\\21047\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_fc1_weight_txt.txt", "r");
+	end
+	always @(posedge clk) begin
+		if(weight_en) begin
+			count_r = $fscanf(w_i,"%b",weight_32);
+			//$display("weight: %b",weight);
+		end
+	end
+	
 	// 读取图片数据
 	initial
 	begin
-		fp_i = $fopen("/Users/curryyang/code/curry_code_summay/rtl_works/BNN_on_fpga/test_output5_txt.txt","r"); // 数字 0  (1)输入数据路径
+		fp_i = $fopen("C:\\Users\\21047\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_output5_txt.txt","r"); // 数字 0  (1)输入数据路径
 	end
 	
 	
@@ -118,12 +136,7 @@ module fc_tb();
 	begin
 		# (20+192*20+32*40+5*20+100); // 等待全连接模块计算完成
 		
-		$finish; // 打印完结果后完成仿真
-	end
-
-	initial begin
-		$dumpfile("fc_tb.vcd");
-		$dumpvars(0,fc_tb);
+		//$finish; // 打印完结果后完成仿真
 	end
 
 endmodule
