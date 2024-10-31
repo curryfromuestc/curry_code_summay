@@ -45,19 +45,19 @@ always @(posedge clk) begin
         start_window <= 1'b0;
     end else begin
         if (state == 1'b0) begin
-            if (cnt < 8'd9&&start) begin
+            if (cnt < 8'd9&&start&&(!start_window)) begin
                 cnt <= cnt + 1;
                 start_window <= 1'b0;
             end else begin
-                cnt <= cnt;
+                cnt <= 0;
                 start_window <= start;
             end
         end else begin
-            if (cnt < 8'd89&&start) begin
+            if (cnt < 8'd89&&start&&(!start_window)) begin
                 cnt <= cnt + 1;
                 start_window <= 1'b0;
             end else begin
-                cnt <= cnt;
+                cnt <= 0;
                 start_window <= start;
             end
         end
@@ -106,24 +106,26 @@ always @(posedge clk or negedge rstn) begin
     else begin
         if(relu_ovalid)
             cnt_line <= cnt_line + 1;
-        else
+        else if(cnt_line == 576)
+            cnt_line <= 0;
+        else 
             cnt_line <= cnt_line;
-        end
+     end
 end
 
-always @( *) begin
+always @(*) begin
     case(state)
     1'b0:begin
     if(cnt_line == 576)
-        done <= 1;
+        done = 1;
     else
-        done <= 0;
+        done = 0;
     end
     1'b1:begin
     if(cnt_line == 64)
-        done <= 1;
+        done = 1;
     else
-        done <= 0;
+        done = 0;
     end
     endcase
 end
