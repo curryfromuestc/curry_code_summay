@@ -16,12 +16,19 @@ reg signed [31:0] fmap_3 [143:0];
 reg signed [31:0] fmap_4 [143:0];
 reg signed [31:0] fmap_5 [143:0];
 
-reg signed [31:0] fmap_conv2_0 [15:0];
-reg signed [31:0] fmap_conv2_1 [15:0];
-reg signed [31:0] fmap_conv2_2 [15:0];
-reg signed [31:0] fmap_conv2_3 [15:0];
-reg signed [31:0] fmap_conv2_4 [15:0];
-reg signed [31:0] fmap_conv2_5 [15:0];
+// reg signed [31:0] fmap_conv2_0 [15:0];
+// reg signed [31:0] fmap_conv2_1 [15:0];
+// reg signed [31:0] fmap_conv2_2 [15:0];
+// reg signed [31:0] fmap_conv2_3 [15:0];
+// reg signed [31:0] fmap_conv2_4 [15:0];
+// reg signed [31:0] fmap_conv2_5 [15:0];
+
+// reg signed [31:0] fmap_conv2ff0_0 [15:0];
+// reg signed [31:0] fmap_conv2ff0_1 [15:0];
+// reg signed [31:0] fmap_conv2ff0_2 [15:0];
+
+// reg signed [31:0] fmap_conv2ff1_0 [15:0];
+// reg signed [31:0] fmap_conv2ff1_1 [15:0];
 
 reg signed [31:0] fmap_fc_0 [15:0];
 reg signed [31:0] fmap_fc_1 [15:0];
@@ -65,6 +72,15 @@ wire signed [31:0] conv_result_3;
 wire signed [31:0] conv_result_4;
 wire signed [31:0] conv_result_5;
 
+reg signed[31:0] conv_result_sum0_0;
+reg signed[31:0] conv_result_sum0_1;
+reg signed[31:0] conv_result_sum0_2;
+
+reg signed[31:0] conv_result_sum1_0;
+reg signed[31:0] conv_result_sum1_1;
+
+reg signed[31:0] conv_result_sum2;
+
 wire din_ready_0;
 wire din_ready_1;
 wire din_ready_2;
@@ -72,7 +88,7 @@ wire din_ready_3;
 wire din_ready_4;
 wire din_ready_5;
 
-wire stage
+wire stage;
 wire [5:0] weight_en;
 wire [9:0] weight_en_fc;
 wire weight_c;
@@ -85,69 +101,100 @@ wire [5:0] fc_ovalid;
 parameter IDLE = 3'b000;
 parameter CONV_1 = 3'b001;
 parameter CONV_2 = 3'b010;
-parameter ADD = 3'b011;
-parameter FC = 3'b100;
-parameter CLASSES = 3'b101;
+parameter FC = 3'b011;
+parameter CLASSES = 3'b100;
 
 wire compare_done;
 wire add_done;
 
 reg [2:0] state, next_state;
-reg [7:0] conv_cnt;
-reg [9:0] fmap_cnt;//!控制卷积输出的值保存到fmap中
-
-// always @(posedge clk) begin
-//     if(ovalid[0])
-//         fmap_0[fmap_cnt] <= conv_result_0;
-//     else
-//         fmap_0[fmap_cnt] <= fmap_0[fmap_cnt];
-//     if(ovalid[1])
-//         fmap_1[fmap_cnt] <= conv_result_1;
-//     else
-//         fmap_1[fmap_cnt] <= fmap_1[fmap_cnt];
-//     if(ovalid[2])
-//         fmap_2[fmap_cnt] <= conv_result_2;
-//     else
-//         fmap_2[fmap_cnt] <= fmap_2[fmap_cnt];
-//     if(ovalid[3])
-//         fmap_3[fmap_cnt] <= conv_result_3;
-//     else
-//         fmap_3[fmap_cnt] <= fmap_3[fmap_cnt];
-//     if(ovalid[4])
-//         fmap_4[fmap_cnt] <= conv_result_4;
-//     else
-//         fmap_4[fmap_cnt] <= fmap_4[fmap_cnt];
-//     if(ovalid[5])
-//         fmap_5[fmap_cnt] <= conv_result_5;
-//     else
-//         fmap_5[fmap_cnt] <= fmap_5[fmap_cnt];
-// end
+reg [7:0] conv_cnt,conv_cnt_ff0,conv_cnt_ff1,conv_cnt_ff2;
+reg [7:0] fmap_cnt;//!控制卷积输出的值保存到fmap中
 
 always @(posedge clk) begin
     case(state)
     IDLE:begin
-        fmap_cnt <= 10'd0;
+        fmap_cnt <= 8'd0;
     end
     CONV_1:begin
-        if(ovalid == 6'b111111)begin
+        fmap_0[fmap_cnt] <= conv_result_0;
+        fmap_1[fmap_cnt] <= conv_result_1;
+        fmap_2[fmap_cnt] <= conv_result_2;
+        fmap_3[fmap_cnt] <= conv_result_3;
+        fmap_4[fmap_cnt] <= conv_result_4;
+        fmap_5[fmap_cnt] <= conv_result_5;
+        if(ovalid == 6'b111111)
             fmap_cnt <= fmap_cnt + 1;
-            
-        end
-        else if(fmap_cnt == 10'd144)
-            fmap_cnt <= 10'd0;
+        else if(fmap_cnt == 8'd144)
+            fmap_cnt <= 8'd0;
         else
             fmap_cnt <= fmap_cnt;
     end
     CONV_2:begin
+        conv_result_sum0_0 <= conv_result_0+conv_result_1;
+        conv_result_sum0_1 <= conv_result_2+conv_result_3;
+        conv_result_sum0_2 <= conv_result_4+conv_result_5;
+        conv_result_sum1_0 <= conv_result_sum0_0+conv_result_sum0_1;
+        conv_result_sum1_1 <= conv_result_sum0_2;
+        conv_result_sum2 <= conv_result_sum1_0+conv_result_sum1_1;
+        case (conv_cnt_ff2)
+            8'd1:begin
+                fmap_fc_0[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd2:begin
+                fmap_fc_1[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd3:begin
+                fmap_fc_2[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd4:begin
+                fmap_fc_3[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd5:begin
+                fmap_fc_4[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd6:begin
+                fmap_fc_5[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd7:begin
+                fmap_fc_6[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd8:begin
+                fmap_fc_7[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd9:begin
+                fmap_fc_8[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd10:begin
+                fmap_fc_9[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd11:begin
+                fmap_fc_10[fmap_cnt] <= conv_result_sum2;
+            end
+            8'd12:begin
+                fmap_fc_11[fmap_cnt] <= conv_result_sum2;
+            end
+            default :begin
+                fmap_fc_0[fmap_cnt] <= fmap_fc_0[fmap_cnt];
+                fmap_fc_1[fmap_cnt] <= fmap_fc_1[fmap_cnt];
+                fmap_fc_2[fmap_cnt] <= fmap_fc_2[fmap_cnt];
+                fmap_fc_3[fmap_cnt] <= fmap_fc_3[fmap_cnt];
+                fmap_fc_4[fmap_cnt] <= fmap_fc_4[fmap_cnt];
+                fmap_fc_5[fmap_cnt] <= fmap_fc_5[fmap_cnt];
+                fmap_fc_6[fmap_cnt] <= fmap_fc_6[fmap_cnt];
+                fmap_fc_7[fmap_cnt] <= fmap_fc_7[fmap_cnt];
+                fmap_fc_8[fmap_cnt] <= fmap_fc_8[fmap_cnt];
+                fmap_fc_9[fmap_cnt] <= fmap_fc_9[fmap_cnt];
+                fmap_fc_10[fmap_cnt] <= fmap_fc_10[fmap_cnt];
+                fmap_fc_11[fmap_cnt] <= fmap_fc_11[fmap_cnt];
+            end
+        endcase
         if(ovalid == 6'b111111)
             fmap_cnt <= fmap_cnt + 1;
-        else if(fmap_cnt == 10'd16)
-            fmap_cnt <= 10'd0;
+        else if(fmap_cnt == 8'd16)
+            fmap_cnt <= 8'd0;
         else
             fmap_cnt <= fmap_cnt;
-    end
-    ADD:begin
-        
     end
     FC:begin
         
@@ -472,20 +519,10 @@ always @( *) begin
                 next_state = CONV_1;
         end
         CONV_2:begin
-            if(conv_done == 6'b111111)
-                next_state = ADD;
+            if(conv_cnt_ff2 == 8'd13 )
+                next_state = FC;
             else
                 next_state = CONV_2; 
-        end
-        ADD:begin
-            if(add_done)begin
-                if(conv_cnt == 8'd13 )
-                    next_state = FC;
-                else
-                    next_state = CONV_2;
-            end
-            else
-                next_state = ADD;
         end
         FC:begin
             if(fc_ovalid == 6'b111111)
@@ -511,6 +548,11 @@ always @(posedge clk or negedge rstn) begin
         else 
             conv_cnt <= conv_cnt;
     end
+end
+always @(posedge clk) begin
+    conv_cnt_ff0 <= conv_cnt;
+    conv_cnt_ff1 <= conv_cnt_ff0;
+    conv_cnt_ff2 <= conv_cnt_ff1;
 end
 
 endmodule
