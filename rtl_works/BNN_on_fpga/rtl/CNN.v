@@ -5,8 +5,7 @@ module CNN(
     input wire signed [31:0] din,
     output reg [9:0] classes,
     output wire done,
-    output wire din_ready,
-    output wire conv1_done
+    output wire din_ready
 );
 
 reg signed [31:0] fmap_0 [143:0];
