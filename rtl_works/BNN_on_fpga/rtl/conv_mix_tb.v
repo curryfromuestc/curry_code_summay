@@ -39,27 +39,24 @@ conv_mix conv_mix_inst(
 initial begin
     clk = 1;
     rstn = 0;
-    state = 0;
+    state = 1;
     cnt_conv = 0;
     #20;
-    weight_c = 1;
     rstn = 1;
     start_conv = 1;
+    #20;
     weight_en = 1;
     #(cycle*25);
     weight_en = 0;
 end
-always @(*) begin
-    weight_c = ~weight[31];
-end
 
 integer w_i;
 initial begin
-    w_i = $fopen("C:\\Users\\21047\\Downloads\\test_conv1_weight_txt.txt", "r");
+    w_i = $fopen("C:\\Users\\21047\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_conv2_weight_txt.txt", "r");
 end
 always @(posedge clk) begin
     if(weight_en == 1)begin
-        count_r <= $fscanf(w_i,"%b",weight);
+        count_r <= $fscanf(w_i,"%b",weight_c);
     end
 end
 initial begin
@@ -70,7 +67,7 @@ initial begin
 end
 
 initial begin
-    fp_i = $fopen("C:\\Users\\21047\\Downloads\\test_image_txt.txt", "r");
+    fp_i = $fopen("C:\\Users\\21047\\Downloads\\test_output2_txt.txt", "r");
 end
 
 always @(posedge clk) begin

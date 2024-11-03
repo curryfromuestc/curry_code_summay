@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-module cnn_tb;
+module top_tb（）;
 	reg  clk;
 	reg  rstn;
 	reg  start_cnn;

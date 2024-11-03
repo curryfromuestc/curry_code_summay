@@ -112,34 +112,66 @@ end
 //    endcase
 //end
 always @(*) begin
-    case(weight_addr)
-        8'd0: k00 = weight;
-        8'd1: k01 = weight;
-        8'd2: k02 = weight;
-        8'd3: k03 = weight;
-        8'd4: k04 = weight;
-        8'd5: k10 = weight;
-        8'd6: k11 = weight;
-        8'd7: k12 = weight;
-        8'd8: k13 = weight;
-        8'd9: k14 = weight;
-        8'd10: k20 = weight;
-        8'd11: k21 = weight;
-        8'd12: k22 = weight;
-        8'd13: k23 = weight;
-        8'd14: k24 = weight;
-        8'd15: k30 = weight;
-        8'd16: k31 = weight;
-        8'd17: k32 = weight;
-        8'd18: k33 = weight;
-        8'd19: k34 = weight;
-        8'd20: k40 = weight;
-        8'd21: k41 = weight;
-        8'd22: k42 = weight;
-        8'd23: k43 = weight;
-        8'd24: k44 = weight;
-        default : ;
-    endcase
+    if(weight_en)begin
+        case(weight_addr)
+            8'd0: k00 = weight;
+            8'd1: k01 = weight;
+            8'd2: k02 = weight;
+            8'd3: k03 = weight;
+            8'd4: k04 = weight;
+            8'd5: k10 = weight;
+            8'd6: k11 = weight;
+            8'd7: k12 = weight;
+            8'd8: k13 = weight;
+            8'd9: k14 = weight;
+            8'd10: k20 = weight;
+            8'd11: k21 = weight;
+            8'd12: k22 = weight;
+            8'd13: k23 = weight;
+            8'd14: k24 = weight;
+            8'd15: k30 = weight;
+            8'd16: k31 = weight;
+            8'd17: k32 = weight;
+            8'd18: k33 = weight;
+            8'd19: k34 = weight;
+            8'd20: k40 = weight;
+            8'd21: k41 = weight;
+            8'd22: k42 = weight;
+            8'd23: k43 = weight;
+            8'd24: k44 = weight;
+            default : ;
+        endcase
+    end
+    else begin
+        case(weight_addr)
+            8'd0:k00 = k44;
+            8'd1:k01 = k44;
+            8'd2:k02 = k44;
+            8'd3:k03 = k44;
+            8'd4:k04 = k44;
+            8'd5:k10 = k44;
+            8'd6:k11 = k44;
+            8'd7:k12 = k44;
+            8'd8:k13 = k44;
+            8'd9:k14 = k44;
+            8'd10:k20 = k44;
+            8'd11:k21 = k44;
+            8'd12:k22 = k44;
+            8'd13:k23 = k44;
+            8'd14:k24 = k44;
+            8'd15:k30 = k44;
+            8'd16:k31 = k44;
+            8'd17:k32 = k44;
+            8'd18:k33 = k44;
+            8'd19:k34 = k44;
+            8'd20:k40 = k44;
+            8'd21:k41 = k44;
+            8'd22:k42 = k44;
+            8'd23:k43 = k44;
+            8'd24:k44 = k44;
+            default : ;
+        endcase
+    end
 end
 
 //------------------------流水线第一级---------------------------------
