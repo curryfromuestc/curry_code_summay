@@ -20,7 +20,7 @@ module fc_12(
     output wire signed [31:0] dout
 );
 
-reg [7:0] weight_addr;
+reg [7:0] weight_addr, weight_addr_ff0, weight_addr_ff1;
 reg w[0:191];
 
 reg [4:0] cnt_fc;
@@ -31,6 +31,7 @@ reg signed [31:0] sum10,sum11,sum12;
 reg signed [31:0] sum20,sum21;
 reg signed [31:0] sum;
 reg signed [31:0] dout_r;
+
 
 reg ivalid_ff_0,ivalid_ff_1,ivalid_ff_2,ivalid_ff_3,ivalid_ff_4,ivalid_ff_5;
 
@@ -67,9 +68,14 @@ end
 
 //---------------权重加载----------------------
 always @(posedge clk or negedge rstn)begin
-    if(!rstn)
+    if(!rstn) begin
         weight_addr <= 8'd0;
+        weight_addr_ff0 <= 1'b0;
+        weight_addr_ff1 <= 1'b0;
+    end
     else begin
+        weight_addr_ff0 <= weight_addr;
+        weight_addr_ff1 <= weight_addr_ff0;
         if(weight_addr == 8'd192)
             weight_addr <= weight_addr;
         else begin
@@ -82,7 +88,7 @@ always @(posedge clk or negedge rstn)begin
 end
 always@(*)
 	begin
-		case(weight_addr)
+		case(weight_addr_ff1)
 			8'd0:w[0] = weight;
 			8'd1:w[1] = weight;
 			8'd2:w[2] = weight;

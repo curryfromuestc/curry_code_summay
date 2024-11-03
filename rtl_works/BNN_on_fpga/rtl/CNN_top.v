@@ -86,14 +86,17 @@ reg weight_c_ff_reg;
 wire weight_c_ff;
 wire weight_conv1,weight_conv2;
 wire weight_fc;
+reg weight_fc_ff_reg;
+wire weight_fc_ff;
 wire [5:0] ovalid;
 reg [5:0] ovalid_reg;
 wire [5:0] conv_done;
 reg [5:0] conv_done_ff_0,conv_done_ff_1;
 wire [9:0] fc_ivalid;
+reg [9:0] fc_ivalid_reg;
 wire [9:0] fc_ovalid;
 wire start_conv;
-reg start_conv2,start_conv2_ff0,start_conv2_ff1,start_conv2_ff2;
+reg start_conv2;
 
 parameter IDLE = 3'b000;
 parameter CONV_1 = 3'b001;
@@ -116,7 +119,8 @@ assign fmap_en = (state == CONV_2) ? din_ready_0 : 1'b0;
 assign din_ready = (state == CONV_1) ? din_ready_0 : 1'b0;
 assign start_conv = (stage == 1'b1) ? start_conv2 : start;
 assign stage = (state == CONV_2) ? 1'b1 : 1'b0;
-assign fc_ivalid = (conv_cnt_ff3 == 8'd13) ? 10'b1111111111 : 10'b0000000000;
+assign fc_ivalid = fc_ivalid_reg;
+// assign fc_ivalid = (conv_cnt_ff3 == 8'd13) ? 10'b1111111111 : 10'b0000000000;
 //!控制输入image_in
 
 assign image_in_0 = (state == CONV_1) ? din : fmap_0[fmap_r_conv2_cnt];
@@ -148,6 +152,8 @@ always @( *) begin
     case(state)
     IDLE:begin
         weight_en_reg = 6'b000000;
+        weight_en_fc_reg = 10'b0000000000;
+        fc_ivalid_reg = 10'b0000000000;
     end
     CONV_1:begin
         if(ovalid_reg == 6'b111111)begin
@@ -387,32 +393,50 @@ always @( *) begin
     end
     end
     FC:begin
-        if(fc_ivalid == 10'b1111111111)begin
-            if(weight_fc_addr < 192)
-                weight_en_fc_reg = 10'b0000000001;
-            else if(weight_fc_addr < 384)
-                weight_en_fc_reg = 10'b0000000010;
-            else if(weight_fc_addr < 576)
-                weight_en_fc_reg = 10'b0000000100;
-            else if(weight_fc_addr < 768)
-                weight_en_fc_reg = 10'b0000001000;
-            else if(weight_fc_addr < 960)
-                weight_en_fc_reg = 10'b0000010000;
-            else if(weight_fc_addr < 1152)
-                weight_en_fc_reg = 10'b0000100000;
-            else if(weight_fc_addr < 1344)
-                weight_en_fc_reg = 10'b0001000000;
-            else if(weight_fc_addr < 1536)
-                weight_en_fc_reg = 10'b0010000000;
-            else if(weight_fc_addr < 1728)
-                weight_en_fc_reg = 10'b0100000000;
-            else if(weight_fc_addr < 1920)
-                weight_en_fc_reg = 10'b1000000000;
-            else
-                weight_en_fc_reg = 10'b0000000000;
+        if(weight_fc_addr < 192)begin
+            weight_en_fc_reg = 10'b0000000001;
+            fc_ivalid_reg = 10'b0000000000;
         end
-        else
+        else if(weight_fc_addr < 384)begin
+            weight_en_fc_reg = 10'b0000000010;
+            fc_ivalid_reg = 10'b0000000001;
+        end
+        else if(weight_fc_addr < 576)begin
+            weight_en_fc_reg = 10'b0000000100;
+            fc_ivalid_reg = 10'b0000000010;
+        end
+        else if(weight_fc_addr < 768)begin
+            weight_en_fc_reg = 10'b0000001000;
+            fc_ivalid_reg = 10'b0000000100;
+        end
+        else if(weight_fc_addr < 960)begin
+            weight_en_fc_reg = 10'b0000010000;
+            fc_ivalid_reg = 10'b0000001000;
+        end
+        else if(weight_fc_addr < 1152)begin
+            weight_en_fc_reg = 10'b0000100000;
+            fc_ivalid_reg = 10'b0000010000;
+        end
+        else if(weight_fc_addr < 1344)begin
+            weight_en_fc_reg = 10'b0001000000;
+            fc_ivalid_reg = 10'b0000100000;
+        end
+        else if(weight_fc_addr < 1536)begin
+            weight_en_fc_reg = 10'b0010000000;
+            fc_ivalid_reg = 10'b0001000000;
+        end
+        else if(weight_fc_addr < 1728)begin
+            weight_en_fc_reg = 10'b0100000000;
+            fc_ivalid_reg = 10'b0010000000;
+        end
+        else if(weight_fc_addr < 1920)begin
+            weight_en_fc_reg = 10'b1000000000;
+            fc_ivalid_reg = 10'b0100000000;
+        end
+        else begin
             weight_en_fc_reg = 10'b0000000000;
+            fc_ivalid_reg = 10'b1000000000;
+        end
     end
     CLASSES:begin
         weight_en_reg = 6'b000000;
@@ -448,11 +472,6 @@ always @(posedge clk) begin
     end
     CONV_1:begin
         if(start)begin
-            weight_fc_addr <= weight_fc_addr + 1;
-        end
-        else
-            weight_fc_addr <= 11'd0;
-        if(start)begin
             if(weight_conv1_addr < 150)
                 weight_conv1_addr <= weight_conv1_addr + 1;
             else
@@ -464,7 +483,7 @@ always @(posedge clk) begin
             fmap_cnt <= fmap_cnt + 1;
         end
         else if(fmap_cnt == 8'd144) begin
-            fmap_cnt <= fmap_cnt;
+            fmap_cnt <= 8'd0;
         end
         else begin
             fmap_cnt <= fmap_cnt;
@@ -528,9 +547,10 @@ always @(posedge clk) begin
         if(fmap_en)
             fmap_r_conv2_cnt <= fmap_r_conv2_cnt + 1;
         else
-            fmap_r_conv2_cnt <= fmap_r_conv2_cnt;
+            fmap_r_conv2_cnt <= 8'd0;
     end
     FC:begin
+        weight_fc_addr <= weight_fc_addr + 1;
         if(fc_ivalid == 10'b1111111111)
             fmap_r_fc_cnt <= fmap_r_fc_cnt + 1;
         else
@@ -626,9 +646,11 @@ end
 
 always @(posedge clk) begin
     weight_c_ff_reg <= weight_c;
+    weight_fc_ff_reg <= weight_fc;
 end
 
 assign weight_c_ff = weight_c_ff_reg;
+assign weight_fc_ff = weight_fc_ff_reg;
 
 ROM_conv1 blk_mem_gen_0_inst(
     .clka(clk),
@@ -686,7 +708,7 @@ fc_12 fc_12_inst0(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[0]),
     .ovalid(fc_ovalid[0]),
     .dout(fc_out[0])
@@ -707,7 +729,7 @@ fc_12 fc_12_inst1(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[1]),
     .ovalid(fc_ovalid[1]),
     .dout(fc_out[1])
@@ -728,7 +750,7 @@ fc_12 fc_12_inst2(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[2]),
     .ovalid(fc_ovalid[2]),
     .dout(fc_out[2])
@@ -749,7 +771,7 @@ fc_12 fc_12_inst3(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[3]),
     .ovalid(fc_ovalid[3]),
     .dout(fc_out[3])
@@ -770,7 +792,7 @@ fc_12 fc_12_inst4(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[4]),
     .ovalid(fc_ovalid[4]),
     .dout(fc_out[4])
@@ -791,7 +813,7 @@ fc_12 fc_12_inst5(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[5]),
     .ovalid(fc_ovalid[5]),
     .dout(fc_out[5])
@@ -812,7 +834,7 @@ fc_12 fc_12_inst6(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[6]),
     .ovalid(fc_ovalid[6]),
     .dout(fc_out[6])
@@ -833,7 +855,7 @@ fc_12 fc_12_inst7(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[7]),
     .ovalid(fc_ovalid[7]),
     .dout(fc_out[7])
@@ -854,7 +876,7 @@ fc_12 fc_12_inst8(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[8]),
     .ovalid(fc_ovalid[8]),
     .dout(fc_out[8])
@@ -875,7 +897,7 @@ fc_12 fc_12_inst9(
     .din_9(fc_in_9),
     .din_10(fc_in_10),
     .din_11(fc_in_11),
-    .weight(weight_fc),
+    .weight(weight_fc_ff),
     .weight_en(weight_en_fc[9]),
     .ovalid(fc_ovalid[9]),
     .dout(fc_out[9])
@@ -910,7 +932,7 @@ always @( *) begin
                 next_state = CONV_2; 
         end
         FC:begin
-            if(fc_ovalid == 10'b1111111111)
+            if(fc_ovalid == 10'b1000000000)
                 next_state = CLASSES;
             else
                 next_state = FC;
@@ -934,7 +956,7 @@ always @(posedge clk or negedge rstn) begin
             conv_cnt <= conv_cnt + 1;
             start_conv2 <= 1'b0;
         end
-        else if(conv_cnt_ff2 - conv_cnt_ff3 == 8'd1) begin
+        else if(conv_cnt - conv_cnt_ff0 == 8'd1) begin
             conv_cnt <= conv_cnt;
             start_conv2 <= 1'b1;
         end

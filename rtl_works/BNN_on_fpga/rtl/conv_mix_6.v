@@ -292,6 +292,14 @@ always @(posedge clk or negedge rstn) begin
             relu_ovalid_4 <= 1'b1;
             relu_ovalid_5 <= 1'b1;
         end
+        else begin
+            relu_ovalid_0 <= 1'b0;
+            relu_ovalid_1 <= 1'b0;
+            relu_ovalid_2 <= 1'b0;
+            relu_ovalid_3 <= 1'b0;
+            relu_ovalid_4 <= 1'b0;
+            relu_ovalid_5 <= 1'b0;
+        end
         if(relu_in_0[31])begin
             relu_dout_0 <= 32'b0;
         end
@@ -391,12 +399,24 @@ always @(posedge clk or negedge rstn) begin
     if(!rstn)
         cnt_line <= 0;
     else begin
+        case(state)
+        1'b0:begin
         if(relu_ovalid_0)
             cnt_line <= cnt_line + 1;
         else if(cnt_line == 576)
             cnt_line <= 0;
         else 
             cnt_line <= cnt_line;
+        end
+        1'b1:begin
+        if(relu_ovalid_0)
+            cnt_line <= cnt_line + 1;
+        else if(cnt_line == 64)
+            cnt_line <= 0;
+        else 
+            cnt_line <= cnt_line;
+        end
+        endcase
      end
 end
 
