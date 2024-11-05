@@ -38,7 +38,7 @@ end
 assign start = (conv1_done == 1) ? 0 : 1;
 
 initial begin
-    fp_i = $fopen("C:\\Users\\curry_yang\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_image_txt.txt", "r");
+    fp_i = $fopen("C:\\Users\\21047\\code\\curry_code_summay\\rtl_works\\BNN_on_fpga\\test_image_txt.txt", "r");
 end
 
 always @(posedge clk) begin

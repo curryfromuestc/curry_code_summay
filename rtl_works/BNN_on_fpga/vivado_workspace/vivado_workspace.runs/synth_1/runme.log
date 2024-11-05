@@ -1,0 +1,1018 @@
+
+*** Running vivado
+    with args -log CNN_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source CNN_top.tcl
+
+
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue Nov  5 10:16:20 2024
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source CNN_top.tcl -notrace
+Command: synth_design -top CNN_top -part xq7z020cl484-2I
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xq7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xq7z020'
+INFO: [Device 21-403] Loading part xq7z020cl484-2I
+INFO: [Device 21-9227] Part: xq7z020cl484-2I does not have CEAM library.
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 23020
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:05 . Memory (MB): peak = 1519.906 ; gain = 447.043
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'CNN_top' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:154]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:538]
+INFO: [Synth 8-638] synthesizing module 'ROM_conv1' [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv1/synth/ROM_conv1.vhd:67]
+	Parameter C_FAMILY bound to: zynq - type: string 
+	Parameter C_XDEVICEFAMILY bound to: qzynq - type: string 
+	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
+	Parameter C_INTERFACE_TYPE bound to: 0 - type: integer 
+	Parameter C_AXI_TYPE bound to: 1 - type: integer 
+	Parameter C_AXI_SLAVE_TYPE bound to: 0 - type: integer 
+	Parameter C_USE_BRAM_BLOCK bound to: 0 - type: integer 
+	Parameter C_ENABLE_32BIT_ADDRESS bound to: 0 - type: integer 
+	Parameter C_CTRL_ECC_ALGO bound to: NONE - type: string 
+	Parameter C_HAS_AXI_ID bound to: 0 - type: integer 
+	Parameter C_AXI_ID_WIDTH bound to: 4 - type: integer 
+	Parameter C_MEM_TYPE bound to: 3 - type: integer 
+	Parameter C_BYTE_SIZE bound to: 9 - type: integer 
+	Parameter C_ALGORITHM bound to: 1 - type: integer 
+	Parameter C_PRIM_TYPE bound to: 1 - type: integer 
+	Parameter C_LOAD_INIT_FILE bound to: 1 - type: integer 
+	Parameter C_INIT_FILE_NAME bound to: ROM_conv1.mif - type: string 
+	Parameter C_INIT_FILE bound to: ROM_conv1.mem - type: string 
+	Parameter C_USE_DEFAULT_DATA bound to: 0 - type: integer 
+	Parameter C_DEFAULT_DATA bound to: 0 - type: string 
+	Parameter C_HAS_RSTA bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_A bound to: CE - type: string 
+	Parameter C_RSTRAM_A bound to: 0 - type: integer 
+	Parameter C_INITA_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENA bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEA bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEA bound to: 0 - type: integer 
+	Parameter C_WEA_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_A bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_A bound to: 1 - type: integer 
+	Parameter C_WRITE_DEPTH_A bound to: 150 - type: integer 
+	Parameter C_READ_DEPTH_A bound to: 150 - type: integer 
+	Parameter C_ADDRA_WIDTH bound to: 8 - type: integer 
+	Parameter C_HAS_RSTB bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_B bound to: CE - type: string 
+	Parameter C_RSTRAM_B bound to: 0 - type: integer 
+	Parameter C_INITB_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENB bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEB bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEB bound to: 0 - type: integer 
+	Parameter C_WEB_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_B bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_B bound to: 1 - type: integer 
+	Parameter C_WRITE_DEPTH_B bound to: 150 - type: integer 
+	Parameter C_READ_DEPTH_B bound to: 150 - type: integer 
+	Parameter C_ADDRB_WIDTH bound to: 8 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_MUX_PIPELINE_STAGES bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_INPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_USE_SOFTECC bound to: 0 - type: integer 
+	Parameter C_USE_ECC bound to: 0 - type: integer 
+	Parameter C_EN_ECC_PIPE bound to: 0 - type: integer 
+	Parameter C_READ_LATENCY_A bound to: 1 - type: integer 
+	Parameter C_READ_LATENCY_B bound to: 1 - type: integer 
+	Parameter C_HAS_INJECTERR bound to: 0 - type: integer 
+	Parameter C_SIM_COLLISION_CHECK bound to: ALL - type: string 
+	Parameter C_COMMON_CLK bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_COLL bound to: 0 - type: integer 
+	Parameter C_EN_SLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_USE_URAM bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRA_CHG bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRB_CHG bound to: 0 - type: integer 
+	Parameter C_EN_DEEPSLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
+	Parameter C_COUNT_36K_BRAM bound to: 0 - type: string 
+	Parameter C_COUNT_18K_BRAM bound to: 1 - type: string 
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     1.903721 mW - type: string 
+INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_8' declared at 'c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_fc/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195208' bound to instance 'U0' of component 'blk_mem_gen_v8_4_8' [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv1/synth/ROM_conv1.vhd:230]
+INFO: [Synth 8-256] done synthesizing module 'ROM_conv1' (0#1) [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv1/synth/ROM_conv1.vhd:67]
+INFO: [Synth 8-638] synthesizing module 'ROM_conv2' [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv2/synth/ROM_conv2.vhd:67]
+	Parameter C_FAMILY bound to: zynq - type: string 
+	Parameter C_XDEVICEFAMILY bound to: qzynq - type: string 
+	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
+	Parameter C_INTERFACE_TYPE bound to: 0 - type: integer 
+	Parameter C_AXI_TYPE bound to: 1 - type: integer 
+	Parameter C_AXI_SLAVE_TYPE bound to: 0 - type: integer 
+	Parameter C_USE_BRAM_BLOCK bound to: 0 - type: integer 
+	Parameter C_ENABLE_32BIT_ADDRESS bound to: 0 - type: integer 
+	Parameter C_CTRL_ECC_ALGO bound to: NONE - type: string 
+	Parameter C_HAS_AXI_ID bound to: 0 - type: integer 
+	Parameter C_AXI_ID_WIDTH bound to: 4 - type: integer 
+	Parameter C_MEM_TYPE bound to: 3 - type: integer 
+	Parameter C_BYTE_SIZE bound to: 9 - type: integer 
+	Parameter C_ALGORITHM bound to: 1 - type: integer 
+	Parameter C_PRIM_TYPE bound to: 1 - type: integer 
+	Parameter C_LOAD_INIT_FILE bound to: 1 - type: integer 
+	Parameter C_INIT_FILE_NAME bound to: ROM_conv2.mif - type: string 
+	Parameter C_INIT_FILE bound to: ROM_conv2.mem - type: string 
+	Parameter C_USE_DEFAULT_DATA bound to: 0 - type: integer 
+	Parameter C_DEFAULT_DATA bound to: 0 - type: string 
+	Parameter C_HAS_RSTA bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_A bound to: CE - type: string 
+	Parameter C_RSTRAM_A bound to: 0 - type: integer 
+	Parameter C_INITA_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENA bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEA bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEA bound to: 0 - type: integer 
+	Parameter C_WEA_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_A bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_A bound to: 1 - type: integer 
+	Parameter C_WRITE_DEPTH_A bound to: 1800 - type: integer 
+	Parameter C_READ_DEPTH_A bound to: 1800 - type: integer 
+	Parameter C_ADDRA_WIDTH bound to: 11 - type: integer 
+	Parameter C_HAS_RSTB bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_B bound to: CE - type: string 
+	Parameter C_RSTRAM_B bound to: 0 - type: integer 
+	Parameter C_INITB_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENB bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEB bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEB bound to: 0 - type: integer 
+	Parameter C_WEB_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_B bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_B bound to: 1 - type: integer 
+	Parameter C_WRITE_DEPTH_B bound to: 1800 - type: integer 
+	Parameter C_READ_DEPTH_B bound to: 1800 - type: integer 
+	Parameter C_ADDRB_WIDTH bound to: 11 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_MUX_PIPELINE_STAGES bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_INPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_USE_SOFTECC bound to: 0 - type: integer 
+	Parameter C_USE_ECC bound to: 0 - type: integer 
+	Parameter C_EN_ECC_PIPE bound to: 0 - type: integer 
+	Parameter C_READ_LATENCY_A bound to: 1 - type: integer 
+	Parameter C_READ_LATENCY_B bound to: 1 - type: integer 
+	Parameter C_HAS_INJECTERR bound to: 0 - type: integer 
+	Parameter C_SIM_COLLISION_CHECK bound to: ALL - type: string 
+	Parameter C_COMMON_CLK bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_COLL bound to: 0 - type: integer 
+	Parameter C_EN_SLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_USE_URAM bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRA_CHG bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRB_CHG bound to: 0 - type: integer 
+	Parameter C_EN_DEEPSLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
+	Parameter C_COUNT_36K_BRAM bound to: 0 - type: string 
+	Parameter C_COUNT_18K_BRAM bound to: 1 - type: string 
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     0.990811 mW - type: string 
+INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_8' declared at 'c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_fc/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195208' bound to instance 'U0' of component 'blk_mem_gen_v8_4_8' [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv2/synth/ROM_conv2.vhd:230]
+INFO: [Synth 8-256] done synthesizing module 'ROM_conv2' (0#1) [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv2/synth/ROM_conv2.vhd:67]
+INFO: [Synth 8-638] synthesizing module 'ROM_fc' [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_fc/synth/ROM_fc.vhd:67]
+	Parameter C_FAMILY bound to: zynq - type: string 
+	Parameter C_XDEVICEFAMILY bound to: qzynq - type: string 
+	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
+	Parameter C_INTERFACE_TYPE bound to: 0 - type: integer 
+	Parameter C_AXI_TYPE bound to: 1 - type: integer 
+	Parameter C_AXI_SLAVE_TYPE bound to: 0 - type: integer 
+	Parameter C_USE_BRAM_BLOCK bound to: 0 - type: integer 
+	Parameter C_ENABLE_32BIT_ADDRESS bound to: 0 - type: integer 
+	Parameter C_CTRL_ECC_ALGO bound to: NONE - type: string 
+	Parameter C_HAS_AXI_ID bound to: 0 - type: integer 
+	Parameter C_AXI_ID_WIDTH bound to: 4 - type: integer 
+	Parameter C_MEM_TYPE bound to: 3 - type: integer 
+	Parameter C_BYTE_SIZE bound to: 9 - type: integer 
+	Parameter C_ALGORITHM bound to: 1 - type: integer 
+	Parameter C_PRIM_TYPE bound to: 1 - type: integer 
+	Parameter C_LOAD_INIT_FILE bound to: 1 - type: integer 
+	Parameter C_INIT_FILE_NAME bound to: ROM_fc.mif - type: string 
+	Parameter C_INIT_FILE bound to: ROM_fc.mem - type: string 
+	Parameter C_USE_DEFAULT_DATA bound to: 0 - type: integer 
+	Parameter C_DEFAULT_DATA bound to: 0 - type: string 
+	Parameter C_HAS_RSTA bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_A bound to: CE - type: string 
+	Parameter C_RSTRAM_A bound to: 0 - type: integer 
+	Parameter C_INITA_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENA bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEA bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEA bound to: 0 - type: integer 
+	Parameter C_WEA_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_A bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_A bound to: 1 - type: integer 
+	Parameter C_WRITE_DEPTH_A bound to: 1920 - type: integer 
+	Parameter C_READ_DEPTH_A bound to: 1920 - type: integer 
+	Parameter C_ADDRA_WIDTH bound to: 11 - type: integer 
+	Parameter C_HAS_RSTB bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_B bound to: CE - type: string 
+	Parameter C_RSTRAM_B bound to: 0 - type: integer 
+	Parameter C_INITB_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENB bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEB bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEB bound to: 0 - type: integer 
+	Parameter C_WEB_WIDTH bound to: 1 - type: integer 
+	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_B bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_B bound to: 1 - type: integer 
+	Parameter C_WRITE_DEPTH_B bound to: 1920 - type: integer 
+	Parameter C_READ_DEPTH_B bound to: 1920 - type: integer 
+	Parameter C_ADDRB_WIDTH bound to: 11 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_MUX_PIPELINE_STAGES bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_INPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_USE_SOFTECC bound to: 0 - type: integer 
+	Parameter C_USE_ECC bound to: 0 - type: integer 
+	Parameter C_EN_ECC_PIPE bound to: 0 - type: integer 
+	Parameter C_READ_LATENCY_A bound to: 1 - type: integer 
+	Parameter C_READ_LATENCY_B bound to: 1 - type: integer 
+	Parameter C_HAS_INJECTERR bound to: 0 - type: integer 
+	Parameter C_SIM_COLLISION_CHECK bound to: ALL - type: string 
+	Parameter C_COMMON_CLK bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_COLL bound to: 0 - type: integer 
+	Parameter C_EN_SLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_USE_URAM bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRA_CHG bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRB_CHG bound to: 0 - type: integer 
+	Parameter C_EN_DEEPSLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
+	Parameter C_COUNT_36K_BRAM bound to: 0 - type: string 
+	Parameter C_COUNT_18K_BRAM bound to: 1 - type: string 
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     0.990811 mW - type: string 
+INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_8' declared at 'c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_fc/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195208' bound to instance 'U0' of component 'blk_mem_gen_v8_4_8' [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_fc/synth/ROM_fc.vhd:230]
+INFO: [Synth 8-256] done synthesizing module 'ROM_fc' (0#1) [c:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_fc/synth/ROM_fc.vhd:67]
+INFO: [Synth 8-6157] synthesizing module 'conv_mix_6' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv_mix_6.v:1]
+INFO: [Synth 8-6157] synthesizing module 'window' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/window.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'window' (0#1) [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/window.v:1]
+INFO: [Synth 8-6157] synthesizing module 'conv' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'conv' (0#1) [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:1]
+INFO: [Synth 8-6157] synthesizing module 'maxpool' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/maxpool.v:1]
+INFO: [Synth 8-226] default block is never used [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/maxpool.v:89]
+INFO: [Synth 8-6155] done synthesizing module 'maxpool' (0#1) [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/maxpool.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'conv_mix_6' (0#1) [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv_mix_6.v:1]
+INFO: [Synth 8-6157] synthesizing module 'fc_12' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'fc_12' (0#1) [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:1116]
+INFO: [Synth 8-6155] done synthesizing module 'CNN_top' (0#1) [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:1]
+WARNING: [Synth 8-6014] Unused sequential element ivalid_ff_5_reg was removed.  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:56]
+WARNING: [Synth 8-6014] Unused sequential element weight_conv2_addr_ff0_reg was removed.  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:578]
+WARNING: [Synth 8-6014] Unused sequential element weight_conv2_addr_ff1_reg was removed.  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:579]
+WARNING: [Synth 8-6014] Unused sequential element fc_out_max_30_reg was removed.  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:832]
+WARNING: [Synth 8-6014] Unused sequential element conv_cnt_ff1_reg was removed.  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:1172]
+WARNING: [Synth 8-6014] Unused sequential element conv_cnt_ff2_reg was removed.  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:1173]
+WARNING: [Synth 8-6014] Unused sequential element conv_cnt_ff3_reg was removed.  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:1174]
+WARNING: [Synth 8-7137] Register ovalid_reg_reg in module CNN_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:529]
+WARNING: [Synth 8-7137] Register conv_done_ff_0_reg in module CNN_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:530]
+WARNING: [Synth 8-7137] Register conv_done_ff_1_reg in module CNN_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v:531]
+WARNING: [Synth 8-7129] Port CLKB in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB_I[0] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SBITERR_I in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DBITERR_I in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[10] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[9] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[8] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[7] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[6] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[5] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[4] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[3] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[2] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[1] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[0] in module blk_mem_output_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[8] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[7] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[6] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[5] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[4] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[3] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[2] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[1] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DOUTB[0] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SBITERR in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DBITERR in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SSRA in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port CLKB in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SSRB in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENB in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEB in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port WEB[0] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[10] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[9] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[8] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[7] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[6] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[5] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[4] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[3] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[2] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[1] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[0] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[8] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[7] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[6] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[5] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[4] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[3] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[2] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[1] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[0] in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SLEEP in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTSBITERR in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTDBITERR in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ECCPIPECE in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ram_rstram_b in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ram_rstreg_b in module blk_mem_gen_prim_wrapper_init__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEA[0] in module blk_mem_gen_generic_cstr__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEB[0] in module blk_mem_gen_generic_cstr__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTSBITERR in module blk_mem_gen_generic_cstr__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTDBITERR in module blk_mem_gen_generic_cstr__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RSTA in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENA in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEA in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port WEA[0] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINA[0] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port CLKB in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RSTB in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ENB in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEB in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port WEB[0] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[10] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[9] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[8] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[7] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[6] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[5] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[4] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[3] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[2] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[1] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[0] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DINB[0] in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTDBITERR in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTSBITERR in module blk_mem_input_block__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AClk in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_ARESETN in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[3] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[2] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[1] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[0] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[31] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[30] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[29] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[28] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[27] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[26] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[25] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[24] in module blk_mem_gen_v8_4_8_synth__parameterized1 is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:36 . Memory (MB): peak = 3467.402 ; gain = 2394.539
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:37 . Memory (MB): peak = 3467.402 ; gain = 2394.539
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:37 . Memory (MB): peak = 3467.402 ; gain = 2394.539
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 3467.402 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 3 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.runs/synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 3985.422 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:36 ; elapsed = 00:01:21 . Memory (MB): peak = 3985.422 ; gain = 2912.559
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xq7z020cl484-2I
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:36 ; elapsed = 00:01:21 . Memory (MB): peak = 3985.422 ; gain = 2912.559
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for blk_mem_gen_2_inst. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for blk_mem_gen_1_inst. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for blk_mem_gen_0_inst. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:01:21 . Memory (MB): peak = 3985.422 ; gain = 2912.559
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-327] inferring latch for variable 'k44_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:141]
+WARNING: [Synth 8-327] inferring latch for variable 'k34_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:136]
+WARNING: [Synth 8-327] inferring latch for variable 'k24_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:131]
+WARNING: [Synth 8-327] inferring latch for variable 'k14_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:126]
+WARNING: [Synth 8-327] inferring latch for variable 'k04_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:121]
+WARNING: [Synth 8-327] inferring latch for variable 'k43_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:140]
+WARNING: [Synth 8-327] inferring latch for variable 'k33_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:135]
+WARNING: [Synth 8-327] inferring latch for variable 'k23_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:130]
+WARNING: [Synth 8-327] inferring latch for variable 'k13_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:125]
+WARNING: [Synth 8-327] inferring latch for variable 'k03_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:120]
+WARNING: [Synth 8-327] inferring latch for variable 'k42_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:139]
+WARNING: [Synth 8-327] inferring latch for variable 'k32_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:134]
+WARNING: [Synth 8-327] inferring latch for variable 'k22_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:129]
+WARNING: [Synth 8-327] inferring latch for variable 'k12_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:124]
+WARNING: [Synth 8-327] inferring latch for variable 'k02_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:119]
+WARNING: [Synth 8-327] inferring latch for variable 'k41_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:138]
+WARNING: [Synth 8-327] inferring latch for variable 'k31_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:133]
+WARNING: [Synth 8-327] inferring latch for variable 'k21_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:128]
+WARNING: [Synth 8-327] inferring latch for variable 'k11_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:123]
+WARNING: [Synth 8-327] inferring latch for variable 'k01_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:118]
+WARNING: [Synth 8-327] inferring latch for variable 'k40_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:137]
+WARNING: [Synth 8-327] inferring latch for variable 'k30_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:132]
+WARNING: [Synth 8-327] inferring latch for variable 'k20_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:127]
+WARNING: [Synth 8-327] inferring latch for variable 'k10_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:122]
+WARNING: [Synth 8-327] inferring latch for variable 'k00_reg' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v:117]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[176]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[177]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[178]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[179]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[180]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[181]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[182]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[183]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[184]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[185]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[186]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[187]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[188]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[189]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[190]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[191]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[160]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[161]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[162]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[163]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[164]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[165]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[166]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[167]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[168]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[169]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[170]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[171]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[172]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[173]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[174]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[175]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[144]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[145]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[146]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[147]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[148]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[149]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[150]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[151]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[152]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[153]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[154]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[155]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[156]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[157]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[158]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[159]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[128]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[129]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[130]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[131]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[132]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[133]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[134]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[135]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[136]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[137]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[138]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[139]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[140]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[141]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[142]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[143]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[112]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[113]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[114]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[115]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[116]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[117]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[118]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[119]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[120]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[121]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+WARNING: [Synth 8-327] inferring latch for variable 'w_reg[122]' [C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v:92]
+INFO: [Common 17-14] Message 'Synth 8-327' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:53 ; elapsed = 00:02:05 . Memory (MB): peak = 3991.395 ; gain = 2918.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   33 Bit       Adders := 6     
+	   2 Input   32 Bit       Adders := 529   
+	   2 Input   11 Bit       Adders := 2     
+	   2 Input   10 Bit       Adders := 7     
+	   2 Input    8 Bit       Adders := 33    
+	   3 Input    8 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 6     
+	   2 Input    5 Bit       Adders := 22    
+	   2 Input    3 Bit       Adders := 1     
+	   2 Input    1 Bit       Adders := 6     
++---Registers : 
+	               32 Bit    Registers := 1618  
+	               11 Bit    Registers := 2     
+	               10 Bit    Registers := 8     
+	                8 Bit    Registers := 42    
+	                6 Bit    Registers := 8     
+	                5 Bit    Registers := 10    
+	                4 Bit    Registers := 7     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 81    
++---RAMs : 
+	              512 Bit	(16 X 32 bit)          RAMs := 12    
++---Muxes : 
+	   2 Input  160 Bit        Muxes := 6     
+	   2 Input   32 Bit        Muxes := 3278  
+	   4 Input   32 Bit        Muxes := 12    
+	   6 Input   10 Bit        Muxes := 3     
+	   2 Input    8 Bit        Muxes := 9     
+	   6 Input    8 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 6     
+	   6 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 6     
+	   2 Input    4 Bit        Muxes := 5     
+	   2 Input    3 Bit        Muxes := 3     
+	   2 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 273   
+	  26 Input    1 Bit        Muxes := 150   
+	   4 Input    1 Bit        Muxes := 8     
+	   6 Input    1 Bit        Muxes := 175   
+	  13 Input    1 Bit        Muxes := 24    
+	   5 Input    1 Bit        Muxes := 17    
+	   7 Input    1 Bit        Muxes := 1     
+	   3 Input    1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "w" won't be mapped to RAM because it is too sparse
+INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'max_addr04_reg[3]' (FDE) to 'max_addr03_reg[1]'
+INFO: [Synth 8-3886] merging instance 'max_addr02_reg[2]' (FDE) to 'max_addr03_reg[1]'
+INFO: [Synth 8-3886] merging instance 'max_addr03_reg[2]' (FDE) to 'max_addr03_reg[1]'
+INFO: [Synth 8-3886] merging instance 'max_addr04_reg[2]' (FDE) to 'max_addr04_reg[1]'
+INFO: [Synth 8-3886] merging instance 'max_addr12_reg[2]' (FDE) to 'max_addr12_reg[1]'
+INFO: [Synth 8-3886] merging instance 'max_addr21_reg[2]' (FDE) to 'max_addr21_reg[1]'
+INFO: [Synth 8-3886] merging instance 'max_addr01_reg[1]' (FDE) to 'max_addr03_reg[1]'
+INFO: [Synth 8-3886] merging instance 'max_addr02_reg[1]' (FDE) to 'max_addr04_reg[1]'
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\max_addr03_reg[1] )
+INFO: [Synth 8-3886] merging instance 'max_addr04_reg[1]' (FDE) to 'max_addr20_reg[3]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\max_addr20_reg[3] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[0] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[1] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[2] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[3] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[4] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[5] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[6] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[7] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[8] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\classes_reg[9] )
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:33 ; elapsed = 00:05:34 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++-----------------------------------+----------------+-----------+----------------------+--------------+
+|Module Name                        | RTL Object     | Inference | Size (Depth x Width) | Primitives   | 
++-----------------------------------+----------------+-----------+----------------------+--------------+
+|conv_mix_6_insti_16/maxpool_inst_0 | data_reg       | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_1 | data_reg       | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_2 | data_reg       | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_3 | data_reg       | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_4 | data_reg       | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_5 | data_reg       | Implied   | 32 x 32              | RAM32M x 16  | 
+|CNN_top__GCB10                     | fmap_fc_7_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB10                     | fmap_fc_9_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB10                     | fmap_fc_10_reg | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB10                     | fmap_fc_11_reg | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_1_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_0_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_8_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_6_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_5_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_4_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_3_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
+|CNN_top__GCB13                     | fmap_fc_2_reg  | Implied   | 16 x 32              | RAM32M x 6   | 
++-----------------------------------+----------------+-----------+----------------------+--------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:37 ; elapsed = 00:05:44 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3332] Sequential element (w_reg[176]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[177]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[178]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[179]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[180]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[181]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[182]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[183]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[184]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[185]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[186]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[187]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[188]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[189]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[190]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[191]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[160]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[161]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[162]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[163]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[164]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[165]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[166]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[167]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[168]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[169]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[170]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[171]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[172]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[173]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[174]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[175]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[144]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[145]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[146]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[147]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[148]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[149]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[150]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[151]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[152]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[153]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[154]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[155]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[156]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[157]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[158]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[159]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[128]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[129]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[130]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[131]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[132]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[133]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[134]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[135]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[136]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[137]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[138]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[139]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[140]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[141]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[142]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[143]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[112]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[113]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[114]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[115]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[116]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[117]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[118]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[119]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[120]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[121]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[122]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[123]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[124]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[125]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[126]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[127]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[96]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[97]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[98]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[99]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[100]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[101]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[102]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[103]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[104]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[105]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[106]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[107]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[108]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[109]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[110]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[111]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[80]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[81]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[82]) is unused and will be removed from module fc_12.
+WARNING: [Synth 8-3332] Sequential element (w_reg[83]) is unused and will be removed from module fc_12.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:02:39 ; elapsed = 00:05:46 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping Report
++-----------------------------------+------------+-----------+----------------------+--------------+
+|Module Name                        | RTL Object | Inference | Size (Depth x Width) | Primitives   | 
++-----------------------------------+------------+-----------+----------------------+--------------+
+|conv_mix_6_insti_16/maxpool_inst_0 | data_reg   | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_1 | data_reg   | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_2 | data_reg   | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_3 | data_reg   | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_4 | data_reg   | Implied   | 32 x 32              | RAM32M x 16  | 
+|conv_mix_6_insti_16/maxpool_inst_5 | data_reg   | Implied   | 32 x 32              | RAM32M x 16  | 
++-----------------------------------+------------+-----------+----------------------+--------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:02:48 ; elapsed = 00:06:09 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:02:51 ; elapsed = 00:06:16 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:51 ; elapsed = 00:06:16 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:51 ; elapsed = 00:06:16 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:51 ; elapsed = 00:06:16 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:51 ; elapsed = 00:06:16 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:51 ; elapsed = 00:06:16 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++------------+-----------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name | RTL Name                                | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------+-----------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|CNN_top     | conv_mix_6_inst/conv_ovalid_ff_2_reg[5] | 3      | 6     | NO           | NO                 | YES               | 6      | 0       | 
++------------+-----------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    38|
+|3     |LUT1   |    33|
+|4     |LUT2   |    45|
+|5     |LUT3   |    64|
+|6     |LUT4   |    66|
+|7     |LUT5   |    52|
+|8     |LUT6   |    83|
+|9     |SRL16E |     6|
+|10    |FDCE   |    73|
+|11    |FDRE   |   226|
+|12    |LD     |    13|
+|13    |IBUF   |     3|
+|14    |OBUF   |    13|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:51 ; elapsed = 00:06:16 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 29191 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:20 ; elapsed = 00:05:45 . Memory (MB): peak = 4264.336 ; gain = 2673.453
+Synthesis Optimization Complete : Time (s): cpu = 00:02:51 ; elapsed = 00:06:17 . Memory (MB): peak = 4264.336 ; gain = 3191.473
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 4264.336 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 51 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4264.336 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 13 instances were transformed.
+  LD => LDCE: 13 instances
+
+Synth Design complete | Checksum: 6edc0671
+INFO: [Common 17-83] Releasing license: Synthesis
+169 Infos, 310 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:02:52 ; elapsed = 00:06:28 . Memory (MB): peak = 4264.336 ; gain = 3618.012
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 4264.336 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.runs/synth_1/CNN_top.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:04 ; elapsed = 00:00:11 . Memory (MB): peak = 4264.336 ; gain = 0.000
+INFO: [Vivado 12-24828] Executing command : report_utilization -file CNN_top_utilization_synth.rpt -pb CNN_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  5 10:23:06 2024...
