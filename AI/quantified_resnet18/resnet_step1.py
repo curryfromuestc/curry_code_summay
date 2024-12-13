@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from BNN import *
+from BNN_STE import *
 from spikingjelly.activation_based import base, functional,neuron,surrogate,layer
 
 

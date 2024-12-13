@@ -19,7 +19,28 @@ def BinaryForFunc(x):   # 权值量化前向函数
 
 def BinaryWBackFunc(x, alpha=4.):   # 权值量化反向梯度函数
     return 2 * SigmoidGFunc(x, alpha)
+
+
+class SignFunc(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, input):
+        ctx.save_for_backward(input)
+        return BinaryForFunc(input)
     
+    @staticmethod
+    def backward(ctx, grad_output):
+        input, = ctx.saved_tensors
+        return grad_output * BinaryWBackFunc(input, alpha=3.)
+    
+class BinaryActivation(nn.Module):
+    def __init__(self):
+        super(BinaryActivation, self).__init__()
+        
+    def forward(self, x):
+        ba = SignFunc.apply(x)
+        return ba
+
+
 class BinaryWeight(torch.autograd.Function):
     @staticmethod
     def forward(ctx, input):
@@ -38,8 +59,8 @@ class BinaryLinear(nn.Linear):
     def forward(self, x):
 
         w = self.weight
-        # bw = BinaryWeight.apply(w)
-        scaling_factor = torch.mean(abs(w),dim=1,keepdim=True)
+        #bw = BinaryWeight.apply(w)
+        scaling_factor = torch.mean(torch.mean(abs(w),dim=1,keepdim=True),dim=0,keepdim=True)
         scaling_factor = scaling_factor.detach()
         bw = scaling_factor * BinaryWeight.apply(w)
         
@@ -59,8 +80,9 @@ class BinaryConv2d(nn.Conv2d):
     def forward(self, x):
         
         w = self.weight
-        # bw = BinaryWeight.apply(w)
-        scaling_factor = torch.mean(torch.mean(torch.mean(abs(w),dim=3,keepdim=True),dim=2,keepdim=True),dim=1,keepdim=True)
+        #bw = BinaryWeight.apply(w)
+        scaling_factor = torch.mean(torch.mean(torch.mean(torch.mean(abs(w),dim=3,keepdim=True),dim=2,keepdim=True),
+                                               dim=1,keepdim=True),dim=0,keepdim=True)
         scaling_factor = scaling_factor.detach()
         bw = scaling_factor * BinaryWeight.apply(w)
     
