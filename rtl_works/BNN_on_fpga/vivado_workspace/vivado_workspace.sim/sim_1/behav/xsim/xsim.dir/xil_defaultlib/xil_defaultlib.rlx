@@ -1,0 +1,15 @@
+0.7
+2020.2
+May 22 2024
+19:03:11
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v,1730772478,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v,,CNN_top,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top_tb.v,1730679724,verilog,,,,CNN_top_tb,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv.v,1730625153,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv_mix_6.v,,conv,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/conv_mix_6.v,1730679665,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v,,conv_mix_6,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/fc_12.v,1730679665,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/maxpool.v,,fc_12,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/maxpool.v,1729473191,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/window.v,,maxpool,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/window.v,1730094699,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top_tb.v,,window,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv1/sim/ROM_conv1.v,1730645620,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/rtl/CNN_top.v,,ROM_conv1,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv2/sim/ROM_conv2.v,1730645663,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv1/sim/ROM_conv1.v,,ROM_conv2,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_fc/sim/ROM_fc.v,1730645702,verilog,,C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.gen/sources_1/ip/ROM_conv2/sim/ROM_conv2.v,,ROM_fc,,,,,,,,
+C:/Users/21047/code/curry_code_summay/rtl_works/BNN_on_fpga/vivado_workspace/vivado_workspace.sim/sim_1/behav/xsim/glbl.v,1708598507,verilog,,,,glbl,,,,,,,,

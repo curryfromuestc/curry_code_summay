@@ -1,0 +1,18 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../vivado_workspace.gen/sources_1/ip/ROM_fc/sim/ROM_fc.v" \
+"../../../../vivado_workspace.gen/sources_1/ip/ROM_conv2/sim/ROM_conv2.v" \
+"../../../../vivado_workspace.gen/sources_1/ip/ROM_conv1/sim/ROM_conv1.v" \
+"../../../../../rtl/CNN_top.v" \
+"../../../../../rtl/conv.v" \
+"../../../../../rtl/conv_mix_6.v" \
+"../../../../../rtl/fc_12.v" \
+"../../../../../rtl/maxpool.v" \
+"../../../../../rtl/window.v" \
+"../../../../../rtl/CNN_top_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

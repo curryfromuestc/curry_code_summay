@@ -1,0 +1,2 @@
+ROM_conv1.v,verilog,xil_defaultlib,../../../../vivado_workspace.gen/sources_1/ip/ROM_conv1/sim/ROM_conv1.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v
