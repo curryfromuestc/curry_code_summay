@@ -1312,3 +1312,5 @@ WARNING: Unsupported notification method: metals/windowStateDidChange
 2025.03.14 17:40:49 INFO  compiling curry_code_summay_d5c0a6989e (55 scala sources)[0m
 Mar 14, 2025 5:40:53 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 WARNING: Unsupported notification method: metals/windowStateDidChange
+2025.03.14 17:40:58 WARN  there were 4 feature warnings; re-run with -feature for details[0m
+2025.03.14 17:40:58 INFO  time: compiled curry_code_summay_d5c0a6989e in 9.19s[0m
