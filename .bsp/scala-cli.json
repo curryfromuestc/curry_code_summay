@@ -1,0 +1,20 @@
+{
+  "name": "scala-cli",
+  "argv": [
+    "/home/curry/.cache/scalacli/local-repo/bin/scala-cli/scala-cli",
+    "bsp",
+    "--json-options",
+    "/home/curry/code/curry_code_summay/.scala-build/ide-options-v2.json",
+    "--json-launcher-options",
+    "/home/curry/code/curry_code_summay/.scala-build/ide-launcher-options.json",
+    "--envs-file",
+    "/home/curry/code/curry_code_summay/.scala-build/ide-envs.json",
+    "/home/curry/code/curry_code_summay"
+  ],
+  "version": "1.5.4",
+  "bspVersion": "2.1.1",
+  "languages": [
+    "scala",
+    "java"
+  ]
+}

@@ -1,3 +1,14 @@
+error id: `<none>`.
+file://<WORKSPACE>/xiangshanshixi/fpu/build.sc
+empty definition using pc, found symbol in pc: `<none>`.
+empty definition using semanticdb
+|empty definition using fallback
+non-local guesses:
+	 -
+
+Document text:
+
+```scala
 // import Mill dependency
 import mill._
 import mill.define.Sources
@@ -7,7 +18,7 @@ import scalalib._
 // support BSP
 import mill.bsp._
 
-object fpu extends SbtModule { m =>
+object chisel-template-curry extends SbtModule { m =>
   override def millSourcePath = os.pwd
   override def scalaVersion = "2.13.15"
   override def scalacOptions = Seq(
@@ -28,3 +39,9 @@ object fpu extends SbtModule { m =>
     )
   }
 }
+
+```
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: `<none>`.
