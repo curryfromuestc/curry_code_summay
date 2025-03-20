@@ -1,0 +1,34 @@
+2025.03.20 08:40:15 INFO  Started: Metals version 1.5.1 in folders '/home/curry/code/curry_code_summay/xiangshanshixi' for client Cursor 1.96.2.[0m
+2025.03.20 08:40:16 INFO  no build target found for /home/curry/code/curry_code_summay/xiangshanshixi/FP8fpu/build.sc. Using presentation compiler with project's scala-library version: 3.3.4[0m
+2025.03.20 08:40:16 INFO  Attempting to connect to the build server...[0m
+2025.03.20 08:40:16 INFO  No running Bloop server found, starting one.[0m
+2025.03.20 08:40:18 INFO  Starting compilation server[0m
+2025.03.20 08:40:18 INFO  no build target found for /home/curry/code/curry_code_summay/xiangshanshixi/FP8fpu/build.sc. Using presentation compiler with project's scala-library version: 3.3.4[0m
+2025.03.20 08:40:20 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/curry/code/curry_code_summay/xiangshanshixi/.metals/bsp.trace.json or /home/curry/.cache/metals/bsp.trace.json[0m
+2025.03.20 08:40:20 INFO  time: Connected to build server in 4.17s[0m
+2025.03.20 08:40:20 INFO  Connected to Build server: Bloop v2.0.8[0m
+Mar 20, 2025 8:40:21 AM scala.meta.internal.metals.StdReporter $anonfun$create$1
+SEVERE: Empty build targets. Expected at least one build target identifier. (full report at: /home/curry/code/curry_code_summay/xiangshanshixi/.metals/.reports/bloop/2025-03-20/r_Empty build targets...._08-40-20-993.md)
+Mar 20, 2025 8:40:21 AM scala.meta.internal.metals.StdReporter $anonfun$create$1
+SEVERE: Empty build targets. Expected at least one build target identifier. (full report at: /home/curry/code/curry_code_summay/xiangshanshixi/.metals/.reports/bloop/2025-03-20/r_Empty build targets...._08-40-20-993.md)
+Mar 20, 2025 8:40:21 AM scala.meta.internal.metals.StdReporter $anonfun$create$1
+SEVERE: Empty build targets. Expected at least one build target identifier. (full report at: /home/curry/code/curry_code_summay/xiangshanshixi/.metals/.reports/bloop/2025-03-20/r_Empty build targets...._08-40-20-993.md)
+Mar 20, 2025 8:40:21 AM scala.meta.internal.metals.StdReporter $anonfun$create$1
+SEVERE: Empty build targets. Expected at least one build target identifier. (full report at: /home/curry/code/curry_code_summay/xiangshanshixi/.metals/.reports/bloop/2025-03-20/r_Empty build targets...._08-40-20-993.md)
+Mar 20, 2025 8:40:21 AM scala.meta.internal.metals.StdReporter $anonfun$create$1
+SEVERE: Empty build targets. Expected at least one build target identifier. (full report at: /home/curry/code/curry_code_summay/xiangshanshixi/.metals/.reports/bloop/2025-03-20/r_Empty build targets...._08-40-20-993.md)
+2025.03.20 08:40:21 INFO  time: Imported build in 0.18s[0m
+2025.03.20 08:40:21 INFO  running doctor check[0m
+2025.03.20 08:40:21 INFO  java targets: [0m
+2025.03.20 08:40:21 INFO  no build target found for /home/curry/code/curry_code_summay/xiangshanshixi/FP8fpu/build.sc. Using presentation compiler with project's scala-library version: 3.3.4[0m
+2025.03.20 08:40:21 INFO  no build target found for /home/curry/code/curry_code_summay/xiangshanshixi/FP8fpu/build.sc. Using presentation compiler with project's scala-library version: 3.3.4[0m
+2025.03.20 08:40:22 WARN  Could not find java sources in /usr/lib/jvm/src.zip, /usr/lib/jvm/lib/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/lib/src.zip. Java symbols will not be available.[0m
+2025.03.20 08:40:22 WARN  Could not find java sources in /usr/lib/jvm/src.zip, /usr/lib/jvm/lib/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/lib/src.zip. Java symbols will not be available.[0m
+2025.03.20 08:40:22 INFO  time: indexed workspace in 1.8s[0m
+2025.03.20 08:40:22 WARN  no build target for: /home/curry/code/curry_code_summay/xiangshanshixi/FP8fpu/build.sc[0m
+2025.03.20 08:40:22 INFO  no build target found for /home/curry/code/curry_code_summay/xiangshanshixi/FP8fpu/build.sc. Using presentation compiler with project's scala-library version: 3.3.4[0m
+2025.03.20 08:40:22 INFO  no build target found for /home/curry/code/curry_code_summay/xiangshanshixi/FP8fpu/build.sc. Using presentation compiler with project's scala-library version: 3.3.4[0m
+2025.03.20 08:40:31 INFO  Shutting down server[0m
+2025.03.20 08:40:31 INFO  shutting down Metals[0m
+2025.03.20 08:40:31 INFO  Shut down connection with build server.[0m
+2025.03.20 08:40:31 INFO  Exiting server[0m
