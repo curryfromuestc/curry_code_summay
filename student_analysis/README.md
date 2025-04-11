@@ -6,7 +6,7 @@
 ```
 student_analysis/
 ├── data/               # 数据文件夹
-│   └── student_data_template.csv  # 数据模板
+│   └── student_data.csv  # 学生数据
 ├── src/               # 源代码
 │   └── analysis.py    # 主分析脚本
 ├── results/           # 分析结果
@@ -17,7 +17,7 @@ student_analysis/
 ## 数据说明
 数据文件(student_data.csv)应包含以下列：
 - student_id: 学生ID
-- ai_usage_frequency: AI使用频率（1-5的整数）
+- ai_usage_frequency: AI使用频率（0-1之间的浮点数）
 - linear_algebra_score: 线性代数与空间解析几何成绩
 - ideology_score: 思想道德与法治成绩
 - probability_score: 概率论与数理统计成绩
@@ -36,14 +36,16 @@ python analysis.py
 
 ## 分析内容
 1. 基本统计分析
-2. AI使用频率与整体GPA的相关性分析
-3. AI使用频率与各科成绩的关系分析
-4. 回归分析
-5. 可视化展示
+2. AI使用频率分布分析
+3. AI使用频率与整体GPA的相关性分析
+4. AI使用频率与各科成绩的关系分析
+5. 回归分析
+6. 可视化展示
 
 ## 输出结果
 分析结果将保存在results文件夹中，包括：
 - correlation_heatmap.png: 相关性热力图
 - regression_plot.png: 回归分析图
+- ai_usage_distribution.png: AI使用频率分布图
 - 各科目散点图
 - correlation_matrix.csv: 相关性矩阵 

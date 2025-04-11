@@ -21,6 +21,9 @@ class StudentAnalysis:
         print("\n=== 各科目平均分 ===")
         print(self.df[self.subjects].mean())
         
+        print("\n=== AI使用频率分布 ===")
+        print(self.df['ai_usage_frequency'].value_counts().sort_index())
+        
     def correlation_analysis(self):
         """相关性分析"""
         # 计算AI使用频率与各科成绩的相关系数
@@ -60,7 +63,7 @@ class StudentAnalysis:
         plt.figure(figsize=(10, 6))
         plt.scatter(X_test, y_test, color='blue', label='实际值')
         plt.plot(X_test, y_pred, color='red', label='预测值')
-        plt.xlabel('AI使用频率')
+        plt.xlabel('AI使用频率 (0-1)')
         plt.ylabel('整体GPA')
         plt.title('AI使用频率与整体GPA的关系')
         plt.legend()
@@ -79,6 +82,7 @@ class StudentAnalysis:
             plt.figure(figsize=(10, 6))
             sns.scatterplot(data=self.df, x='ai_usage_frequency', y=subject)
             plt.title(f'AI使用频率与{subject}的关系')
+            plt.xlabel('AI使用频率 (0-1)')
             plt.savefig(f'../results/{subject}_scatter.png')
             plt.close()
             
@@ -88,6 +92,16 @@ class StudentAnalysis:
             
             t_stat, p_value = stats.ttest_ind(high_ai[subject], low_ai[subject])
             print(f"t检验p值: {p_value:.4f}")
+            
+    def ai_usage_distribution(self):
+        """分析AI使用频率的分布"""
+        plt.figure(figsize=(10, 6))
+        sns.histplot(data=self.df, x='ai_usage_frequency', bins=20)
+        plt.title('AI使用频率分布')
+        plt.xlabel('AI使用频率 (0-1)')
+        plt.ylabel('学生数量')
+        plt.savefig('../results/ai_usage_distribution.png')
+        plt.close()
 
 def main():
     # 设置中文字体
@@ -102,6 +116,7 @@ def main():
     correlations = analyzer.correlation_analysis()
     analyzer.regression_analysis()
     analyzer.subject_pattern_analysis()
+    analyzer.ai_usage_distribution()
     
     # 保存相关性矩阵
     correlations.to_csv('../results/correlation_matrix.csv')

@@ -1336,3 +1336,27 @@ Mar 14, 2025 5:42:15 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notif
 WARNING: Unsupported notification method: metals/windowStateDidChange
 Mar 14, 2025 5:43:01 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 WARNING: Unsupported notification method: metals/windowStateDidChange
+2025.04.02 17:19:02 INFO  Started: Metals version 1.5.2 in folders '/home/curry/code/curry_code_summay' for client Cursor 1.96.2.[0m
+2025.04.02 17:19:05 INFO  Attempting to connect to the build server...[0m
+2025.04.02 17:19:05 INFO  Running BSP server List(/home/curry/.cache/scalacli/local-repo/bin/scala-cli/scala-cli, bsp, --json-options, /home/curry/code/curry_code_summay/.scala-build/ide-options-v2.json, --json-launcher-options, /home/curry/code/curry_code_summay/.scala-build/ide-launcher-options.json, --envs-file, /home/curry/code/curry_code_summay/.scala-build/ide-envs.json, /home/curry/code/curry_code_summay)[0m
+2025.04.02 17:19:05 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/curry/code/curry_code_summay/.metals/bsp.trace.json or /home/curry/.cache/metals/bsp.trace.json[0m
+2025.04.02 17:19:06 INFO  BSP server: Starting compilation server[0m
+2025.04.02 17:19:08 INFO  time: Connected to build server in 3.53s[0m
+2025.04.02 17:19:08 INFO  Connected to Build server: scala-cli v1.5.4[0m
+2025.04.02 17:19:08 INFO  time: Imported build in 0.12s[0m
+2025.04.02 17:19:10 WARN  Could not find java sources in /usr/lib/jvm/src.zip, /usr/lib/jvm/lib/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/lib/src.zip. Java symbols will not be available.[0m
+2025.04.02 17:19:10 INFO  time: indexed workspace in 1.9s[0m
+2025.04.03 09:04:03 INFO  Shutting down server[0m
+2025.04.03 09:04:03 INFO  shutting down Metals[0m
+2025.04.03 09:04:03 INFO  Shut down connection with build server.[0m
+2025.04.03 09:04:03 INFO  Exiting server[0m
+2025.04.11 17:11:07 INFO  Started: Metals version 1.5.2 in folders '/home/curry/code/curry_code_summay' for client Cursor 1.96.2.[0m
+2025.04.11 17:11:13 INFO  Attempting to connect to the build server...[0m
+2025.04.11 17:11:13 INFO  Running BSP server List(/home/curry/.cache/scalacli/local-repo/bin/scala-cli/scala-cli, bsp, --json-options, /home/curry/code/curry_code_summay/.scala-build/ide-options-v2.json, --json-launcher-options, /home/curry/code/curry_code_summay/.scala-build/ide-launcher-options.json, --envs-file, /home/curry/code/curry_code_summay/.scala-build/ide-envs.json, /home/curry/code/curry_code_summay)[0m
+2025.04.11 17:11:13 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/curry/code/curry_code_summay/.metals/bsp.trace.json or /home/curry/.cache/metals/bsp.trace.json[0m
+2025.04.11 17:11:16 INFO  BSP server: Starting compilation server[0m
+2025.04.11 17:11:20 INFO  time: Connected to build server in 6.33s[0m
+2025.04.11 17:11:20 INFO  Connected to Build server: scala-cli v1.5.4[0m
+2025.04.11 17:11:20 INFO  time: Imported build in 0.12s[0m
+2025.04.11 17:11:23 WARN  Could not find java sources in /usr/lib/jvm/src.zip, /usr/lib/jvm/lib/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/src.zip, /usr/lib/jvm/java-17-openjdk-amd64/lib/src.zip. Java symbols will not be available.[0m
+2025.04.11 17:11:23 INFO  time: indexed workspace in 3.39s[0m
