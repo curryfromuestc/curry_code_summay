@@ -1,0 +1,123 @@
+\begin{thebibliography}{17}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Arends(2014)]{arends2014instructional}
+Richard~I Arends.
+\newblock \emph{Instructional-design theories and models, Volume IV: The
+  learner-centered paradigm of education}.
+\newblock Routledge, 2014.
+
+\bibitem[Baidoo-Anu and Owusu~Ansah(2023)]{baidoo2023education}
+David Baidoo-Anu and Leticia Owusu~Ansah.
+\newblock Education in the era of generative artificial intelligence (ai):
+  Understanding the potential benefits of chatgpt in promoting teaching and
+  learning.
+\newblock \emph{Available at SSRN 4337484}, 2023.
+
+\bibitem[Crompton(2013)]{crompton2013systematic}
+Helen Crompton.
+\newblock A systematic review of mobile learning in higher education.
+\newblock \emph{British Journal of Educational Technology}, 44\penalty0
+  (2):\penalty0 163--174, 2013.
+
+\bibitem[Davis(1989)]{davis1989perceived}
+Fred~D Davis.
+\newblock Perceived usefulness, perceived ease of use, and user acceptance of
+  information technology.
+\newblock \emph{MIS quarterly}, pages 319--340, 1989.
+
+\bibitem[Farrokhnia et~al.(2023)Farrokhnia, Banihashem, Noroozi, and
+  Wals]{farrokhnia2023integrating}
+Mehdi Farrokhnia, Seyed~Kazem Banihashem, Omid Noroozi, and Arjen Wals.
+\newblock Integrating chatgpt into higher education: A study on potential
+  benefits and drawbacks based on students' perceptions.
+\newblock \emph{European Journal of Investigation in Health, Psychology and
+  Education}, 13\penalty0 (7):\penalty0 1197--1218, 2023.
+
+\bibitem[Hwang et~al.(2020)Hwang, Xie, Wah, and
+  Ga{\v{s}}evi{\'c}]{hwang2020roles}
+Gwo-Jen Hwang, Haoran Xie, Benjamin~W Wah, and Dragan Ga{\v{s}}evi{\'c}.
+\newblock Roles and research trends of artificial intelligence in education: A
+  bibliometric mapping analysis and systematic review.
+\newblock \emph{Computers and Education: Artificial Intelligence}, 1:\penalty0
+  100001, 2020.
+
+\bibitem[Kasneci et~al.(2023)Kasneci, Sessler, K{"u}chemann, Bannert,
+  Dementieva, Fischer, Gasser, Groh, G{"u}nnemann, H{"u}llermeier,
+  et~al.]{kasneci2023chatgpt}
+Enkelejda Kasneci, Katharina Sessler, Stefan K{"u}chemann, Maria Bannert,
+  Daryna Dementieva, Frank Fischer, Urs Gasser, Georg Groh, Stephan
+  G{"u}nnemann, Eyke H{"u}llermeier, et~al.
+\newblock Chatgpt for good? on the implications of chatbots for education.
+\newblock \emph{Learning and individual differences}, 103:\penalty0 102274,
+  2023.
+
+\bibitem[Kirschner and van Merri{"e}nboer(2006)]{kirschner2006symptoms}
+Paul~A Kirschner and Jeroen~JG van Merri{"e}nboer.
+\newblock Symptoms of declining academic skills of students in higher
+  education.
+\newblock \emph{Nederlands tijdschrift voor opvoeding, vorming en onderwijs},
+  22\penalty0 (4):\penalty0 229--242, 2006.
+
+\bibitem[Kulik and Kulik(1994)]{kulik1994meta}
+James~A Kulik and Chen-Lin~C Kulik.
+\newblock Meta-analytic studies of findings on computer-based instruction.
+\newblock \emph{Technology assessment in software applications}, pages 9--33,
+  1994.
+
+\bibitem[Means et~al.(2013)Means, Bakia, and Murphy]{means2013learning}
+Barbara Means, Marianne Bakia, and Robert Murphy.
+\newblock Learning online: What research tells us about whether, when and how.
+\newblock \emph{Routledge}, 2013.
+
+\bibitem[OpenAI et~al.(2023)]{openai2023gpt4}
+OpenAI et~al.
+\newblock Gpt-4 technical report.
+\newblock Technical report, arXiv preprint arXiv:2303.08774, 2023.
+
+\bibitem[Rudolph et~al.(2023)Rudolph, Tan, and Tan]{rudolph2023chatgpt}
+J{"u}rgen Rudolph, Samson Tan, and Shannon Tan.
+\newblock Chatgpt: Bullshit spewer or the end of traditional assessments in
+  higher education?
+\newblock \emph{Journal of Applied Learning and Teaching}, 6\penalty0 (1),
+  2023.
+
+\bibitem[Schepers and Wetzels(2007)]{schepers2007meta}
+Jeroen Schepers and Martin Wetzels.
+\newblock A meta-analysis of the technology acceptance model: Investigating
+  subjective norm and moderation effects.
+\newblock \emph{Information \& management}, 44\penalty0 (1):\penalty0 90--103,
+  2007.
+
+\bibitem[Schmid et~al.(2014)Schmid, Bernard, Borokhovski, Tamim, Abrami,
+  Surkes, Wade, and Woods]{schmid2014does}
+Richard~F Schmid, Robert~M Bernard, Eugene Borokhovski, Rana~M Tamim, Philip~C
+  Abrami, Michael~A Surkes, C~Anne Wade, and Jenna Woods.
+\newblock Does the use of technology in higher education improve student
+  learning outcomes? a meta-analysis.
+\newblock \emph{Computers \& Education}, 78:\penalty0 224--231, 2014.
+
+\bibitem[Sweller et~al.(1998)Sweller, Van~Merrienboer, and
+  Paas]{sweller1998cognitive}
+John Sweller, Jeroen~JG Van~Merrienboer, and Fred~GW Paas.
+\newblock Cognitive load theory and the use of worked examples.
+\newblock \emph{Journal of Experimental Psychology: General}, 127\penalty0
+  (2):\penalty0 178, 1998.
+
+\bibitem[Sweller et~al.(2011)Sweller, Ayres, and Kalyuga]{sweller2011cognitive}
+John Sweller, Paul Ayres, and Slava Kalyuga.
+\newblock Cognitive load theory.
+\newblock \emph{Cognitive load theory}, pages 1--310, 2011.
+
+\bibitem[Zeng et~al.(2023)Zeng, Feng, Liu, Michael, and
+  Michael]{zeng2023cognitive}
+Han Zeng, Xinyao Feng, Xun Liu, K~Michael, and M~G Michael.
+\newblock Cognitive load theory informed generative ai in education: systematic
+  review and meta-analysis.
+\newblock \emph{Available at SSRN 4572718}, 2023.
+
+\end{thebibliography}
