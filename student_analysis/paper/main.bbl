@@ -1,123 +1,79 @@
-\begin{thebibliography}{17}
-\providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{\texttt{#1}}
-\expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi: #1}\else
-  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\bibitem[Arends(2014)]{arends2014instructional}
-Richard~I Arends.
-\newblock \emph{Instructional-design theories and models, Volume IV: The
-  learner-centered paradigm of education}.
-\newblock Routledge, 2014.
+\begin{thebibliography}{5}
 
-\bibitem[Baidoo-Anu and Owusu~Ansah(2023)]{baidoo2023education}
-David Baidoo-Anu and Leticia Owusu~Ansah.
-\newblock Education in the era of generative artificial intelligence (ai):
-  Understanding the potential benefits of chatgpt in promoting teaching and
-  learning.
-\newblock \emph{Available at SSRN 4337484}, 2023.
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
 
-\bibitem[Crompton(2013)]{crompton2013systematic}
-Helen Crompton.
-\newblock A systematic review of mobile learning in higher education.
-\newblock \emph{British Journal of Educational Technology}, 44\penalty0
-  (2):\penalty0 163--174, 2013.
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
 
-\bibitem[Davis(1989)]{davis1989perceived}
-Fred~D Davis.
-\newblock Perceived usefulness, perceived ease of use, and user acceptance of
-  information technology.
-\newblock \emph{MIS quarterly}, pages 319--340, 1989.
+\bibitem[Binns(2018)]%
+        {binns2018fairness}
+\bibfield{author}{\bibinfo{person}{Reuben Binns}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Fairness in machine learning: Lessons from political philosophy}. In \bibinfo{booktitle}{\emph{Conference on fairness, accountability and transparency}}. PMLR, \bibinfo{pages}{149--159}.
+\newblock
 
-\bibitem[Farrokhnia et~al.(2023)Farrokhnia, Banihashem, Noroozi, and
-  Wals]{farrokhnia2023integrating}
-Mehdi Farrokhnia, Seyed~Kazem Banihashem, Omid Noroozi, and Arjen Wals.
-\newblock Integrating chatgpt into higher education: A study on potential
-  benefits and drawbacks based on students' perceptions.
-\newblock \emph{European Journal of Investigation in Health, Psychology and
-  Education}, 13\penalty0 (7):\penalty0 1197--1218, 2023.
 
-\bibitem[Hwang et~al.(2020)Hwang, Xie, Wah, and
-  Ga{\v{s}}evi{\'c}]{hwang2020roles}
-Gwo-Jen Hwang, Haoran Xie, Benjamin~W Wah, and Dragan Ga{\v{s}}evi{\'c}.
-\newblock Roles and research trends of artificial intelligence in education: A
-  bibliometric mapping analysis and systematic review.
-\newblock \emph{Computers and Education: Artificial Intelligence}, 1:\penalty0
-  100001, 2020.
+\bibitem[Kaplan and Haenlein(2019)]%
+        {kaplan2019siri}
+\bibfield{author}{\bibinfo{person}{Andreas Kaplan} {and} \bibinfo{person}{Michael Haenlein}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Siri, Siri, in my hand: Who’s the fairest in the land? On the interpretations, illustrations, and implications of artificial intelligence}.
+\newblock \bibinfo{journal}{\emph{Business horizons}} \bibinfo{volume}{62}, \bibinfo{number}{1} (\bibinfo{year}{2019}), \bibinfo{pages}{15--25}.
+\newblock
 
-\bibitem[Kasneci et~al.(2023)Kasneci, Sessler, K{"u}chemann, Bannert,
-  Dementieva, Fischer, Gasser, Groh, G{"u}nnemann, H{"u}llermeier,
-  et~al.]{kasneci2023chatgpt}
-Enkelejda Kasneci, Katharina Sessler, Stefan K{"u}chemann, Maria Bannert,
-  Daryna Dementieva, Frank Fischer, Urs Gasser, Georg Groh, Stephan
-  G{"u}nnemann, Eyke H{"u}llermeier, et~al.
-\newblock Chatgpt for good? on the implications of chatbots for education.
-\newblock \emph{Learning and individual differences}, 103:\penalty0 102274,
-  2023.
 
-\bibitem[Kirschner and van Merri{"e}nboer(2006)]{kirschner2006symptoms}
-Paul~A Kirschner and Jeroen~JG van Merri{"e}nboer.
-\newblock Symptoms of declining academic skills of students in higher
-  education.
-\newblock \emph{Nederlands tijdschrift voor opvoeding, vorming en onderwijs},
-  22\penalty0 (4):\penalty0 229--242, 2006.
+\bibitem[Kulik and Fletcher(2016)]%
+        {kulik2016effectiveness}
+\bibfield{author}{\bibinfo{person}{James~A Kulik} {and} \bibinfo{person}{John~D Fletcher}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Effectiveness of intelligent tutoring systems: a meta-analytic review}.
+\newblock \bibinfo{journal}{\emph{Review of educational research}} \bibinfo{volume}{86}, \bibinfo{number}{1} (\bibinfo{year}{2016}), \bibinfo{pages}{42--78}.
+\newblock
 
-\bibitem[Kulik and Kulik(1994)]{kulik1994meta}
-James~A Kulik and Chen-Lin~C Kulik.
-\newblock Meta-analytic studies of findings on computer-based instruction.
-\newblock \emph{Technology assessment in software applications}, pages 9--33,
-  1994.
 
-\bibitem[Means et~al.(2013)Means, Bakia, and Murphy]{means2013learning}
-Barbara Means, Marianne Bakia, and Robert Murphy.
-\newblock Learning online: What research tells us about whether, when and how.
-\newblock \emph{Routledge}, 2013.
+\bibitem[Siemens(2013)]%
+        {siemens2013learning}
+\bibfield{author}{\bibinfo{person}{George Siemens}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{Learning analytics: The emergence of a discipline}.
+\newblock \bibinfo{journal}{\emph{American Behavioral Scientist}} \bibinfo{volume}{57}, \bibinfo{number}{10} (\bibinfo{year}{2013}), \bibinfo{pages}{1380--1400}.
+\newblock
 
-\bibitem[OpenAI et~al.(2023)]{openai2023gpt4}
-OpenAI et~al.
-\newblock Gpt-4 technical report.
-\newblock Technical report, arXiv preprint arXiv:2303.08774, 2023.
 
-\bibitem[Rudolph et~al.(2023)Rudolph, Tan, and Tan]{rudolph2023chatgpt}
-J{"u}rgen Rudolph, Samson Tan, and Shannon Tan.
-\newblock Chatgpt: Bullshit spewer or the end of traditional assessments in
-  higher education?
-\newblock \emph{Journal of Applied Learning and Teaching}, 6\penalty0 (1),
-  2023.
+\bibitem[Zawacki-Richter et~al\mbox{.}(2019)]%
+        {zawacki2019systematic}
+\bibfield{author}{\bibinfo{person}{Olaf Zawacki-Richter}, \bibinfo{person}{Victoria~I Mar{\'\i}n}, \bibinfo{person}{Melissa Bond}, {and} \bibinfo{person}{Franziska Gouverneur}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Systematic review of research on artificial intelligence applications in higher education--where are the educators?}
+\newblock \bibinfo{journal}{\emph{International journal of educational technology in higher education}} \bibinfo{volume}{16}, \bibinfo{number}{1} (\bibinfo{year}{2019}), \bibinfo{pages}{1--27}.
+\newblock
 
-\bibitem[Schepers and Wetzels(2007)]{schepers2007meta}
-Jeroen Schepers and Martin Wetzels.
-\newblock A meta-analysis of the technology acceptance model: Investigating
-  subjective norm and moderation effects.
-\newblock \emph{Information \& management}, 44\penalty0 (1):\penalty0 90--103,
-  2007.
-
-\bibitem[Schmid et~al.(2014)Schmid, Bernard, Borokhovski, Tamim, Abrami,
-  Surkes, Wade, and Woods]{schmid2014does}
-Richard~F Schmid, Robert~M Bernard, Eugene Borokhovski, Rana~M Tamim, Philip~C
-  Abrami, Michael~A Surkes, C~Anne Wade, and Jenna Woods.
-\newblock Does the use of technology in higher education improve student
-  learning outcomes? a meta-analysis.
-\newblock \emph{Computers \& Education}, 78:\penalty0 224--231, 2014.
-
-\bibitem[Sweller et~al.(1998)Sweller, Van~Merrienboer, and
-  Paas]{sweller1998cognitive}
-John Sweller, Jeroen~JG Van~Merrienboer, and Fred~GW Paas.
-\newblock Cognitive load theory and the use of worked examples.
-\newblock \emph{Journal of Experimental Psychology: General}, 127\penalty0
-  (2):\penalty0 178, 1998.
-
-\bibitem[Sweller et~al.(2011)Sweller, Ayres, and Kalyuga]{sweller2011cognitive}
-John Sweller, Paul Ayres, and Slava Kalyuga.
-\newblock Cognitive load theory.
-\newblock \emph{Cognitive load theory}, pages 1--310, 2011.
-
-\bibitem[Zeng et~al.(2023)Zeng, Feng, Liu, Michael, and
-  Michael]{zeng2023cognitive}
-Han Zeng, Xinyao Feng, Xun Liu, K~Michael, and M~G Michael.
-\newblock Cognitive load theory informed generative ai in education: systematic
-  review and meta-analysis.
-\newblock \emph{Available at SSRN 4572718}, 2023.
 
 \end{thebibliography}

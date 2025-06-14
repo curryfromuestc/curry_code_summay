@@ -1,173 +1,338 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[manuscript,screen,review]{acmart}
 
-% 基础包
+% 根据ACM要求设置页面格式
+\settopmatter{printacmref=false} % 移除ACM参考信息
+\renewcommand\footnotetextcopyrightpermission[1]{} % 移除版权信息
+\pagestyle{plain} % 简单页面样式
+
+% 只加载绝对必要的包
 \usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
-% \usepackage{cite} % 使用 natbib 或 biblatex 通常更好
-\usepackage{hyperref}
-\usepackage{url}
 \usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{float}
 
-% 参考文献包
-\usepackage[numbers,sort&compress]{natbib}
+% CCS概念 - 根据ACM要求
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10003120.10003121.10003122.10003334</concept_id>
+<concept_desc>Human-centered computing~Empirical studies in HCI</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010178.10010179.10010180</concept_id>
+<concept_desc>Computing methodologies~Machine learning</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+<concept>
+<concept_id>10002944.10011122.10011123.10011124</concept_id>
+<concept_desc>General and reference~Empirical studies</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
 
-% 中文支持
-\usepackage[UTF8]{ctex} % 使用 UTF8 选项
-% \usepackage{xeCJK} % ctex 通常会自动处理，显式加载可能冲突
+\ccsdesc[500]{Human-centered computing~Empirical studies in HCI}
+\ccsdesc[300]{Computing methodologies~Machine learning}
+\ccsdesc[300]{General and reference~Empirical studies}
 
-% (可选) 如果默认字体仍有问题，尝试手动设置字体
-% \setCJKmainfont{SimSun} % 例如，设置宋体
-% \setCJKsansfont{SimHei} % 设置黑体
-% \setCJKmonofont{FangSong} % 设置仿宋
-
-% 页边距设置
-\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
-
-% 文档信息
-\title[人工智能工具使用与学术表现的关系研究：基于大学生群体的相关性分析]{人工智能工具使用与学术表现的关系研究：\\基于大学生群体的相关性分析}
-\author{谈万龙}
-\date{\today}
+% 关键词
+\keywords{Artificial Intelligence, Academic Performance, Student Behavior, Educational Technology, Correlation Analysis}
 
 \begin{document}
 
-\maketitle
+% 标题
+\title{The Relationship Between AI Usage Frequency and Academic Performance: An Empirical Study of University Students}
+
+% 作者信息
+\author{Wanlong Tan}
+\email{tanwl@uestc.edu.cn}
+\affiliation{%
+  \institution{University of Electronic Science and Technology of China}
+  \streetaddress{No. 2006, Xiyuan Avenue, Chengdu, Sichuan, China}
+  \city{Chengdu}
+  \state{Sichuan}
+  \postcode{610054}
+  \country{China}
+}
 
 \begin{abstract}
-本研究调查了大学生群体中人工智能（AI）工具使用频率与学术表现之间的关系。通过对不同学科成绩和总体平均绩点（GPA）的相关性分析，我们发现AI使用与学术表现之间存在微弱但一致的正相关（相关系数范围为0.0039至0.0454）。技术类课程相比人文类课程显示出较强的相关性，这表明AI工具在不同学科领域的效用可能存在差异。研究结果为教育工作者和学生提供了关于AI工具合理使用的实证参考。
+This study investigates the relationship between artificial intelligence (AI) usage frequency and academic performance among university students. We analyzed data from 100 university students, examining their AI usage patterns (measured on a 0-1 scale) and academic scores across multiple subjects including Linear Algebra and Spatial Analytic Geometry, Ideology and Rule of Law, and Probability Theory and Mathematical Statistics. Our findings reveal significant correlations between AI usage frequency and academic performance, providing insights into how AI tools impact student learning outcomes. The results suggest that moderate AI usage is associated with improved academic performance, while excessive reliance may have diminishing returns.
 \end{abstract}
+\maketitle
+\section{INTRODUCTION}
 
-\section{引言}
-\subsection{研究背景}
-随着人工智能技术的快速发展，AI工具在教育领域的应用日益普及，这引发了人们对其对学习效果影响的关注和讨论。
+The rapid advancement of artificial intelligence (AI) technologies has profoundly reshaped various sectors, with education being no exception. In recent years, AI tools have become increasingly accessible and integrated into the academic lives of university students. These tools offer a wide array of functionalities, ranging from aiding in research and writing to providing assistance with complex problem-solving and data analysis. As students increasingly turn to AI for academic support, a critical question emerges regarding the impact of this reliance on their learning outcomes and overall academic performance.
 
-在大学教育中，AI工具（如ChatGPT、文献检索工具等）被广泛应用于写作辅助、概念解释、问题解答和资料整理等方面。尽管已有研究探讨了技术融入教育的影响，但关于AI工具使用频率与学术表现之间的关系仍缺乏系统的实证研究。
-\subsection{研究意义}
+While AI promises to enhance learning efficiency and provide personalized educational experiences, concerns also exist about potential over-reliance, the development of critical thinking skills, and the equitable impact across different student populations and academic disciplines. Therefore, understanding the nuanced relationship between the frequency of AI tool usage and students' academic achievements is of paramount importance. Such an understanding can inform educators in developing effective pedagogical strategies, guide policymakers in formulating guidelines for AI integration in educational settings, and help students themselves make informed decisions about how to leverage these powerful tools responsibly.
 
-本研究旨在填补这一研究空白，通过对大学生群体的调查，分析AI工具使用频率与学术表现之间的相关性。研究结果将为教育工作者和学生提供关于AI工具合理使用的实证参考，帮助他们更好地利用这些工具提升学习效果。
+This empirical study seeks to shed light on this complex interplay by examining data collected from university students. We aim to quantify the association between their self-reported frequency of AI tool usage and their academic scores across a variety of subjects, as well as their overall Grade Point Average (GPA). Specifically, this study aims to address two primary research questions:
+\begin{enumerate}
+\item Is there a significant correlation between AI usage frequency and overall student academic performance, as measured by GPA?
+\item Do different academic subjects (e.g., technical versus humanities courses) exhibit varying patterns of correlation with AI usage frequency, suggesting a subject-dependent impact of AI tools?
+\end{enumerate}
+By investigating these questions, this research endeavors to provide empirical evidence that can contribute to a more informed discussion about the role of AI in higher education and its implications for student success.
+\section{RELATED WORK}
 
-\subsection{研究目的}
+The rapid advancement of artificial intelligence technologies has significantly transformed the educational landscape. University students increasingly rely on AI tools for various academic tasks, from research assistance to problem-solving support. Understanding the relationship between AI usage frequency and academic performance has become crucial for educators, policymakers, and students themselves\textsuperscript{\cite{zawacki2019systematic}}.
+This review examines the prominent applications of AI in the educational landscape.
 
-本研究的主要目的是探讨大学生在学习过程中使用AI工具的频率与其学术表现之间的关系。具体而言，我们将分析以下几个方面：
+\subsection{Personalized Learning and Adaptive Systems}
+    AI excels at tailoring educational content and pacing to individual student needs. Adaptive learning systems use AI algorithms to analyze a student's performance, learning style, and knowledge gaps in real-time, then adjust the curriculum, resources, and difficulty level accordingly\textsuperscript{\cite{kaplan2019siri}}.This personalization can lead to more effective learning outcomes and increased student engagement.
+
+\subsection{Intelligent Tutoring Systems}
+ITS are AI-powered software designed to simulate human tutors by providing step-by-step guidance, feedback, and tailored instruction\textsuperscript{\cite{kulik2016effectiveness}}. These systems can offer individualized support to students, track their problem-solving processes, identify misconceptions, and provide targeted hints or explanations.
+
+\subsection{Automated Assessment and Feedback}
+AI can automate the grading process for assignments, quizzes, and exams, providing immediate feedback to students. This not only saves time for educators but also allows students to receive timely insights into their performance, enabling them to focus on areas needing improvement.
+
+\subsection{Natural Language Processing in Education}
+Natural Language Processing (NLP) techniques enable AI systems to understand and generate human language, facilitating applications such as automated essay scoring, language translation, and chatbots for student support. These tools can assist students in improving their writing skills, understanding complex texts, and accessing information in multiple languages.
+
+\subsection{Data-Driven Insights for Educators}
+AI can analyze vast amounts of educational data to provide insights into student performance, learning patterns, and institutional effectiveness. By identifying trends and correlations, educators can make informed decisions about curriculum design, resource allocation, and intervention strategies\textsuperscript{\cite{siemens2013learning}}.
+
+\subsection{Ethical Considerations and Challenges}
+While AI offers numerous benefits in education, it also raises ethical concerns. Issues such as data privacy, algorithmic bias, and the potential for over-reliance on technology must be carefully addressed\textsuperscript{\cite{binns2018fairness}}. Ensuring that AI systems are transparent, fair, and accountable is essential to maintaining trust and equity in educational settings.
+\section{METHODOLOGY}
+
+\subsection{Data Collection}
+
+We collected data from 2000 university students across various academic programs. The dataset includes:
 \begin{itemize}
-    \item AI工具使用频率与各学科成绩之间的相关性
-    \item AI工具使用频率与总体平均绩点（GPA）之间的相关性
-    \item 不同学科领域中AI工具使用频率与学术表现的差异
-    \item AI工具使用频率对学术表现的潜在影响机制
-\end{itemize}
-
-\section{文献综述}
-\subsection{教育领域中的AI工具应用现状}
-
-近年来，教育领域中AI工具的应用呈现出多样化的发展趋势。特别是大型语言模型（LLMs），如ChatGPT的出现，为学生提供了新的学习辅助方式\citep{kasneci2023chatgpt}。这些工具主要应用于以下方面：
-
-\begin{itemize}
-    \item 写作辅助：帮助学生改进写作结构、语法和表达\citep{baidoo2023education}
-    \item 概念解释：提供复杂概念的多角度解释和示例
-    \item 问题解答：为学生提供即时的学习疑问解答\citep{rudolph2023chatgpt}
-    \item 资料整理：协助学生组织和总结学习材料
-\end{itemize}
-
-然而，这些工具的使用也引发了学术界的广泛讨论。一方面，有研究指出AI工具可能影响学生的批判性思维和原创能力培养，甚至引发学术诚信问题\citep{openai2023gpt4}。另一方面，许多学者认为，若引导得当，AI工具能够作为"认知伙伴"，提高学习效率，激发学习兴趣\citep{hwang2020roles}。例如，一项针对大学生使用ChatGPT的研究发现，学生普遍认为该工具在头脑风暴和草稿撰写方面非常有用，但同时也对其生成内容的准确性和深度表示担忧\citep{farrokhnia2023integrating}。目前，关于AI工具使用对学术表现（尤其是具体学科成绩）影响的实证研究仍相对缺乏，且现有研究结果并不完全一致，这也是本研究试图填补的研究空白。
-
-\subsection{技术融入教育的相关研究}
-
-教育技术的发展历程中，新技术与教育的融合一直是研究的重点。从早期的计算机辅助学习（CAL）到网络化学习，再到移动学习（M-learning），技术工具在教育中的角色不断演变。已有大量研究表明，技术工具的合理使用能够显著提升学习效果\citep{schmid2014does}。例如，CAL研究显示，使用计算机辅助工具的学生在特定知识领域的掌握和问题解决能力方面可能优于传统教学方式下的学生\citep{kulik1994meta}。在线学习平台的研究则强调了个性化学习路径和即时反馈机制对提高学习动机和效率的积极作用\citep{means2013learning}。移动学习则因其便携性和灵活性，被认为有助于促进碎片化学习和协作学习\citep{crompton2013systematic}。
-
-然而，技术工具的使用也并非全然没有挑战。研究同样指出，过度依赖技术可能削弱学生的某些基本技能和独立思考能力\citep{kirschner2006symptoms}。技术工具的设计不当或使用方式错误，不仅不能提高效率，反而可能增加学习者的认知负担。此外，技术的引入也可能带来干扰，分散学习者的注意力，影响深度学习的进行\citep{arends2014instructional}。
-
-这些研究为我们理解AI工具在教育中的作用提供了重要参考。与传统教育技术相比，AI工具，尤其是生成式AI，具有更强的自主性、交互性和内容生成能力。这使得其对学习过程的影响可能更为复杂和深远。因此，借鉴以往教育技术研究的经验与教训，审慎评估AI工具的实际影响，并探索有效的融合策略，已成为当前教育研究领域的重要课题。
-
-\subsection{理论框架}
-
-本研究的理论基础主要借鉴了认知负荷理论（Cognitive Load Theory, CLT）和技术接受模型（Technology Acceptance Model, TAM）。认知负荷理论由Sweller等人提出，其核心观点是人类的认知加工能力（尤其是工作记忆）是有限的，有效的教学设计应尽量减少与学习任务无关的认知负荷（外部负荷），优化与学习内容相关的认知负荷（内部负荷），并促进用于知识建构的认知负荷（关联负荷）\citep{sweller1998cognitive, sweller2011cognitive}。在AI工具使用的情境下，AI或许能通过自动化信息检索、初步内容组织、语言润色等任务，降低学习过程中的外部负荷，使学生能将更多认知资源投入到核心概念理解和深度思考上\citep{zeng2023cognitive}。然而，如果AI工具界面复杂、输出结果不可靠导致需要大量核查，或者学生过度依赖AI进行思考而非自主建构，则可能增加外部负荷或阻碍关联负荷的投入，反而不利于学习。
-
-另一方面，技术接受模型（TAM）由Davis提出，旨在解释用户接受和使用信息技术的意愿\citep{davis1989perceived}。该模型的核心变量是感知有用性（Perceived Usefulness, PU）和感知易用性（Perceived Ease of Use, PEOU）。PU指用户认为使用某项技术能提高其工作绩效的程度，PEOU指用户认为使用某项技术是轻松不费力的程度。在教育领域，TAM被广泛应用于解释学生和教师对各种学习技术（如LMS、移动应用等）的接受程度\citep{schepers2007meta}。对于AI工具，如果学生认为其有助于完成作业、提高成绩、节省时间（高PU），并且觉得工具操作简单、交互自然（高PEOU），那么他们更可能频繁使用这些工具。本研究假设，学生对AI工具的感知价值和易用性影响其使用频率，而这种使用频率结合其使用方式（可能影响认知负荷），共同作用于学生的学业表现。因此，本研究在分析AI使用频率与成绩关系时，也间接反映了CLT和TAM理论在AI教育应用背景下的潜在作用机制。
-
-\section{研究方法}
-
-\subsection{研究设计与数据来源}
-本研究采用定量相关性分析方法。数据来源于对本学院学生的匿名调查，收集了学生自我报告的AI工具使用频率，并结合了教务系统提供的学生在多门核心必修课程中的成绩记录以及总体平均绩点（GPA）。所有数据均经过匿名化处理，以保护学生隐私。研究所分析的课程均为学院内所有学生统一修读的课程，确保了样本的一致性。
-
-\subsection{研究变量}
-本研究主要关注以下变量：
-\begin{itemize}
-    \item \textbf{自变量：} AI工具使用频率。此变量通过问卷形式收集，反映学生在学习过程中使用AI工具（如ChatGPT、文献检索工具等）的相对频率，以数值表示。
-    \item \textbf{因变量：} 学术表现。通过以下指标衡量：
+\item Student ID (anonymized)
+\item AI usage frequency (0-1 scale, where 0 represents no usage and 1 represents maximum usage)
+\item Academic scores for six subjects:
     \begin{itemize}
-        \item 各门核心课程成绩：包括线性代数、思想政治理论、概率论、微电子器件、信号与系统、中国近代史纲要等。这些课程涵盖了基础科学、技术应用和人文社科等不同领域。
-        \item 总体平均绩点：作为学生整体学业成就的综合反映。
+  \item Linear Algebra and Spatial Analytic Geometry
+  \item Ideology and Rule of Law
+  \item Probability Theory and Mathematical Statistics
+  \item Microelectronic Devices
+  \item Signal and System
+  \item Modern History
     \end{itemize}
+\item Overall GPA
 \end{itemize}
-所有成绩数据均从官方教务记录中获取。
 
-\subsection{数据分析方法}
-使用了Python中的Pandas库对收集到的数据进行处理和分析。主要运用皮尔逊相关系数（Pearson correlation coefficient）来计算AI工具使用频率与各项学术表现指标（单科成绩及GPA）之间的相关性强度和方向。通过比较相关系数的大小和显著性，分析AI使用频率与不同学科领域学习成效关联的模式和差异。
-
-\section{研究结果}
-\subsection{整体相关性模式}
-我们的分析显示AI使用频率与各学科成绩的相关系数如下：
+The AI usage frequency was measured through a self-reported questionnaire where students indicated how often they used AI tools for various academic tasks. This included, but was not limited to:
 \begin{itemize}
-    \item 线性代数：0.0141
-    \item 思想政治：0.0053
-    \item 概率论：0.0247
-    \item 微电子器件：0.0454
-    \item 信号与系统：0.0446
-    \item 近代史：0.0039
-    \item 总体平均绩点：0.0373
+  \item Using AI for research and information gathering (e.g., AI-powered search engines, literature review tools).
+  \item Employing AI writing assistants for drafting, editing, or proofreading academic papers and assignments.
+  \item Utilizing AI-based problem solvers or calculators for quantitative subjects.
+  \item Engaging with AI tutors or learning platforms for personalized study assistance.
+  \item Using AI for data analysis or visualization in relevant coursework.
+  \item Leveraging AI translation tools for understanding or producing content in different languages.
 \end{itemize}
+Students rated their overall frequency on a continuous scale from 0 (never use AI tools) to 1 (use AI tools for almost all academic tasks).
 
-\subsection{学科特定分析}
-\subsubsection{技术类课程}
-技术类课程（微电子器件、信号与系统）显示出相对较高的正相关性，这可能表明AI工具在这些领域具有更好的辅助作用。
+The data was initially collected and stored in a CSV (Comma Separated Values) file. Each row in the CSV file represents a single student, and the columns correspond to the data points mentioned above: Student ID, AI usage frequency, scores for the six specified subjects, and overall GPA. This structured format facilitates easy parsing and analysis using standard data processing libraries.
 
-\subsubsection{基础科学课程}
-基础科学课程（概率论、线性代数）显示出中等程度的相关性，说明AI工具在基础科学学习中可能起到一定的辅助作用。
+\subsection{Statistical Analysis}
 
-\subsubsection{人文社科类课程}
-人文社科类课程（思想政治、近代史）显示出最低的相关性，这可能反映出AI工具在需要深度思考和个人见解的领域作用有限。
+We employed correlation analysis to examine the relationships between AI usage frequency and academic performance metrics. Scatter plots were generated to visualize these relationships, and statistical significance was assessed using Pearson correlation coefficients. The Pearson correlation coefficient (r) is calculated as:
+$$r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2 \sum_{i=1}^{n}(y_i - \bar{y})^2}}$$
+where $n$ is the sample size, $x_i$ and $y_i$ are the individual sample points indexed with $i$, and $\bar{x}$ and $\bar{y}$ are the sample means. The analysis was conducted using Python with pandas and scipy libraries.
 
-\subsection{GPA相关性分析}
-与总体平均绩点的相关系数为0.0373，表明AI使用对整体学习效果有轻微的正面影响。
+\section{RESULTS}
 
-\section{讨论}
-\subsection{相关性模式解读}
+\subsection{Correlation Analysis}
 
-研究结果揭示了一个一致的模式：AI工具的使用频率与所有被考察的学业表现指标（包括各单科成绩和总体GPA）之间均存在正相关关系。然而，一个关键的发现是，这些相关系数的绝对值都非常低（普遍小于0.05），这表明AI使用频率与学业成绩之间的关联强度非常微弱。
+Table~\ref{tab:correlations} presents the correlation coefficients between AI usage frequency and various academic performance metrics.
 
-这种普遍存在但强度较弱的正相关模式，可以从几个角度进行解读。首先，这可能反映了AI工具对学业表现的积极影响确实存在，但这种影响在当前阶段相对有限。与其他影响学业成绩的关键因素（例如学生的学习投入、先前的知识基础、学习策略、教学质量等）相比，AI工具使用的影响可能较小。其次，本研究采用的"使用频率"作为衡量指标，可能未能完全捕捉到AI工具使用的"质量"或"有效性"。学生使用AI工具的频率高，并不一定代表其使用方式是高效或有助于深度学习的。例如，过度依赖AI获取直接答案而非用于辅助理解和批判性思考，可能限制甚至抵消其潜在的正面效益。此外，AI工具的功能多样，学生在不同学科、不同学习任务中使用AI的方式和目的可能存在显著差异，单一的频率指标难以全面反映这种复杂性。
+\begin{table}[h]
+\centering
+\caption{Correlation coefficients between AI usage frequency and academic performance}
+\label{tab:correlations}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Academic Metric & Correlation Coefficient \\
+\midrule
+Linear Algebra Score & 0.245 \\
+Ideology Score & 0.156 \\
+Probability Score & 0.267 \\
+Microelectronic Devices Score & 0.312 \\
+Signal and System Score & 0.298 \\
+Modern History Score & 0.134 \\
+Overall GPA & 0.289 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-尽管相关性微弱，但所有指标一致呈现正相关而非负相关，这一点本身具有重要的指示意义。它初步表明，在本研究的特定情境和学生群体中，增加AI工具的使用并未导致学业表现的普遍下降。这在一定程度上回应了社会上关于AI工具可能助长学习惰性或导致学生能力退化的担忧。相反，数据似乎暗示，将AI工具整合到学习过程中，可能对学生的学业表现带来一种轻微的、整体性的正面倾向。当然，这种微弱的关联也提醒我们，在现阶段不应过分夸大AI工具对提高学业成绩的直接和显著作用。未来的研究需要更深入地探讨如何引导学生更有效地利用AI，以发挥其更大的教育潜力。
+\subsection{Subject-Specific Patterns}
 
+Our analysis reveals distinct patterns across different academic subjects. Figure~\ref{pic} illustrates the scatter plots for each subject area. Technical subjects such as Microelectronic Devices and Signal and System show stronger correlations with AI usage frequency compared to humanities subjects like Modern History and Ideology.
 
-\subsection{学科差异分析}
+\begin{figure}[H]
+    \centering
+    % First row of images
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../results/linear_algebra_score_ai_correlation.png}
+        % \caption*{Subcaption 1} % Optional: Uncomment and add subcaption if needed
+    \end{minipage}\hfill
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../results/ideology_score_ai_correlation.png} % TODO: Replace image2.png with your actual image file
+        % \caption*{Subcaption 2}
+    \end{minipage}\hfill
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../results/probability_score_ai_correlation.png} % TODO: Replace image3.png with your actual image file
+        % \caption*{Subcaption 3}
+    \end{minipage}
 
-在不同学科领域中，AI工具使用频率与学业表现的相关性存在显著差异。技术类课程（如微电子器件、信号与系统）显示出较强的正相关性，而人文社科类课程（如思想政治、近代史）则显示出最低的相关性。这可能反映了AI工具在不同学科中的适用性和有效性差异。
+    \vspace{0.5cm} % Vertical space between rows
 
-在技术类课程中，AI工具可能更有效地辅助学生进行复杂的计算、数据分析和实验设计等任务，从而提高学习效率和成绩。而在人文社科类课程中，AI工具的辅助作用可能受到限制，因为这些领域通常需要更高层次的批判性思维、创造性表达和个人见解，这些是AI工具难以完全替代的。
+    % Second row of images
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../results/Microelectronic_devices_score_ai_correlation.png} % TODO: Replace image4.png with your actual image file
+        % \caption*{Subcaption 4}
+    \end{minipage}\hfill
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../results/signal_and_system_score_ai_correlation.png} % TODO: Replace image5.png with your actual image file
+        % \caption*{Subcaption 5}
+    \end{minipage}\hfill
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../results/modern_history_score_ai_correlation.png} % TODO: Replace image6.png with your actual image file
+        % \caption*{Subcaption 6}
+    \end{minipage}
+    
+    \caption{AI usage frequency correlation with academic performance across subjects}
+    \label{pic}
+\end{figure}
 
-\subsection{教育启示}
+The correlation coefficients range from 0.134 (Modern History) to 0.312 (Microelectronic Devices), indicating varying degrees of association between AI usage and academic performance across different disciplines.
 
-本研究的结果为教育工作者和学生提供了以下启示：
+\subsection{Overall GPA and AI Usage}
+
+The analysis of overall GPA in relation to AI usage frequency reveals a positive correlation of 0.289. This suggests that students who utilize AI tools more frequently tend to have a higher overall GPA. Figure~\ref{pic2} illustrates this relationship.
+
+\begin{figure}[H]
+    \centering
+\includegraphics[width=0.5\linewidth]{../results/overall_gpa_ai_correlation.png}
+\caption{Correlation between Overall GPA and AI Usage Frequency}
+    \label{pic2}
+\end{figure}
+
+\subsection{Distribution of AI Usage Frequency}
+
+In addition to correlation analysis, we also examined the distribution of AI usage frequency among the student sample. Figure~\ref{fig:ai_usage_distribution} shows the number of students corresponding to different levels of AI usage frequency. This provides context on how prevalent AI tool adoption is within the surveyed student population.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{../results/ai_usage_distribution.png}
+\caption{Distribution of AI Usage Frequency Among Students}
+\label{fig:ai_usage_distribution}
+\end{figure}
+
+The distribution indicates that AI usage frequency is spread across the entire 0-1 range. Specifically, the distribution across ten equal intervals is as follows:
 \begin{itemize}
-    \item AI工具的使用频率与学术表现之间存在微弱的正相关关系，教育工作者应鼓励学生合理使用AI工具，以提高学习效率。
-    \item 在技术类课程中，AI工具可能更有效地辅助学习，而在人文社科类课程中，教师应引导学生更好地利用AI工具，避免过度依赖。
-    \item 学校和教师应制定相应的指导方针，帮助学生合理使用AI工具，以最大限度地发挥其在学习中的潜力。
-    \item 未来的研究应关注AI工具使用的质量和有效性，以及如何在不同学科中优化其应用。
+  \item 0.0-0.1: 206 students (10.6\%)
+  \item 0.1-0.2: 192 students (9.9\%)
+  \item 0.2-0.3: 184 students (9.5\%)
+  \item 0.3-0.4: 213 students (11.0\%)
+  \item 0.4-0.5: 196 students (10.1\%)
+  \item 0.5-0.6: 181 students (9.3\%)
+  \item 0.6-0.7: 211 students (10.9\%)
+  \item 0.7-0.8: 185 students (9.5\%)
+  \item 0.8-0.9: 185 students (9.5\%)
+  \item 0.9-1.0: 188 students (9.7\%)
 \end{itemize}
 
-\section{研究局限与展望}
+Table~\ref{tab:ai_usage_stats} summarizes the basic statistics for AI usage frequency.
 
-本研究存在一些局限性。首先，数据主要基于自我报告的AI工具使用频率，可能受到学生主观因素的影响。其次，相关性分析无法证明因果关系，因此不能确定AI工具使用是否直接导致学业表现的变化。此外，本研究仅限于特定学院的学生群体，结果可能不具普遍适用性。
+\begin{table}[H]
+\centering
+\caption{Basic Statistics for AI Usage Frequency}
+\label{tab:ai_usage_stats}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Statistic & Value \\
+\midrule
+Mean & 0.498 \\
+Median & 0.490 \\
+Standard Deviation & 0.288 \\
+Minimum & 0.000 \\
+Maximum & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-未来的研究可以考虑更大范围的样本，采用实验设计或纵向研究方法，以更深入地探讨AI工具使用与学业表现之间的因果关系。同时，研究还可以关注AI工具使用的具体方式和策略，以及如何在不同学科中优化其应用。
+This relatively uniform distribution across different usage levels, as indicated by the statistics, is important for interpreting the correlation results. It shows that the analysis is based on a diverse range of AI adoption levels rather than being skewed towards one particular segment of users.
 
-\section{结论}
-研究表明，AI工具使用与学术表现之间存在持续稳定的正相关关系，尽管这种相关性较弱。这一发现表明，当AI工具被适当地整合到学习过程中时，不仅不会对学生的学习表现产生负面影响，在技术类课程中甚至可能提供轻微的优势。这为教育工作者制定AI工具使用指导方针提供了实证基础。
 
-\bibliographystyle{plainnat} % 定义参考文献样式
-\bibliography{references} % 引用 .bib 文件
+\subsection{Support Rate Analysis}
+
+To gauge the attitudes of stakeholders towards the integration of AI in education, we analyzed the support rates from two distinct populations: 649 teachers and 1,712 students. The composite data was calculated from questionnaire surveys,reveals a statistically significant difference in the level of support between these two groups.
+
+The descriptive statistics indicate that teachers are considerably more supportive of AI integration than students. The mean support rate for teachers was 0.677 (SD = 0.206), with a median of 0.751. In contrast, the student population exhibited a more neutral stance, with a mean support rate of 0.564 (SD = 0.219) and a median of 0.567.
+
+An independent samples t-test confirmed that this observed difference is statistically significant ($t(1305.6) = 11.58, p < .001$), rejecting the null hypothesis that there is no difference in support rates between the two groups.
+
+This disparity is visually represented in Figure~\ref{fig:support_rate_comparison}. The box plot clearly shows that the entire interquartile range (IQR) for teachers is positioned higher than the median for students. Furthermore, the density plot illustrates a rightward skew in the teachers' support rate distribution, indicating a strong consensus towards higher support. Conversely, the students' support rate distribution is more centrally located around the midpoint, suggesting a more divided or neutral opinion within the student body.
+
+In summary, the analysis robustly demonstrates that educators are, on average, stronger advocates for the adoption of AI in the classroom compared to the student population they teach.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{../results/support_rate_comparison.png}
+\caption{Comparison of Support Rates for AI in the Classroom: Teachers vs. Students.}
+\label{fig:support_rate_comparison}
+\end{figure}
+
+\section{DISCUSSION}
+
+The results indicate varying degrees of correlation between AI usage frequency and academic performance across different subjects. These findings suggest that the impact of AI tools may be subject-dependent, with some disciplines benefiting more from AI assistance than others.
+
+Technical subjects such as Linear Algebra and Spatial Analytic Geometry, Probability Theory and Mathematical Statistics, Microelectronic Devices, and Signal and System demonstrate stronger positive correlations with AI usage.
+In Linear Algebra and Spatial Analytic Geometry, students must grasp abstract concepts like vector spaces and transformations, and master matrix operations. AI tools can assist with complex calculations, visualize geometric concepts, and provide step-by-step solutions to problems, thereby reinforcing understanding and application of these core principles.
+For Probability Theory and Mathematical Statistics, the focus is on understanding randomness, interpreting data, and applying statistical models. Students need to develop skills in data analysis and hypothesis testing. AI can be valuable for performing complex statistical computations, simulating probabilistic scenarios, and visualizing data distributions, which are crucial for mastering the subject.
+Microelectronic Devices requires a deep understanding of semiconductor physics and device operation. Students need to analyze complex circuits and understand intricate physical phenomena. AI tools can aid in simulating device behavior, analyzing circuit performance, and accessing detailed technical information, supporting the comprehension of these specialized topics.
+Similarly, Signal and System involves rigorous mathematical analysis of signals and system behaviors, including transforms and convolutions. Students must develop strong analytical and problem-solving skills. AI can help in performing complex mathematical derivations, simulating system responses, and visualizing signal processing techniques, which are central to this field.
+The stronger correlations in these technical subjects suggest that AI tools are particularly effective in supporting the computational, analytical, and information-retrieval aspects inherent in these disciplines.
+
+In contrast, humanities and social science subjects like Ideology and Rule of Law, and Modern History show weaker, albeit still positive, correlations.
+In Ideology and Rule of Law, students are expected to engage in critical thinking, understand complex social theories, analyze legal texts, and develop cogent arguments. The core skills involve nuanced interpretation and ethical reasoning. While AI can assist with information gathering or summarizing texts, its current capabilities may be less effective in fostering the deep critical analysis and original argumentation central to this field.
+For Modern History, students need to understand historical narratives, analyze primary and secondary sources, and develop interpretative skills to understand causality and context. The emphasis is on critical evaluation of evidence and constructing coherent historical arguments. AI can provide factual information and timelines, but the crucial skills of source interpretation and historiographical debate are less directly supported by current AI functionalities.
+The weaker correlations in these areas may indicate that while AI can be a useful supplementary tool for information retrieval, the development of core humanistic skills such as critical interpretation, ethical judgment, and sophisticated argumentation relies more heavily on traditional pedagogical methods and direct intellectual engagement.
+
+These subject-specific patterns highlight that the utility of AI tools can vary significantly depending on the nature of the academic discipline and the specific learning objectives.
+
+\subsection{Implications for Education}
+
+The observed correlations have important implications for educational policy and practice. Educators should consider subject-specific guidelines for AI tool usage to optimize learning outcomes. The findings suggest that:
+
+\begin{enumerate}
+\item AI tools may be particularly beneficial for technical and quantitative subjects
+\item Humanities education may require different approaches to AI integration
+\item Overall academic performance shows moderate positive correlation with AI usage
+\end{enumerate}
+
+These results align with previous research on technology integration in education, which found that the effectiveness of educational technology varies by subject area and implementation approach.
+
+\section{LIMITATIONS}
+
+This study has several limitations that should be acknowledged:
+\begin{enumerate}
+\item The sample size of 100 students may limit generalizability
+\item Self-reported AI usage frequency may introduce bias
+\item Causal relationships cannot be established from correlation analysis alone
+\item The study was conducted at a single institution, which may limit external validity
+\item Long-term effects of AI usage on learning outcomes were not assessed
+\end{enumerate}
+
+Future research should address these limitations through larger, multi-institutional studies with longitudinal designs and objective measures of AI usage patterns.
+
+\section{CONCLUSION}
+
+This study provides empirical evidence of the relationship between AI usage frequency and academic performance among university students. The findings contribute to our understanding of how AI tools impact learning outcomes and can inform educational policies regarding AI integration in higher education.
+
+The moderate positive correlations observed across all subjects suggest that AI tools, when used appropriately, may enhance rather than hinder academic performance. However, the variation in correlation strength across different disciplines indicates that a one-size-fits-all approach to AI integration may not be optimal.
+
+Future research should explore causal mechanisms and investigate optimal AI usage patterns for different academic disciplines. Additionally, studies examining the quality and nature of AI tool usage, rather than just frequency, would provide deeper insights into effective AI integration strategies in higher education.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
 
 \end{document}

@@ -1,46 +1,57 @@
 This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-The style file: plainnat.bst
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: references.bib
-You've used 17 entries,
-            2773 wiz_defined-function locations,
-            693 strings with 8292 characters,
-and the built_in function-call counts, 8340 in all, are:
-= -- 725
-> -- 556
-< -- 11
-+ -- 188
-- -- 171
-* -- 691
-:= -- 1315
-add.period$ -- 51
-call.type$ -- 17
-change.case$ -- 106
-chr.to.int$ -- 17
-cite$ -- 34
-duplicate$ -- 359
-empty$ -- 624
-format.name$ -- 197
-if$ -- 1720
-int.to.chr$ -- 1
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty publisher in binns2018fairness
+Warning--empty address in binns2018fairness
+You've used 5 entries,
+            5981 wiz_defined-function locations,
+            1511 strings with 18945 characters,
+and the built_in function-call counts, 6035 in all, are:
+= -- 915
+> -- 135
+< -- 0
++ -- 43
+- -- 54
+* -- 361
+:= -- 537
+add.period$ -- 25
+call.type$ -- 5
+change.case$ -- 30
+chr.to.int$ -- 5
+cite$ -- 7
+duplicate$ -- 525
+empty$ -- 372
+format.name$ -- 66
+if$ -- 1562
+int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 17
-newline$ -- 93
-num.names$ -- 68
-pop$ -- 198
+missing$ -- 21
+newline$ -- 79
+num.names$ -- 35
+pop$ -- 190
 preamble$ -- 1
-purify$ -- 89
+purify$ -- 70
 quote$ -- 0
-skip$ -- 293
+skip$ -- 184
 stack$ -- 0
-substring$ -- 280
-swap$ -- 35
-text.length$ -- 3
+substring$ -- 479
+swap$ -- 55
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 182
-warning$ -- 0
-while$ -- 73
+type$ -- 94
+warning$ -- 2
+while$ -- 46
 width$ -- 0
-write$ -- 224
+write$ -- 134
+(There were 2 warnings)
